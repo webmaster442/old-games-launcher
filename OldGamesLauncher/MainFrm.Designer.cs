@@ -555,7 +555,7 @@
             this.gameSettingsToolStripMenuItem,
             this.gameExePropertiesToolStripMenuItem});
             this.ListContext.Name = "ListContext";
-            this.ListContext.Size = new System.Drawing.Size(200, 180);
+            this.ListContext.Size = new System.Drawing.Size(200, 202);
             this.ListContext.Opening += new System.ComponentModel.CancelEventHandler(this.ListContext_Opening);
             // 
             // startGameToolStripMenuItem
@@ -591,7 +591,7 @@
             this.searchCheatsToolStripMenuItem.Name = "searchCheatsToolStripMenuItem";
             this.searchCheatsToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.searchCheatsToolStripMenuItem.Text = "Search Cheats";
-            this.searchCheatsToolStripMenuItem.Click += new System.EventHandler(this.searchCheatsToolStripMenuItem_Click);
+            this.searchCheatsToolStripMenuItem.Click += new System.EventHandler(this.InternetMenuItemClick);
             // 
             // wikipediaLookupToolStripMenuItem
             // 
@@ -599,7 +599,7 @@
             this.wikipediaLookupToolStripMenuItem.Name = "wikipediaLookupToolStripMenuItem";
             this.wikipediaLookupToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.wikipediaLookupToolStripMenuItem.Text = "Wikipedia lookup";
-            this.wikipediaLookupToolStripMenuItem.Click += new System.EventHandler(this.wikipediaLookupToolStripMenuItem_Click);
+            this.wikipediaLookupToolStripMenuItem.Click += new System.EventHandler(this.InternetMenuItemClick);
             // 
             // googleToolStripMenuItem
             // 
@@ -607,7 +607,7 @@
             this.googleToolStripMenuItem.Name = "googleToolStripMenuItem";
             this.googleToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.googleToolStripMenuItem.Text = "Google seach";
-            this.googleToolStripMenuItem.Click += new System.EventHandler(this.googleToolStripMenuItem_Click);
+            this.googleToolStripMenuItem.Click += new System.EventHandler(this.InternetMenuItemClick);
             // 
             // deleteGameToolStripMenuItem
             // 
