@@ -82,7 +82,7 @@ namespace OldGamesLauncher
         {
             if (GamesList.SelectedItems.Count < 1) return;
             var selected = GamesList.SelectedItems[0].Text;
-            GamesData d = _manager.GetGameDataByName(selected);
+            GamesData d = _manager[selected];
             bool test = SystemCommands.IsDosExe(d.GameExePath);
             if (d.isScumGame() && d.isDosboxGame)
             {
@@ -224,7 +224,7 @@ namespace OldGamesLauncher
             if (asgf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 _manager.AddGame(asgf.GameName, asgf.GamePath, false, asgf.GameId);
-                Program._fileman.AddScumGame(asgf.GameId, asgf.GameName, asgf.GamePath);
+                Program._fileman.AddScummGame(asgf.GameId, asgf.GameName, asgf.GamePath);
                 BuildList();
             }
         }
@@ -287,8 +287,8 @@ namespace OldGamesLauncher
             else
             {
                 var selected = GamesList.SelectedItems[0].Text;
-                bool scummgame = _manager.GetGameDataByName(selected).isScumGame();
-                bool dosexe = _manager.GetGameDataByName(selected).isDosboxGame;
+                bool scummgame = _manager[selected].isScumGame();
+                bool dosexe = _manager[selected].isDosboxGame;
                 internetToolStripMenuItem.Enabled = true;
                 deleteGameToolStripMenuItem.Enabled = true;
                 EditToolStripMenuItem.Enabled = true;
@@ -341,7 +341,7 @@ namespace OldGamesLauncher
             if (GamesList.SelectedItems.Count < 1) return;
             var selected = GamesList.SelectedItems[0].Text;
 
-            var dat = _manager.GetGameDataByName(selected);
+            var dat = _manager[selected];
             int index = _manager.IndexOf(dat);
 
             if (!dat.isScumGame())
@@ -383,6 +383,7 @@ namespace OldGamesLauncher
             var confirm = MessageBox.Show("Delete " + selected + "?", "Confirm action", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
             if (confirm == System.Windows.Forms.DialogResult.Yes)
             {
+                if (_manager[selected].isScumGame()) Program._fileman.RemoveScummGame(_manager[selected].ScumGameId);
                 _manager.RemoveByName(selected);
                 BuildList();
             }

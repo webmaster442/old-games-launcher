@@ -34,6 +34,9 @@ namespace OldGamesLauncher
             get { return _storageroot + "oldgamesstarter.xml"; }
         }
 
+        /// <summary>
+        /// Scum VM Application data folder
+        /// </summary>
         public string ScummAppData
         {
             get { return _appdataloc + "\\scummvm\\"; }
@@ -48,13 +51,16 @@ namespace OldGamesLauncher
         }
 
         /// <summary>
-        /// ScumVm Exe path
+        /// ScummVm Exe path
         /// </summary>
         public string ScummVmExe
         {
             get { return _storageroot + "scummvm\\scummvm.exe"; }
         }
 
+        /// <summary>
+        /// ScummVM path
+        /// </summary>
         public string ScummVmPath
         {
             get { return _storageroot + "scummvm"; }
@@ -209,6 +215,9 @@ namespace OldGamesLauncher
             }
         }
 
+        /// <summary>
+        /// Installs ScummVm
+        /// </summary>
         public void InstallScummVm()
         {
             try
@@ -276,7 +285,7 @@ namespace OldGamesLauncher
         }
 
         /// <summary>
-        /// Deletes ScumVm
+        /// Deletes ScummVm
         /// </summary>
         /// <returns>true, if uninstall was succesfull, false, if not</returns>
         public bool DeleteScummVm()
@@ -340,7 +349,13 @@ namespace OldGamesLauncher
             }
         }
 
-        public void AddScumGame(string GameId, string description, string path)
+        /// <summary>
+        /// Registers a Scum
+        /// </summary>
+        /// <param name="GameId">Scumm Game ID</param>
+        /// <param name="description">Game Name (description)</param>
+        /// <param name="path">Game Path</param>
+        public void AddScummGame(string GameId, string description, string path)
         {
             _iniparser.Load();
             _iniparser[GameId, "gameid"] = GameId;
@@ -349,7 +364,11 @@ namespace OldGamesLauncher
             _iniparser.SaveSettings();
         }
 
-        public void RemoveScumGame(string GameId)
+        /// <summary>
+        /// Deletes a SummVm Game
+        /// </summary>
+        /// <param name="GameId">Scumm Game Id</param>
+        public void RemoveScummGame(string GameId)
         {
             _iniparser.Load();
             _iniparser.DeleteSection(GameId);

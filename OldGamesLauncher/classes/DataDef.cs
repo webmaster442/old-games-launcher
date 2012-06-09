@@ -155,6 +155,11 @@ namespace OldGamesLauncher
             set { _games[i] = value; }
         }
 
+        public GamesData this[string name]
+        {
+            get { return GetGameDataByName(name); }
+        }
+
         /// <summary>
         /// Images of the games
         /// </summary>
