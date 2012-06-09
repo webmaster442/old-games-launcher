@@ -317,25 +317,23 @@ namespace OldGamesLauncher
             SystemCommands.RunCommand("explorer.exe", path);
         }
 
-        private void searchCheatsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void InternetMenuItemClick(object sender, EventArgs e)
         {
             if (GamesList.SelectedItems.Count < 1) return;
             var selected = GamesList.SelectedItems[0].Text;
-            SystemCommands.OpenWebLocation("https://www.google.hu/search?q=" + selected + " cheats");
-        }
-
-        private void wikipediaLookupToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (GamesList.SelectedItems.Count < 1) return;
-            var selected = GamesList.SelectedItems[0].Text;
-            SystemCommands.OpenWebLocation("http://en.wikipedia.org/wiki/" + selected);
-        }
-
-        private void googleToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (GamesList.SelectedItems.Count < 1) return;
-            var selected = GamesList.SelectedItems[0].Text;
-            SystemCommands.OpenWebLocation("https://www.google.hu/search?q=" + selected);
+            ToolStripMenuItem s = (ToolStripMenuItem)sender;
+            switch (s.Name)
+            {
+                case "googleToolStripMenuItem":
+                    SystemCommands.OpenWebLocation("https://www.google.hu/search?q=" + selected);
+                    break;
+                case "wikipediaLookupToolStripMenuItem":
+                    SystemCommands.OpenWebLocation("http://en.wikipedia.org/wiki/" + selected);
+                    break;
+                case "searchCheatsToolStripMenuItem":
+                    SystemCommands.OpenWebLocation("https://www.google.hu/search?q=" + selected + " cheats");
+                    break;
+            }
         }
 
         private void EditToolStripMenuItem_Click(object sender, EventArgs e)
@@ -605,10 +603,13 @@ namespace OldGamesLauncher
             switch(s.Name)
             {
                 case "getDosDemosToolStripMenuItem":
+                    SystemCommands.OpenWebLocation("http://www.dosgamesarchive.com/");
                     break;
                 case "getScumVMDemosToolStripMenuItem":
+                    SystemCommands.OpenWebLocation("http://www.scummvm.org/demos/");
                     break;
                 case "visitGOGcomToolStripMenuItem":
+                    SystemCommands.OpenWebLocation("http://www.gog.com/");
                     break;
             }
         }
