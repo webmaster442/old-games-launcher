@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CD530533-6BC7-4F31-83E8-03E60939D411}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OldGamesLauncher</RootNamespace>
+    <AssemblyName>OldGamesLauncher</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://oldgameslauncher.codeplex.com/releases/clickonce/</InstallUrl>
+    <ProductName>Old Games Launcher</ProductName>
+    <PublisherName>Webmaster442</PublisherName>
+    <SuiteName>Old Games Launcher</SuiteName>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>F365CAD359B7E1595BBEE783D35E6362F14EA4B2</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>OldGamesLauncher.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="forms\AddScumGameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\AddScumGameForm.Designer.cs">
+      <DependentUpon>AddScumGameForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\ArgumentInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\ArgumentInput.Designer.cs">
+      <DependentUpon>ArgumentInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\AddGameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\AddGameForm.Designer.cs">
+      <DependentUpon>AddGameForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="classes\DataDef.cs" />
+    <Compile Include="forms\DropForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\DropForm.Designer.cs">
+      <DependentUpon>DropForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="classes\FileManager.cs" />
+    <Compile Include="forms\HelpBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\HelpBrowser.Designer.cs">
+      <DependentUpon>HelpBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="classes\IniParser.cs" />
+    <Compile Include="MainFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainFrm.Designer.cs">
+      <DependentUpon>MainFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="classes\PEFormat.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.cs" />
+    <Compile Include="sharpzip\Checksums\Adler32.cs" />
+    <Compile Include="sharpzip\Checksums\CRC32.cs" />
+    <Compile Include="sharpzip\Checksums\IChecksum.cs" />
+    <Compile Include="sharpzip\Checksums\StrangeCRC.cs" />
+    <Compile Include="sharpzip\Core\FileSystemScanner.cs" />
+    <Compile Include="sharpzip\Core\INameTransform.cs" />
+    <Compile Include="sharpzip\Core\IScanFilter.cs" />
+    <Compile Include="sharpzip\Core\NameFilter.cs" />
+    <Compile Include="sharpzip\Core\PathFilter.cs" />
+    <Compile Include="sharpzip\Core\StreamUtils.cs" />
+    <Compile Include="sharpzip\Core\WindowsPathUtils.cs" />
+    <Compile Include="sharpzip\Encryption\PkzipClassic.cs" />
+    <Compile Include="sharpzip\Encryption\ZipAESStream.cs" />
+    <Compile Include="sharpzip\Encryption\ZipAESTransform.cs" />
+    <Compile Include="sharpzip\SharpZipBaseException.cs" />
+    <Compile Include="sharpzip\Zip\Compression\Deflater.cs" />
+    <Compile Include="sharpzip\Zip\Compression\DeflaterConstants.cs" />
+    <Compile Include="sharpzip\Zip\Compression\DeflaterEngine.cs" />
+    <Compile Include="sharpzip\Zip\Compression\DeflaterHuffman.cs" />
+    <Compile Include="sharpzip\Zip\Compression\DeflaterPending.cs" />
+    <Compile Include="sharpzip\Zip\Compression\Inflater.cs" />
+    <Compile Include="sharpzip\Zip\Compression\InflaterDynHeader.cs" />
+    <Compile Include="sharpzip\Zip\Compression\InflaterHuffmanTree.cs" />
+    <Compile Include="sharpzip\Zip\Compression\PendingBuffer.cs" />
+    <Compile Include="sharpzip\Zip\Compression\Streams\DeflaterOutputStream.cs" />
+    <Compile Include="sharpzip\Zip\Compression\Streams\InflaterInputStream.cs" />
+    <Compile Include="sharpzip\Zip\Compression\Streams\OutputWindow.cs" />
+    <Compile Include="sharpzip\Zip\Compression\Streams\StreamManipulator.cs" />
+    <Compile Include="sharpzip\Zip\FastZip.cs" />
+    <Compile Include="sharpzip\Zip\IEntryFactory.cs" />
+    <Compile Include="sharpzip\Zip\WindowsNameTransform.cs" />
+    <Compile Include="sharpzip\Zip\ZipConstants.cs" />
+    <Compile Include="sharpzip\Zip\ZipEntry.cs" />
+    <Compile Include="sharpzip\Zip\ZipEntryFactory.cs" />
+    <Compile Include="sharpzip\Zip\ZipException.cs" />
+    <Compile Include="sharpzip\Zip\ZipExtraData.cs" />
+    <Compile Include="sharpzip\Zip\ZipFile.cs" />
+    <Compile Include="sharpzip\Zip\ZipHelperStream.cs" />
+    <Compile Include="sharpzip\Zip\ZipInputStream.cs" />
+    <Compile Include="sharpzip\Zip\ZipNameTransform.cs" />
+    <Compile Include="sharpzip\Zip\ZipOutputStream.cs" />
+    <Compile Include="classes\SystemCommands.cs" />
+    <Compile Include="forms\WaitForInstall.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\WaitForInstall.Designer.cs">
+      <DependentUpon>WaitForInstall.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="forms\AddScumGameForm.resx">
+      <DependentUpon>AddScumGameForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\ArgumentInput.resx">
+      <DependentUpon>ArgumentInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\AddGameForm.resx">
+      <DependentUpon>AddGameForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\DropForm.resx">
+      <DependentUpon>DropForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\HelpBrowser.resx">
+      <DependentUpon>HelpBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFrm.resx">
+      <DependentUpon>MainFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="forms\WaitForInstall.resx">
+      <DependentUpon>WaitForInstall.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="OldGamesLauncher_TemporaryKey.pfx" />
+    <None Include="icons\scum.png" />
+    <None Include="icons\scumicon.ico" />
+    <None Include="icons\back.png" />
+    <Content Include="Zips\dosbox.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Zips\ddhack.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="license.rtf" />
+    <None Include="OldGamesLauncher.snk" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="icons\konsole.png" />
+    <Content Include="scumgames.txt" />
+    <Content Include="Zips\docs.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Zips\scummvm.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Icon.ico" />
+    <None Include="icons\application_edit.png" />
+    <None Include="icons\application_go.png" />
+    <None Include="icons\link_go.png" />
+    <None Include="icons\link.png" />
+    <None Include="icons\folder.png" />
+    <None Include="icons\door_out.png" />
+    <None Include="icons\arrow_refresh.png" />
+    <None Include="icons\application_error.png" />
+    <None Include="icons\application_view_tile.png" />
+    <None Include="icons\application_view_list.png" />
+    <None Include="icons\application_view_icons.png" />
+    <None Include="icons\application_view_gallery.png" />
+    <None Include="icons\application_delete.png" />
+    <None Include="icons\application_add.png" />
+    <None Include="icons\0000 - DOSBOX_ICO_0004.png" />
+    <None Include="icons\bullet_wrench.png" />
+    <Content Include="icons\dosicon.ico" />
+    <None Include="icons\drive_delete.png" />
+    <None Include="icons\drive_disk.png" />
+    <None Include="icons\folder_camera.png" />
+    <None Include="icons\page_white_text.png" />
+    <Content Include="Icon_small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="icons\dosicon.ico">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Icon_small.ico">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
