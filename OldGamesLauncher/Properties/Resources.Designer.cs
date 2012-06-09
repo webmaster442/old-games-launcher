@@ -179,6 +179,16 @@ namespace OldGamesLauncher.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to Windows &amp; Dos Exe|*.exe;*.com;*.bat
+        ///SNES Rom|*.N;*.smcN;*.zipY;*.zip;*.gzY;*.swcN;*.figN;*.058N;*.078N;*.japN;*.usaN;*.048N;*.eurN;*.sfcN;*.1N;*.mgdN;*.ufoN;*.binN;*.gd3N;*.mghN;*.gd7N;*.ausN;*.dx2N;*.aN;*.jmaY;.
+        /// </summary>
+        internal static string FileTypes {
+            get {
+                return ResourceManager.GetString("FileTypes", resourceCulture);
+            }
+        }
+        
         internal static System.Drawing.Bitmap folder {
             get {
                 object obj = ResourceManager.GetObject("folder", resourceCulture);

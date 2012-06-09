@@ -36,7 +36,8 @@
             this.BtnCancel = new System.Windows.Forms.Button();
             this.BtnAdd = new System.Windows.Forms.Button();
             this.OpenExeDialog = new System.Windows.Forms.OpenFileDialog();
-            this.CbDosExe = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.CbGameType = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -101,20 +102,28 @@
             this.BtnAdd.UseVisualStyleBackColor = true;
             this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
-            // OpenExeDialog
+            // label3
             // 
-            this.OpenExeDialog.Filter = "Exe & Com Files | *.exe;*.com";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 90);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(62, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "GameType:";
             // 
-            // CbDosExe
+            // CbGameType
             // 
-            this.CbDosExe.AutoSize = true;
-            this.CbDosExe.Location = new System.Drawing.Point(16, 99);
-            this.CbDosExe.Name = "CbDosExe";
-            this.CbDosExe.Size = new System.Drawing.Size(143, 17);
-            this.CbDosExe.TabIndex = 7;
-            this.CbDosExe.Text = "This is a Dos Executable";
-            this.CbDosExe.UseVisualStyleBackColor = true;
-            this.CbDosExe.CheckedChanged += new System.EventHandler(this.CbDosExe_CheckedChanged);
+            this.CbGameType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CbGameType.FormattingEnabled = true;
+            this.CbGameType.Items.AddRange(new object[] {
+            "Windows",
+            "Dos",
+            "SNES"});
+            this.CbGameType.Location = new System.Drawing.Point(80, 87);
+            this.CbGameType.Name = "CbGameType";
+            this.CbGameType.Size = new System.Drawing.Size(121, 21);
+            this.CbGameType.TabIndex = 8;
+            this.CbGameType.SelectedIndexChanged += new System.EventHandler(this.CbGameType_SelectedIndexChanged);
             // 
             // AddGameForm
             // 
@@ -122,7 +131,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.BtnCancel;
             this.ClientSize = new System.Drawing.Size(414, 145);
-            this.Controls.Add(this.CbDosExe);
+            this.Controls.Add(this.CbGameType);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.BtnAdd);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnBrowse);
@@ -150,6 +160,7 @@
         private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.Button BtnAdd;
         private System.Windows.Forms.OpenFileDialog OpenExeDialog;
-        private System.Windows.Forms.CheckBox CbDosExe;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox CbGameType;
     }
 }

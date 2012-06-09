@@ -12,9 +12,14 @@ namespace OldGamesLauncher
 {
     public partial class AddGameForm : Form
     {
+        private bool Warn;
+
         public AddGameForm()
         {
             InitializeComponent();
+            Warn = false;
+            CbGameType.SelectedIndex = 0;
+            OpenExeDialog.Filter = Properties.Resources.FileTypes.Replace("\r\n", "|");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -28,10 +33,16 @@ namespace OldGamesLauncher
                 }
             }
             catch (IOException) { }
+
             if (OpenExeDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 this.TbGamePath.Text = OpenExeDialog.FileName;
-                this.CbDosExe.Checked = SystemCommands.IsDosExe(OpenExeDialog.FileName);
+                if (OpenExeDialog.FilterIndex == 0)
+                {
+                    if (SystemCommands.IsDosExe(OpenExeDialog.FileName)) CbGameType.SelectedIndex = 1;
+                    else CbGameType.SelectedIndex = 0;
+                }
+                else CbGameType.SelectedIndex = 2;
             }
         }
 
@@ -45,7 +56,7 @@ namespace OldGamesLauncher
             }
             if (TbGamePath.Text.Length < 1)
             {
-                MessageBox.Show("Select Game Exe");
+                MessageBox.Show("Select Game path");
                 ok = false;
             }
             if (ok) this.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -63,20 +74,53 @@ namespace OldGamesLauncher
             set { TbGamePath.Text = value; }
         }
 
-        public bool IsDosExe
+        public GameType SelectedGameType
         {
-            get { return CbDosExe.Checked; }
-            set { CbDosExe.Checked = value; }
+            get
+            {
+                switch (CbGameType.SelectedIndex)
+                {
+                    case 0:
+                        return GameType.Windows;
+                    case 1:
+                        return GameType.DosBox;
+                    case 2:
+                        return GameType.Snes;
+                    default:
+                        return GameType.Windows;
+                }
+            }
+            set
+            {
+                switch (value)
+                {
+                    case GameType.Windows:
+                        CbGameType.SelectedIndex = 0;
+                        break;
+                    case GameType.DosBox:
+                        CbGameType.SelectedIndex = 1;
+                        break;
+                    case GameType.Snes:
+                        CbGameType.SelectedIndex = 2;
+                        break;
+                }
+            }
         }
 
-        private void CbDosExe_CheckedChanged(object sender, EventArgs e)
+        private void CbGameType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!CbDosExe.Checked && SystemCommands.IsDosExe(TbGamePath.Text))
+            if (!Warn)
+            { 
+                Warn = true;
+                return;
+            }
+            else if (SystemCommands.IsDosExe(TbGamePath.Text) && SelectedGameType != GameType.DosBox && !string.IsNullOrEmpty(TbGamePath.Text))
             {
                 var result = MessageBox.Show("The Game seems to be a dos game. With wrong configuration, the game won't start.\r\n" +
-                                             "Do you want to set correct settings now?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == System.Windows.Forms.DialogResult.Yes) CbDosExe.Checked = true;
+                             "Do you want to set correct settings now?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == System.Windows.Forms.DialogResult.Yes) CbGameType.SelectedIndex = 1;
             }
+
         }
     }
 }
