@@ -84,14 +84,14 @@ namespace OldGamesLauncher
             var selected = GamesList.SelectedItems[0].Text;
             GamesData d = _manager[selected];
             bool test = SystemCommands.IsDosExe(d.GameExePath);
-            if (d.isScumGame() && d.isDosboxGame)
+            if (d.isScummGame() && d.isDosboxGame)
             {
                 MessageBox.Show("Game Database error. Can't decide if game is ScummVm Game or Dos game.\r\n"+
                                 "Please delete game, and re add to program, with correct settings.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else if (d.isDosboxGame) DoInstallAndRun(WaitForInstall.Install.Dosbox, Program._fileman.DosBoxExe, "\"" + d.GameExePath + "\"");
-            else if (d.isScumGame()) DoInstallAndRun(WaitForInstall.Install.ScummVm, Program._fileman.ScummVmExe, d.ScumGameId);
+            else if (d.isScummGame()) DoInstallAndRun(WaitForInstall.Install.ScummVm, Program._fileman.ScummVmExe, d.ScumGameId);
             else
             {
                 if (test)
@@ -201,7 +201,7 @@ namespace OldGamesLauncher
                     _filter = GamesManager.GameType.Dos;
                     break;
                 case 3:
-                    _filter = GamesManager.GameType.Scum;
+                    _filter = GamesManager.GameType.Scumm;
                     break;
             }
             BuildList();
@@ -287,7 +287,7 @@ namespace OldGamesLauncher
             else
             {
                 var selected = GamesList.SelectedItems[0].Text;
-                bool scummgame = _manager[selected].isScumGame();
+                bool scummgame = _manager[selected].isScummGame();
                 bool dosexe = _manager[selected].isDosboxGame;
                 internetToolStripMenuItem.Enabled = true;
                 deleteGameToolStripMenuItem.Enabled = true;
@@ -344,7 +344,7 @@ namespace OldGamesLauncher
             var dat = _manager[selected];
             int index = _manager.IndexOf(dat);
 
-            if (!dat.isScumGame())
+            if (!dat.isScummGame())
             {
                 AddGameForm ed = new AddGameForm();
                 ed.GameName = dat.GameName;
@@ -383,7 +383,7 @@ namespace OldGamesLauncher
             var confirm = MessageBox.Show("Delete " + selected + "?", "Confirm action", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
             if (confirm == System.Windows.Forms.DialogResult.Yes)
             {
-                if (_manager[selected].isScumGame()) Program._fileman.RemoveScummGame(_manager[selected].ScumGameId);
+                if (_manager[selected].isScummGame()) Program._fileman.RemoveScummGame(_manager[selected].ScumGameId);
                 _manager.RemoveByName(selected);
                 BuildList();
             }
@@ -615,6 +615,15 @@ namespace OldGamesLauncher
             }
         }
 
+        private void removeAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var confirm = MessageBox.Show("Warning! This will delete all games in collection and can't be undone.\r\n" +
+                                          "Are you sure you want to do this?", "Warning", MessageBoxButtons.YesNo,  MessageBoxIcon.Warning);
+            if (confirm == System.Windows.Forms.DialogResult.Yes)
+            {
+                _manager.Clear();
+                BuildList();
+            }
+        }
     }
-
 }
