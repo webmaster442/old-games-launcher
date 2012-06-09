@@ -25,7 +25,7 @@ namespace OldGamesLauncher
 
         public override int GetHashCode()
         {
-            return GameName.GetHashCode() ^ GameExePath.GetHashCode() ^ isDosboxGame.GetHashCode();
+            return GameName.GetHashCode() ^ GameExePath.GetHashCode() ^ isDosboxGame.GetHashCode() ^ ScumGameId.GetHashCode();
         }
 
         public override string ToString()
@@ -33,7 +33,7 @@ namespace OldGamesLauncher
             return GameName;
         }
 
-        public bool isScumGame()
+        public bool isScummGame()
         {
             return !string.IsNullOrEmpty(ScumGameId);
         }
@@ -50,7 +50,7 @@ namespace OldGamesLauncher
 
         public enum GameType
         {
-            All, Windows, Dos, Scum
+            All, Windows, Dos, Scumm
         }
 
         public GamesManager()
@@ -79,7 +79,7 @@ namespace OldGamesLauncher
             foreach (var e in _games)
             {
                 if (e.isDosboxGame) _images.Images.Add(e.GameName, Properties.Resources.dosicon);
-                else if (e.isScumGame()) _images.Images.Add(e.GameName, Properties.Resources.scumicon);
+                else if (e.isScummGame()) _images.Images.Add(e.GameName, Properties.Resources.scumicon);
                 else _images.Images.Add(e.GameName, SystemCommands.GetIconOfExe(e.GameExePath));
                  
             }
@@ -155,6 +155,11 @@ namespace OldGamesLauncher
             set { _games[i] = value; }
         }
 
+        /// <summary>
+        /// Gets a game data by it's name
+        /// </summary>
+        /// <param name="name">Game name</param>
+        /// <returns>Game data structure</returns>
         public GamesData this[string name]
         {
             get { return GetGameDataByName(name); }
@@ -216,11 +221,20 @@ namespace OldGamesLauncher
             return q.FirstOrDefault();
         }
 
+        /// <summary>
+        /// Returns the index of a GameData structure
+        /// </summary>
+        /// <param name="d"></param>
+        /// <returns></returns>
         public int IndexOf(GamesData d)
         {
             return _games.IndexOf(d);
         }
 
+        /// <summary>
+        /// Deletes a GameData structure by it's name
+        /// </summary>
+        /// <param name="name">GameData structure's name to be deleted</param>
         public void RemoveByName(string name)
         {
             foreach (var data in _games)
@@ -234,55 +248,93 @@ namespace OldGamesLauncher
             }
         }
 
-        public List<GamesData> Filter(GameType Filter)
+        /// <summary>
+        /// Filters Games by game type
+        /// </summary>
+        /// <param name="Filter">GameType filter</param>
+        /// <returns>Filtered games collection</returns>
+        public GamesData[] Filter(GameType Filter)
         {
             switch (Filter)
             {
                 case GameType.All:
-                    return (from l in _games orderby l.GameName select l).ToList();
+                    return (from l in _games orderby l.GameName select l).ToArray();
                 case GameType.Dos:
-                    return (from i in _games where i.isDosboxGame == true orderby i.GameName select i).ToList();
-                case GameType.Scum:
-                    return (from j in _games where j.isScumGame() == true orderby j.GameName select j).ToList();
+                    return (from i in _games where i.isDosboxGame == true orderby i.GameName select i).ToArray();
+                case GameType.Scumm:
+                    return (from j in _games where j.isScummGame() == true orderby j.GameName select j).ToArray();
                 case GameType.Windows:
-                    return (from k in _games where k.isScumGame() == false && k.isDosboxGame == false orderby k.GameName select k).ToList();
+                    return (from k in _games where k.isScummGame() == false && k.isDosboxGame == false orderby k.GameName select k).ToArray();
                 default:
                     return null;
             }
         }
 
+        /// <summary>
+        /// Adds a GameData structure
+        /// </summary>
+        /// <param name="item">GameData to be added</param>
         public void Add(GamesData item)
         {
             _games.Add(item);
             RebuildIconIndex();
         }
 
+        /// <summary>
+        /// Removes all Game Data Structures
+        /// </summary>
         public void Clear()
         {
+            var scumgames = Filter(GameType.Scumm);
+            foreach (var game in scumgames)
+            {
+                Program._fileman.RemoveScummGame(game.ScumGameId);
+            }
             _games.Clear();
             RebuildIconIndex();
         }
 
+        /// <summary>
+        /// Checks that the collection contains the specified GameData structure
+        /// </summary>
+        /// <param name="item">item to be checked</param>
+        /// <returns>True, if the item is contained. False, if not.</returns>
         public bool Contains(GamesData item)
         {
             return _games.Contains(item);
         }
 
+        /// <summary>
+        /// Uimplemented methood
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="arrayIndex"></param>
         public void CopyTo(GamesData[] array, int arrayIndex)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Number of items in the collection
+        /// </summary>
         public int Count
         {
             get { return _games.Count; }
         }
 
+        /// <summary>
+        /// Checks if the collection is readable only
+        /// </summary>
         public bool IsReadOnly
         {
             get { return false; }
         }
 
+        /// <summary>
+        /// Removes a GameData Structure
+        /// </summary>
+        /// <param name="item">item to be removed</param>
+        /// <returns></returns>
         public bool Remove(GamesData item)
         {
             return _games.Remove(item);

@@ -100,6 +100,8 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.Tray = new System.Windows.Forms.NotifyIcon(this.components);
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.removeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenuStrip.SuspendLayout();
             this.ListContext.SuspendLayout();
             this.FilterSelector.SuspendLayout();
@@ -196,7 +198,9 @@
             // 
             this.gamesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addGameToolStripMenuItem,
-            this.addScumVmGameToolStripMenuItem});
+            this.addScumVmGameToolStripMenuItem,
+            this.toolStripMenuItem4,
+            this.removeAllToolStripMenuItem});
             this.gamesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("gamesToolStripMenuItem.Image")));
             this.gamesToolStripMenuItem.Name = "gamesToolStripMenuItem";
             this.gamesToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
@@ -555,7 +559,7 @@
             this.gameSettingsToolStripMenuItem,
             this.gameExePropertiesToolStripMenuItem});
             this.ListContext.Name = "ListContext";
-            this.ListContext.Size = new System.Drawing.Size(200, 202);
+            this.ListContext.Size = new System.Drawing.Size(200, 180);
             this.ListContext.Opening += new System.ComponentModel.CancelEventHandler(this.ListContext_Opening);
             // 
             // startGameToolStripMenuItem
@@ -727,6 +731,18 @@
             this.Tray.Visible = true;
             this.Tray.DoubleClick += new System.EventHandler(this.Tray_DoubleClick);
             // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(187, 6);
+            // 
+            // removeAllToolStripMenuItem
+            // 
+            this.removeAllToolStripMenuItem.Name = "removeAllToolStripMenuItem";
+            this.removeAllToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.removeAllToolStripMenuItem.Text = "Remove all";
+            this.removeAllToolStripMenuItem.Click += new System.EventHandler(this.removeAllToolStripMenuItem_Click);
+            // 
             // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -824,6 +840,8 @@
         private System.Windows.Forms.ToolStripMenuItem getDosDemosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem getScumVMDemosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem visitGOGcomToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem removeAllToolStripMenuItem;
     }
 }
 
