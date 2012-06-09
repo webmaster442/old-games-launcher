@@ -19,7 +19,7 @@ namespace OldGamesLauncher
 
         private Thread _t;
 
-        public Install WhatToInstall { get; set; }
+        public GameType EmulatorToInstall { get; set; }
 
         public string Command { get; set; }
         public string Arguments { get; set; }
@@ -29,42 +29,20 @@ namespace OldGamesLauncher
             get { return !string.IsNullOrEmpty(Command); }
         }
 
-        public enum Install
-        {
-            Dosbox, ScummVm
-        }
-
         private void WaitForDosBoxInstall_Load(object sender, EventArgs e)
         {
-            switch (WhatToInstall)
+            label1.Text = string.Format("Installing {0}, Please Wait...", EmulatorToInstall);
+            if (!Program._fileman.IsEmulatorInstalled(EmulatorToInstall))
             {
-                case Install.Dosbox:
-                    label1.Text = "Installing DosBox, Please Wait...";
-                    if (!Program._fileman.IsDosboxInstalled())
-                    {
-                        _t = new Thread(delegate()
-                        {
-                            Program._fileman.InstallDosDox();
-                            if (this.InvokeRequired) this.Invoke((Action)delegate { this.Close(); });
-                        });
-                        _t.Start();
-                    }
-                    else this.Close();
-                    break;
-                case Install.ScummVm:
-                    label1.Text = "Installing ScumVM, Please Wait...";
-                    if (!Program._fileman.IsScummVmInstalled())
-                    {
-                        _t = new Thread(delegate()
-                        {
-                            Program._fileman.InstallScummVm();
-                            if (this.InvokeRequired) this.Invoke((Action)delegate { this.Close(); });
-                        });
-                        _t.Start();
-                    }
-                    else this.Close();
-                    break;
+                _t = new Thread(delegate()
+                {
+                    Program._fileman.InstallEmulator(EmulatorToInstall);
+                    if (this.InvokeRequired) this.Invoke((Action)delegate { this.Close(); });
+                });
+                _t.Start();
             }
+            else this.Close();
+
         }
 
         private void WaitForInstall_FormClosing(object sender, FormClosingEventArgs e)

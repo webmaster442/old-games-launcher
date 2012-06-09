@@ -59,6 +59,14 @@ namespace OldGamesLauncher
         }
 
         /// <summary>
+        /// Snes9x exe path
+        /// </summary>
+        public string SnesExe
+        {
+            get { return _storageroot + "snes9x\\snes9x.exe"; }
+        }
+
+        /// <summary>
         /// ScummVM path
         /// </summary>
         public string ScummVmPath
@@ -74,32 +82,27 @@ namespace OldGamesLauncher
             get { return _storageroot + "dosbox"; }
         }
 
-        /// <summary>
-        /// Checks if dosbox is installed or not
-        /// </summary>
-        /// <returns>true, if installed, false, if not</returns>
-        public bool IsDosboxInstalled()
+        public string Snes9xPath
         {
-            if (Directory.Exists(_storageroot + "dosbox"))
-            {
-                if (File.Exists(_storageroot + "dosbox\\dosbox.exe")) return true;
-                else return false;
-            }
-            else return false;
+            get { return _storageroot + "snes9x"; }
         }
 
-        /// <summary>
-        /// Checks if ScummVm is installed or not
-        /// </summary>
-        /// <returns>true, if installed, false, if not</returns>
-        public bool IsScummVmInstalled()
+        public bool IsEmulatorInstalled(GameType type)
         {
-            if (Directory.Exists(_storageroot + "scummvm"))
+            switch (type)
             {
-                if (File.Exists(_storageroot + "scummvm\\scummvm.exe")) return true;
-                else return false;
+                case GameType.DosBox:
+                    if (Directory.Exists(DosBoxPath)) return File.Exists(DosBoxExe);
+                    else return false;
+                case GameType.ScummVm:
+                    if (Directory.Exists(ScummVmPath)) return File.Exists(ScummVmExe);
+                    else return false;
+                case GameType.Snes:
+                    if (Directory.Exists(Snes9xPath)) return File.Exists(SnesExe);
+                    else return false;
+                default:
+                    return false;
             }
-            else return false;
         }
 
         private static string CreateFilenameFromUri(Uri uri)
@@ -175,17 +178,31 @@ namespace OldGamesLauncher
             }
         }
 
-        /// <summary>
-        /// Installs dosbox
-        /// </summary>
-        public void InstallDosDox()
+        public void InstallEmulator(GameType type)
         {
+            FileStream ms = null;
+            string basedir = null;
+            string target = null;
             try
             {
-                if (!Directory.Exists(this.DosBoxPath)) Directory.CreateDirectory(this.DosBoxPath);
-                FileStream ms = File.OpenRead(_appdir + "\\Zips\\dosbox.zip");
-                string basedir = _storageroot + "dosbox";
-                string target;
+                switch (type)
+                {
+                    case GameType.DosBox:
+                        if (!Directory.Exists(this.DosBoxPath)) Directory.CreateDirectory(this.DosBoxPath);
+                        ms = File.OpenRead(_appdir + "\\Zips\\dosbox.zip");
+                        basedir = DosBoxPath;
+                        break;
+                    case GameType.ScummVm:
+                        if (!Directory.Exists(this.ScummVmPath)) Directory.CreateDirectory(this.ScummVmPath);
+                        ms = File.OpenRead(_appdir + "\\Zips\\scummvm.zip");
+                        basedir = ScummVmPath;
+                        break;
+                    case GameType.Snes:
+                        if (!Directory.Exists(this.Snes9xPath)) Directory.CreateDirectory(this.Snes9xPath);
+                        ms = File.OpenRead(_appdir + "\\Zips\\snes9x.zip");
+                        basedir = Snes9xPath;
+                        break;
+                }
                 using (ZipInputStream zi = new ZipInputStream(ms))
                 {
                     ZipEntry file;
@@ -211,47 +228,7 @@ namespace OldGamesLauncher
             }
             catch (IOException ex)
             {
-                MessageBox.Show("DosBox Install failed.\r\n" + ex.Message, "DosBox Installer", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        /// <summary>
-        /// Installs ScummVm
-        /// </summary>
-        public void InstallScummVm()
-        {
-            try
-            {
-                if (!Directory.Exists(this.ScummVmPath)) Directory.CreateDirectory(this.ScummVmPath);
-                FileStream ms = File.OpenRead(_appdir + "\\Zips\\scummvm.zip");
-                string basedir = _storageroot + "scummvm";
-                string target;
-                using (ZipInputStream zi = new ZipInputStream(ms))
-                {
-                    ZipEntry file;
-                    while ((file = zi.GetNextEntry()) != null)
-                    {
-                        target = Path.Combine(basedir, file.Name.Replace('/', '\\'));
-
-                        if (file.IsDirectory) Directory.CreateDirectory(target);
-                        else
-                        {
-                            using (FileStream fs = File.Create(target))
-                            {
-                                int size;
-                                byte[] data = new byte[2048];
-                                while ((size = zi.Read(data, 0, data.Length)) > 0)
-                                {
-                                    fs.Write(data, 0, size);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch (IOException ex)
-            {
-                MessageBox.Show("ScummVm Install failed.\r\n" + ex.Message, "ScummVm Installer", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(string.Format("{0} Install failed.\r\n", type) + ex.Message, "Emulator Installer", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -259,51 +236,31 @@ namespace OldGamesLauncher
         /// Uninstalls DosBox
         /// </summary>
         /// <returns>true, if uninstall was succesfull, false, if not</returns>
-        public bool DeleteDosBox()
+        public bool DeleteEmulator(GameType type)
         {
-            if (!IsDosboxInstalled()) return true;
+            string workdir = null;
+            if (!IsEmulatorInstalled(type)) return true;
+            switch (type)
+            {
+                case GameType.DosBox:
+                    workdir = DosBoxPath;
+                    break;
+                case GameType.ScummVm:
+                    workdir = ScummVmPath;
+                    break;
+                case GameType.Snes:
+                    workdir = Snes9xPath;
+                    break;
+            }
             try
             {
-                string[] Files = Directory.GetFiles(_storageroot + "dosbox", "*.*", SearchOption.AllDirectories);
-                foreach (var file in Files)
-                {
-                    File.Delete(file);
-                }
-                string[] dirs = Directory.GetDirectories(_storageroot + "dosbox", "*.*", SearchOption.AllDirectories);
-                foreach (var dir in dirs)
-                {
-                    Directory.Delete(dir);
-                }
-                Directory.Delete(_storageroot + "dosbox");
-                return true;
-            }
-            catch (IOException ex)
-            {
-                MessageBox.Show("Uninstall failed. Reason: " + ex.Message, "Uninstall error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-        }
+                string[] Files = Directory.GetFiles(workdir, "*.*", SearchOption.AllDirectories);
+                foreach (var file in Files) File.Delete(file);
 
-        /// <summary>
-        /// Deletes ScummVm
-        /// </summary>
-        /// <returns>true, if uninstall was succesfull, false, if not</returns>
-        public bool DeleteScummVm()
-        {
-            if (!IsScummVmInstalled()) return true;
-            try
-            {
-                string[] Files = Directory.GetFiles(_storageroot + "scummvm", "*.*", SearchOption.AllDirectories);
-                foreach (var file in Files)
-                {
-                    File.Delete(file);
-                }
-                string[] dirs = Directory.GetDirectories(_storageroot + "scummvm", "*.*", SearchOption.AllDirectories);
-                foreach (var dir in dirs)
-                {
-                    Directory.Delete(dir);
-                }
-                Directory.Delete(_storageroot + "scummvm");
+                string[] dirs = Directory.GetDirectories(workdir, "*.*", SearchOption.AllDirectories);
+                foreach (var dir in dirs) Directory.Delete(dir);
+
+                Directory.Delete(workdir);
                 return true;
             }
             catch (IOException ex)

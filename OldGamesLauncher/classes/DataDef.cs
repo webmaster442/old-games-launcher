@@ -7,6 +7,11 @@ using System.Xml.Serialization;
 
 namespace OldGamesLauncher
 {
+    public enum GameType
+    {
+        DosBox, ScummVm, Snes
+    }
+
     [Serializable]
     public class GamesData
     {
