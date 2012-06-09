@@ -7,9 +7,14 @@ using System.Xml.Serialization;
 
 namespace OldGamesLauncher
 {
+    [Serializable]
     public enum GameType
     {
-        DosBox, ScummVm, Snes
+        Windows = 0,
+        DosBox = 1,
+        ScummVm = 2,
+        Snes = 3,
+        All = 255
     }
 
     [Serializable]
@@ -17,30 +22,26 @@ namespace OldGamesLauncher
     {
         public string GameName { get; set; }
         public string GameExePath { get; set; }
-        public bool isDosboxGame { get; set; }
+        public GameType GameType { get; set; }
         public string ScumGameId { get; set; }
 
-        public GamesData() { }
+        public GamesData() { ScumGameId = ""; }
 
         public GamesData(string Name, string Exepath)
         {
             GameName = Name;
             GameExePath = Exepath;
+            ScumGameId = "";
         }
 
         public override int GetHashCode()
         {
-            return GameName.GetHashCode() ^ GameExePath.GetHashCode() ^ isDosboxGame.GetHashCode() ^ ScumGameId.GetHashCode();
+            return GameName.GetHashCode() ^ GameExePath.GetHashCode() ^ GameType.GetHashCode() ^ ScumGameId.GetHashCode();
         }
 
         public override string ToString()
         {
             return GameName;
-        }
-
-        public bool isScummGame()
-        {
-            return !string.IsNullOrEmpty(ScumGameId);
         }
     }
 
@@ -52,11 +53,6 @@ namespace OldGamesLauncher
         private List<GamesData> _games;
         private List<string> _gamestartletters;
         private ImageList _images;
-
-        public enum GameType
-        {
-            All, Windows, Dos, Scumm
-        }
 
         public GamesManager()
         {
@@ -83,8 +79,8 @@ namespace OldGamesLauncher
             _images.ImageSize = new System.Drawing.Size(32, 32);
             foreach (var e in _games)
             {
-                if (e.isDosboxGame) _images.Images.Add(e.GameName, Properties.Resources.dosicon);
-                else if (e.isScummGame()) _images.Images.Add(e.GameName, Properties.Resources.scumicon);
+                if (e.GameType == OldGamesLauncher.GameType.DosBox) _images.Images.Add(e.GameName, Properties.Resources.dosicon);
+                else if (e.GameType == OldGamesLauncher.GameType.ScummVm) _images.Images.Add(e.GameName, Properties.Resources.scumicon);
                 else _images.Images.Add(e.GameName, SystemCommands.GetIconOfExe(e.GameExePath));
                  
             }
@@ -193,12 +189,12 @@ namespace OldGamesLauncher
         /// </summary>
         /// <param name="Name">Game name</param>
         /// <param name="ExePath">Game exe path</param>
-        public void AddGame(string Name, string ExePath, bool isDos, string scumid = null)
+        public void AddGame(string Name, string ExePath, GameType type, string scumid = null)
         {
             GamesData d = new GamesData();
             d.GameName = Name;
             d.GameExePath = ExePath;
-            d.isDosboxGame = isDos;
+            d.GameType = type;
             d.ScumGameId = scumid;
             _games.Add(d);
             RebuildIconIndex();
@@ -260,19 +256,8 @@ namespace OldGamesLauncher
         /// <returns>Filtered games collection</returns>
         public GamesData[] Filter(GameType Filter)
         {
-            switch (Filter)
-            {
-                case GameType.All:
-                    return (from l in _games orderby l.GameName select l).ToArray();
-                case GameType.Dos:
-                    return (from i in _games where i.isDosboxGame == true orderby i.GameName select i).ToArray();
-                case GameType.Scumm:
-                    return (from j in _games where j.isScummGame() == true orderby j.GameName select j).ToArray();
-                case GameType.Windows:
-                    return (from k in _games where k.isScummGame() == false && k.isDosboxGame == false orderby k.GameName select k).ToArray();
-                default:
-                    return null;
-            }
+            if (Filter == GameType.All) return (from l in _games orderby l.GameName select l).ToArray();
+            else return (from i in _games where i.GameType == Filter orderby i.GameName select i).ToArray();
         }
 
         /// <summary>
@@ -290,7 +275,7 @@ namespace OldGamesLauncher
         /// </summary>
         public void Clear()
         {
-            var scumgames = Filter(GameType.Scumm);
+            var scumgames = Filter(GameType.ScummVm);
             foreach (var game in scumgames)
             {
                 Program._fileman.RemoveScummGame(game.ScumGameId);

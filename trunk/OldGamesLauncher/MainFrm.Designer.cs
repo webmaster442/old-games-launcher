@@ -43,14 +43,17 @@
             this.gamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addScumVmGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.removeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.emulatorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dosBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openScreenshotsRecordingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetKeyMappingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.startDosBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startDosBoxToolSatripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startScummVMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startSnes9xToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.installUninstallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.installReinstallDosBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,6 +61,9 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.installReinstallScummVmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uninstallScummVmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
+            this.installReinstallSnes9xToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uninstallSnes9xToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupsVisibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dosExeDropformToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,9 +105,8 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.Tray = new System.Windows.Forms.NotifyIcon(this.components);
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
-            this.removeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenuStrip.SuspendLayout();
             this.ListContext.SuspendLayout();
             this.FilterSelector.SuspendLayout();
@@ -223,12 +228,25 @@
             this.addScumVmGameToolStripMenuItem.Text = "Add ScumVm Game...";
             this.addScumVmGameToolStripMenuItem.Click += new System.EventHandler(this.addScumVmGameToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(187, 6);
+            // 
+            // removeAllToolStripMenuItem
+            // 
+            this.removeAllToolStripMenuItem.Name = "removeAllToolStripMenuItem";
+            this.removeAllToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.removeAllToolStripMenuItem.Text = "Remove all";
+            this.removeAllToolStripMenuItem.Click += new System.EventHandler(this.removeAllToolStripMenuItem_Click);
+            // 
             // emulatorsToolStripMenuItem
             // 
             this.emulatorsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dosBoxToolStripMenuItem,
-            this.startDosBoxToolStripMenuItem,
+            this.startDosBoxToolSatripMenuItem,
             this.startScummVMToolStripMenuItem,
+            this.startSnes9xToolStripMenuItem,
             this.toolStripMenuItem1,
             this.installUninstallToolStripMenuItem});
             this.emulatorsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("emulatorsToolStripMenuItem.Image")));
@@ -280,14 +298,14 @@
             this.resetKeyMappingsToolStripMenuItem.Text = "Reset Key Mappings";
             this.resetKeyMappingsToolStripMenuItem.Click += new System.EventHandler(this.DosBoxManage);
             // 
-            // startDosBoxToolStripMenuItem
+            // startDosBoxToolSatripMenuItem
             // 
-            this.startDosBoxToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("startDosBoxToolStripMenuItem.Image")));
-            this.startDosBoxToolStripMenuItem.Name = "startDosBoxToolStripMenuItem";
-            this.startDosBoxToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.startDosBoxToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.startDosBoxToolStripMenuItem.Text = "Start DosBox";
-            this.startDosBoxToolStripMenuItem.Click += new System.EventHandler(this.startDosBoxToolStripMenuItem_Click);
+            this.startDosBoxToolSatripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("startDosBoxToolSatripMenuItem.Image")));
+            this.startDosBoxToolSatripMenuItem.Name = "startDosBoxToolSatripMenuItem";
+            this.startDosBoxToolSatripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.startDosBoxToolSatripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.startDosBoxToolSatripMenuItem.Text = "Start DosBox";
+            this.startDosBoxToolSatripMenuItem.Click += new System.EventHandler(this.StartEmulator);
             // 
             // startScummVMToolStripMenuItem
             // 
@@ -296,7 +314,14 @@
             this.startScummVMToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.startScummVMToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.startScummVMToolStripMenuItem.Text = "Start ScummVM";
-            this.startScummVMToolStripMenuItem.Click += new System.EventHandler(this.startScummVMToolStripMenuItem_Click);
+            this.startScummVMToolStripMenuItem.Click += new System.EventHandler(this.StartEmulator);
+            // 
+            // startSnes9xToolStripMenuItem
+            // 
+            this.startSnes9xToolStripMenuItem.Name = "startSnes9xToolStripMenuItem";
+            this.startSnes9xToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.startSnes9xToolStripMenuItem.Text = "Start Snes9x";
+            this.startSnes9xToolStripMenuItem.Click += new System.EventHandler(this.StartEmulator);
             // 
             // toolStripMenuItem1
             // 
@@ -310,7 +335,10 @@
             this.uninstallDosBoxToolStripMenuItem,
             this.toolStripMenuItem2,
             this.installReinstallScummVmToolStripMenuItem,
-            this.uninstallScummVmToolStripMenuItem});
+            this.uninstallScummVmToolStripMenuItem,
+            this.toolStripMenuItem6,
+            this.installReinstallSnes9xToolStripMenuItem,
+            this.uninstallSnes9xToolStripMenuItem});
             this.installUninstallToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("installUninstallToolStripMenuItem.Image")));
             this.installUninstallToolStripMenuItem.Name = "installUninstallToolStripMenuItem";
             this.installUninstallToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
@@ -352,6 +380,27 @@
             this.uninstallScummVmToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.uninstallScummVmToolStripMenuItem.Text = "Uninstall ScummVm";
             this.uninstallScummVmToolStripMenuItem.Click += new System.EventHandler(this.UninstallEmulator);
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(213, 6);
+            // 
+            // installReinstallSnes9xToolStripMenuItem
+            // 
+            this.installReinstallSnes9xToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.drive_disk;
+            this.installReinstallSnes9xToolStripMenuItem.Name = "installReinstallSnes9xToolStripMenuItem";
+            this.installReinstallSnes9xToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.installReinstallSnes9xToolStripMenuItem.Text = "Install/Reinstall Snes9x";
+            this.installReinstallSnes9xToolStripMenuItem.Click += new System.EventHandler(this.InstallEmulator);
+            // 
+            // uninstallSnes9xToolStripMenuItem
+            // 
+            this.uninstallSnes9xToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.drive_delete;
+            this.uninstallSnes9xToolStripMenuItem.Name = "uninstallSnes9xToolStripMenuItem";
+            this.uninstallSnes9xToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.uninstallSnes9xToolStripMenuItem.Text = "Uninstall Snes9x";
+            this.uninstallSnes9xToolStripMenuItem.Click += new System.EventHandler(this.UninstallEmulator);
             // 
             // viewToolStripMenuItem
             // 
@@ -678,6 +727,7 @@
             this.FilterSelector.Controls.Add(this.tabPage2);
             this.FilterSelector.Controls.Add(this.tabPage3);
             this.FilterSelector.Controls.Add(this.tabPage4);
+            this.FilterSelector.Controls.Add(this.tabPage5);
             this.FilterSelector.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.FilterSelector.Location = new System.Drawing.Point(0, 404);
             this.FilterSelector.Name = "FilterSelector";
@@ -724,24 +774,21 @@
             this.tabPage4.Text = "ScumVM";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Location = new System.Drawing.Point(4, 4);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(610, 0);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "SNES";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
             // Tray
             // 
             this.Tray.Icon = ((System.Drawing.Icon)(resources.GetObject("Tray.Icon")));
             this.Tray.Text = "Old Games Starter";
             this.Tray.Visible = true;
             this.Tray.DoubleClick += new System.EventHandler(this.Tray_DoubleClick);
-            // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(187, 6);
-            // 
-            // removeAllToolStripMenuItem
-            // 
-            this.removeAllToolStripMenuItem.Name = "removeAllToolStripMenuItem";
-            this.removeAllToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.removeAllToolStripMenuItem.Text = "Remove all";
-            this.removeAllToolStripMenuItem.Click += new System.EventHandler(this.removeAllToolStripMenuItem_Click);
             // 
             // MainFrm
             // 
@@ -805,7 +852,7 @@
         private System.Windows.Forms.ToolStripMenuItem releaseNotesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem licenseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dosBoxReadmeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem startDosBoxToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem startDosBoxToolSatripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gameExePropertiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem directDrawHackToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem installToolStripMenuItem;
@@ -842,6 +889,11 @@
         private System.Windows.Forms.ToolStripMenuItem visitGOGcomToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem removeAllToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.ToolStripMenuItem startSnes9xToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem installReinstallSnes9xToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem uninstallSnes9xToolStripMenuItem;
     }
 }
 
