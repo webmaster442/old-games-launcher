@@ -58,19 +58,19 @@ namespace OldGamesLauncher
 
         }
 
-        private void DoInstall(WaitForInstall.Install whattoinstall)
+        private void DoInstall(GameType whattoinstall)
         {
             WaitForInstall db = new WaitForInstall();
-            db.WhatToInstall = whattoinstall;
+            db.EmulatorToInstall = whattoinstall;
             db.Show();
         }
 
-        private void DoInstallAndRun(WaitForInstall.Install whattoinstall, string Command, string param = null)
+        private void DoInstallAndRun(GameType whattoinstall, string Command, string param = null)
         {
             try
             {
                 WaitForInstall db = new WaitForInstall();
-                db.WhatToInstall = whattoinstall;
+                db.EmulatorToInstall = whattoinstall;
                 db.Command = Command;
                 db.Arguments = param;
                 db.Show();
@@ -90,8 +90,8 @@ namespace OldGamesLauncher
                                 "Please delete game, and re add to program, with correct settings.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (d.isDosboxGame) DoInstallAndRun(WaitForInstall.Install.Dosbox, Program._fileman.DosBoxExe, "\"" + d.GameExePath + "\"");
-            else if (d.isScummGame()) DoInstallAndRun(WaitForInstall.Install.ScummVm, Program._fileman.ScummVmExe, d.ScumGameId);
+            else if (d.isDosboxGame) DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxExe, "\"" + d.GameExePath + "\"");
+            else if (d.isScummGame()) DoInstallAndRun(GameType.ScummVm, Program._fileman.ScummVmExe, d.ScumGameId);
             else
             {
                 if (test)
@@ -114,7 +114,7 @@ namespace OldGamesLauncher
                 MessageBox.Show("The file you droped is not a Dos executable", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            DoInstallAndRun(WaitForInstall.Install.Dosbox, Program._fileman.DosBoxExe, "\"" + filename + "\"");
+            DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxExe, "\"" + filename + "\"");
             //DoInstall(WaitForInstall.Install.Dosbox, true, "\"" + filename + "\"");
             //SystemCommands.RunCommand(Program._fileman.DosBoxExe, "\"" + filename + "\"");
         }
@@ -396,19 +396,19 @@ namespace OldGamesLauncher
             switch (s.Name)
             {
                 case "editConfigurationToolStripMenuItem":
-                    DoInstallAndRun(WaitForInstall.Install.Dosbox, Program._fileman.DosBoxPath + "\\DOSBox 0.74 Options.bat");
+                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxPath + "\\DOSBox 0.74 Options.bat");
                     //SystemCommands.RunCommand(Program._fileman.DosBoxPath + "\\DOSBox 0.74 Options.bat");
                     break;
                 case "openScreenshotsRecordingsToolStripMenuItem":
-                    DoInstallAndRun(WaitForInstall.Install.Dosbox, Program._fileman.DosBoxPath + "\\Screenshots & Recordings.bat");
+                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxPath + "\\Screenshots & Recordings.bat");
                     //SystemCommands.RunCommand(Program._fileman.DosBoxPath + "\\Screenshots & Recordings.bat");
                     break;
                 case "resetConfigurationToolStripMenuItem":
-                    DoInstallAndRun(WaitForInstall.Install.Dosbox, Program._fileman.DosBoxPath + "\\Reset Options.bat");
+                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxPath + "\\Reset Options.bat");
                     //SystemCommands.RunCommand(Program._fileman.DosBoxPath + "\\Reset Options.bat");
                     break;
                 case "resetKeyMappingsToolStripMenuItem":
-                    DoInstallAndRun(WaitForInstall.Install.Dosbox, Program._fileman.DosBoxPath + "\\Reset KeyMapper.bat");
+                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxPath + "\\Reset KeyMapper.bat");
                     //SystemCommands.RunCommand(Program._fileman.DosBoxPath + "\\Reset KeyMapper.bat");
                     break;
             }
@@ -417,14 +417,14 @@ namespace OldGamesLauncher
         private void startDosBoxToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Program._fileman.DosBoxPath
-            DoInstallAndRun(WaitForInstall.Install.Dosbox, Program._fileman.DosBoxExe);
+            DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxExe);
             //DoInstall(WaitForInstall.Install.Dosbox, true);
             
         }
 
         private void startScummVMToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DoInstallAndRun(WaitForInstall.Install.ScummVm, Program._fileman.ScummVmExe);
+            DoInstallAndRun(GameType.ScummVm, Program._fileman.ScummVmExe);
             //DoInstall(WaitForInstall.Install.ScummVm, true);
             
         }
@@ -448,12 +448,12 @@ namespace OldGamesLauncher
                 switch (s.Name)
                 {
                     case "installReinstallDosBoxToolStripMenuItem":
-                        if (Program._fileman.IsDosboxInstalled()) Program._fileman.DeleteDosBox();
-                        DoInstall(WaitForInstall.Install.Dosbox);
+                        if (Program._fileman.IsEmulatorInstalled(GameType.DosBox)) Program._fileman.DeleteEmulator(GameType.DosBox);
+                        DoInstall(GameType.DosBox);
                         break;
                     case "installReinstallScummVmToolStripMenuItem":
-                        if (Program._fileman.IsDosboxInstalled()) Program._fileman.DeleteScummVm();
-                        DoInstall(WaitForInstall.Install.ScummVm);
+                        if (Program._fileman.IsEmulatorInstalled(GameType.ScummVm)) Program._fileman.DeleteEmulator(GameType.ScummVm);
+                        DoInstall(GameType.ScummVm);
                         break;
                 }
             }
@@ -478,10 +478,10 @@ namespace OldGamesLauncher
                 switch (s.Name)
                 {
                     case "uninstallDosBoxToolStripMenuItem":
-                        if (Program._fileman.DeleteDosBox()) MessageBox.Show("DosBox Uninstalled", "DosBox Installer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (Program._fileman.DeleteEmulator(GameType.DosBox)) MessageBox.Show("DosBox Uninstalled", "DosBox Installer", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     case "uninstallScummVmToolStripMenuItem":
-                        if (Program._fileman.DeleteScummVm()) MessageBox.Show("ScummVM Uninstalled", "ScummVM Installer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (Program._fileman.DeleteEmulator(GameType.ScummVm)) MessageBox.Show("ScummVM Uninstalled", "ScummVM Installer", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                 }
             }
