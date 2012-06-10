@@ -65,7 +65,7 @@ namespace OldGamesLauncher
             db.Show();
         }
 
-        private void DoInstallAndRun(GameType whattoinstall, string Command, string param = null)
+        private void DoInstallAndRun(GameType whattoinstall, string Command, string param = null, bool cmdemu = false)
         {
             try
             {
@@ -73,6 +73,7 @@ namespace OldGamesLauncher
                 db.EmulatorToInstall = whattoinstall;
                 db.Command = Command;
                 db.Arguments = param;
+                db.CommandWindowVisible = cmdemu;
                 db.Show();
             }
             catch (ObjectDisposedException) { }
@@ -84,19 +85,28 @@ namespace OldGamesLauncher
             var selected = GamesList.SelectedItems[0].Text;
             GamesData d = _manager[selected];
             bool test = SystemCommands.IsDosExe(d.GameExePath);
-            if (d.GameType == GameType.DosBox) DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxExe, "\"" + d.GameExePath + "\"");
-            else if (d.GameType == GameType.ScummVm) DoInstallAndRun(GameType.ScummVm, Program._fileman.ScummVmExe, d.ScumGameId);
-            else
+            switch (d.GameType)
             {
-                if (test)
-                {
-                    MessageBox.Show("You are trying to run a DOS program as a Windows program.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                _idtowatch = SystemCommands.RunCommand(d.GameExePath);
-                Thread.Sleep(1000);
-                ProcessWatchTimer.Enabled = true;
-                SystemCommands.KillExplorer();
+                case GameType.DosBox:
+                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxExe, "\"" + d.GameExePath + "\"", true);
+                    break;
+                case GameType.ScummVm:
+                    DoInstallAndRun(GameType.ScummVm, Program._fileman.ScummVmExe, d.ScumGameId, true);
+                    break;
+                case GameType.Snes:
+                    DoInstallAndRun(GameType.Snes, Program._fileman.SnesExe, "\"" + d.GameExePath + "\"", false);
+                    break;
+                case GameType.Windows:
+                    if (test)
+                    {
+                        MessageBox.Show("You are trying to run a DOS program as a Windows program.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    _idtowatch = SystemCommands.RunCommand(d.GameExePath);
+                    Thread.Sleep(1000);
+                    ProcessWatchTimer.Enabled = true;
+                    SystemCommands.KillExplorer();
+                    break;
             }
         }
 
@@ -108,7 +118,7 @@ namespace OldGamesLauncher
                 MessageBox.Show("The file you droped is not a Dos executable", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxExe, "\"" + filename + "\"");
+            DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxExe, "\"" + filename + "\"", true);
             //DoInstall(WaitForInstall.Install.Dosbox, true, "\"" + filename + "\"");
             //SystemCommands.RunCommand(Program._fileman.DosBoxExe, "\"" + filename + "\"");
         }
@@ -187,18 +197,23 @@ namespace OldGamesLauncher
             {
                 case 0:
                     _filter = GameType.All;
+                    GamesList.BackgroundImage = Properties.Resources.back;
                     break;
                 case 1:
                     _filter = GameType.Windows;
+                    GamesList.BackgroundImage = Properties.Resources.back1;
                     break;
                 case 2:
                     _filter = GameType.DosBox;
+                    GamesList.BackgroundImage = Properties.Resources.back2;
                     break;
                 case 3:
                     _filter = GameType.ScummVm;
+                    GamesList.BackgroundImage = Properties.Resources.back3;
                     break;
                 case 4:
                     _filter = GameType.Snes;
+                    GamesList.BackgroundImage = Properties.Resources.back4;
                     break;
             }
             BuildList();
@@ -396,19 +411,19 @@ namespace OldGamesLauncher
             switch (s.Name)
             {
                 case "editConfigurationToolStripMenuItem":
-                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxPath + "\\DOSBox 0.74 Options.bat");
+                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxPath + "\\DOSBox 0.74 Options.bat", null, false);
                     //SystemCommands.RunCommand(Program._fileman.DosBoxPath + "\\DOSBox 0.74 Options.bat");
                     break;
                 case "openScreenshotsRecordingsToolStripMenuItem":
-                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxPath + "\\Screenshots & Recordings.bat");
+                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxPath + "\\Screenshots & Recordings.bat", null, false);
                     //SystemCommands.RunCommand(Program._fileman.DosBoxPath + "\\Screenshots & Recordings.bat");
                     break;
                 case "resetConfigurationToolStripMenuItem":
-                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxPath + "\\Reset Options.bat");
+                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxPath + "\\Reset Options.bat", null, false);
                     //SystemCommands.RunCommand(Program._fileman.DosBoxPath + "\\Reset Options.bat");
                     break;
                 case "resetKeyMappingsToolStripMenuItem":
-                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxPath + "\\Reset KeyMapper.bat");
+                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxPath + "\\Reset KeyMapper.bat", null, false);
                     //SystemCommands.RunCommand(Program._fileman.DosBoxPath + "\\Reset KeyMapper.bat");
                     break;
             }
@@ -610,6 +625,9 @@ namespace OldGamesLauncher
                 case "visitGOGcomToolStripMenuItem":
                     SystemCommands.OpenWebLocation("http://www.gog.com/");
                     break;
+                case "getSNESRomsToolStripMenuItem":
+                    SystemCommands.OpenWebLocation("http://www.rom-world.com/dl.php?name=Super_Nintendo");
+                    break;
             }
         }
 
@@ -630,13 +648,13 @@ namespace OldGamesLauncher
             switch (s.Name)
             {
                 case "startDosBoxToolSatripMenuItem":
-                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxExe);
+                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxExe, null, true);
                     break;
                 case "startScummVMToolStripMenuItem":
-                    DoInstallAndRun(GameType.ScummVm, Program._fileman.ScummVmExe);
+                    DoInstallAndRun(GameType.ScummVm, Program._fileman.ScummVmExe, null, true);
                     break;
                 case "startSnes9xToolStripMenuItem":
-                    DoInstallAndRun(GameType.Snes, Program._fileman.SnesExe);
+                    DoInstallAndRun(GameType.Snes, Program._fileman.SnesExe, null, false);
                     break;
             }
 

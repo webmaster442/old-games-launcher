@@ -43,7 +43,7 @@ namespace OldGamesLauncher
             setups = new string[] { "setup.exe", "setup.com" };
         }
 
-        public static int RunCommand(string cmd, string args = "")
+        public static int RunCommand(string cmd, string args = "", bool cmdemu = false)
         {
             Process Command = new Process();
             Command.StartInfo.UseShellExecute = true;
@@ -53,7 +53,7 @@ namespace OldGamesLauncher
             if (dir.Length < 1) dir = Path.GetDirectoryName(Application.ExecutablePath);
 
             Command.StartInfo.WorkingDirectory = dir;
-            if (!Properties.Settings.Default.EmuConsoleVisible) Command.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            if (!Properties.Settings.Default.EmuConsoleVisible && cmdemu) Command.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             Command.StartInfo.Arguments = args;
             Command.Start();
             return Command.Id;
