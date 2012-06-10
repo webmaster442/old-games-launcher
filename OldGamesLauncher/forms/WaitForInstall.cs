@@ -23,6 +23,7 @@ namespace OldGamesLauncher
 
         public string Command { get; set; }
         public string Arguments { get; set; }
+        public bool CommandWindowVisible { get; set; }
 
         private bool AfterInstallCmd
         {
@@ -47,7 +48,7 @@ namespace OldGamesLauncher
 
         private void WaitForInstall_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (AfterInstallCmd) SystemCommands.RunCommand(Command, Arguments);
+            if (AfterInstallCmd) SystemCommands.RunCommand(Command, Arguments, CommandWindowVisible);
             e.Cancel = false;
         }
     }

@@ -144,6 +144,41 @@ namespace OldGamesLauncher.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap back1 {
+            get {
+                object obj = ResourceManager.GetObject("back1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap back2 {
+            get {
+                object obj = ResourceManager.GetObject("back2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap back3 {
+            get {
+                object obj = ResourceManager.GetObject("back3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap back4 {
+            get {
+                object obj = ResourceManager.GetObject("back4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap back5 {
+            get {
+                object obj = ResourceManager.GetObject("back5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap bullet_wrench {
             get {
                 object obj = ResourceManager.GetObject("bullet_wrench", resourceCulture);

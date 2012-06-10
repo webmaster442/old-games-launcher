@@ -107,6 +107,7 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.Tray = new System.Windows.Forms.NotifyIcon(this.components);
+            this.getSNESRomsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenuStrip.SuspendLayout();
             this.ListContext.SuspendLayout();
             this.FilterSelector.SuspendLayout();
@@ -548,7 +549,8 @@
             this.getGamesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.getDosDemosToolStripMenuItem,
             this.getScumVMDemosToolStripMenuItem,
-            this.visitGOGcomToolStripMenuItem});
+            this.visitGOGcomToolStripMenuItem,
+            this.getSNESRomsToolStripMenuItem});
             this.getGamesToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.folder;
             this.getGamesToolStripMenuItem.Name = "getGamesToolStripMenuItem";
             this.getGamesToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
@@ -790,6 +792,14 @@
             this.Tray.Visible = true;
             this.Tray.DoubleClick += new System.EventHandler(this.Tray_DoubleClick);
             // 
+            // getSNESRomsToolStripMenuItem
+            // 
+            this.getSNESRomsToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.link_go;
+            this.getSNESRomsToolStripMenuItem.Name = "getSNESRomsToolStripMenuItem";
+            this.getSNESRomsToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.getSNESRomsToolStripMenuItem.Text = "Get SNES Roms";
+            this.getSNESRomsToolStripMenuItem.Click += new System.EventHandler(this.GetGamesMenu);
+            // 
             // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -894,6 +904,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
         private System.Windows.Forms.ToolStripMenuItem installReinstallSnes9xToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem uninstallSnes9xToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem getSNESRomsToolStripMenuItem;
     }
 }
 

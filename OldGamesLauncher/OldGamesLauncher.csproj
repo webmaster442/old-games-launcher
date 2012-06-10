@@ -227,6 +227,11 @@
     <None Include="icons\scumicon.ico" />
     <None Include="icons\back.png" />
     <Content Include="FileTypes.txt" />
+    <None Include="icons\back1.png" />
+    <None Include="icons\back2.png" />
+    <None Include="icons\back3.png" />
+    <None Include="icons\back4.png" />
+    <None Include="icons\back5.png" />
     <Content Include="Zips\dosbox.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -307,22 +312,22 @@
   <ItemGroup>
     <PublishFile Include="icons\dosicon.ico">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="Icon_small.ico">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
