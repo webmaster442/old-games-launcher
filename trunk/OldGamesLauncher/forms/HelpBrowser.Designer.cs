@@ -35,6 +35,8 @@
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.RtbHelp = new System.Windows.Forms.RichTextBox();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
             this.TabSelector.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,12 +46,15 @@
             this.TabSelector.Controls.Add(this.tabPage2);
             this.TabSelector.Controls.Add(this.tabPage3);
             this.TabSelector.Controls.Add(this.tabPage5);
+            this.TabSelector.Controls.Add(this.tabPage6);
+            this.TabSelector.Controls.Add(this.tabPage7);
             this.TabSelector.Controls.Add(this.tabPage4);
             this.TabSelector.Dock = System.Windows.Forms.DockStyle.Top;
             this.TabSelector.Location = new System.Drawing.Point(0, 0);
+            this.TabSelector.Multiline = true;
             this.TabSelector.Name = "TabSelector";
             this.TabSelector.SelectedIndex = 0;
-            this.TabSelector.Size = new System.Drawing.Size(632, 22);
+            this.TabSelector.Size = new System.Drawing.Size(632, 24);
             this.TabSelector.TabIndex = 0;
             this.TabSelector.SelectedIndexChanged += new System.EventHandler(this.TabSelector_SelectedIndexChanged);
             // 
@@ -107,12 +112,30 @@
             this.RtbHelp.BackColor = System.Drawing.SystemColors.Control;
             this.RtbHelp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RtbHelp.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.RtbHelp.Location = new System.Drawing.Point(0, 22);
+            this.RtbHelp.Location = new System.Drawing.Point(0, 24);
             this.RtbHelp.Name = "RtbHelp";
             this.RtbHelp.ReadOnly = true;
-            this.RtbHelp.Size = new System.Drawing.Size(632, 406);
+            this.RtbHelp.Size = new System.Drawing.Size(632, 404);
             this.RtbHelp.TabIndex = 1;
             this.RtbHelp.Text = "";
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Size = new System.Drawing.Size(624, 0);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "ScumVM Readme";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Size = new System.Drawing.Size(624, 0);
+            this.tabPage7.TabIndex = 6;
+            this.tabPage7.Text = "Snes9x readme";
+            this.tabPage7.UseVisualStyleBackColor = true;
             // 
             // HelpBrowser
             // 
@@ -137,5 +160,7 @@
         private System.Windows.Forms.RichTextBox RtbHelp;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TabPage tabPage7;
     }
 }

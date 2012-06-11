@@ -32,8 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFrm));
             this.MainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importDemoCollectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.restartAsAdministratorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restartExplorerexeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -79,6 +77,8 @@
             this.licenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dosBoxReadmeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dosBoxKeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.snes9xReadmeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scummVmReadmeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compatiblitySettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.getGamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.getDosDemosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -131,8 +131,6 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.importDemoCollectionToolStripMenuItem,
-            this.toolStripMenuItem5,
             this.restartAsAdministratorToolStripMenuItem,
             this.restartExplorerexeToolStripMenuItem,
             this.toolStripSeparator1,
@@ -143,17 +141,6 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.fileToolStripMenuItem.Text = "File";
-            // 
-            // importDemoCollectionToolStripMenuItem
-            // 
-            this.importDemoCollectionToolStripMenuItem.Name = "importDemoCollectionToolStripMenuItem";
-            this.importDemoCollectionToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
-            this.importDemoCollectionToolStripMenuItem.Text = "Import Demo Collection...";
-            // 
-            // toolStripMenuItem5
-            // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(245, 6);
             // 
             // restartAsAdministratorToolStripMenuItem
             // 
@@ -499,6 +486,8 @@
             this.licenseToolStripMenuItem,
             this.dosBoxReadmeToolStripMenuItem,
             this.dosBoxKeysToolStripMenuItem,
+            this.snes9xReadmeToolStripMenuItem,
+            this.scummVmReadmeToolStripMenuItem,
             this.compatiblitySettingsToolStripMenuItem});
             this.helpToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("helpToolStripMenuItem.Image")));
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
@@ -507,7 +496,7 @@
             // 
             // releaseNotesToolStripMenuItem
             // 
-            this.releaseNotesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("releaseNotesToolStripMenuItem.Image")));
+            this.releaseNotesToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.page_white_text;
             this.releaseNotesToolStripMenuItem.Name = "releaseNotesToolStripMenuItem";
             this.releaseNotesToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.releaseNotesToolStripMenuItem.Text = "Release Notes";
@@ -515,7 +504,7 @@
             // 
             // licenseToolStripMenuItem
             // 
-            this.licenseToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("licenseToolStripMenuItem.Image")));
+            this.licenseToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.page_white_text;
             this.licenseToolStripMenuItem.Name = "licenseToolStripMenuItem";
             this.licenseToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.licenseToolStripMenuItem.Text = "License";
@@ -523,7 +512,7 @@
             // 
             // dosBoxReadmeToolStripMenuItem
             // 
-            this.dosBoxReadmeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("dosBoxReadmeToolStripMenuItem.Image")));
+            this.dosBoxReadmeToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.page_white_text;
             this.dosBoxReadmeToolStripMenuItem.Name = "dosBoxReadmeToolStripMenuItem";
             this.dosBoxReadmeToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.dosBoxReadmeToolStripMenuItem.Text = "DosBox Readme";
@@ -531,15 +520,31 @@
             // 
             // dosBoxKeysToolStripMenuItem
             // 
-            this.dosBoxKeysToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("dosBoxKeysToolStripMenuItem.Image")));
+            this.dosBoxKeysToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.page_white_text;
             this.dosBoxKeysToolStripMenuItem.Name = "dosBoxKeysToolStripMenuItem";
             this.dosBoxKeysToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.dosBoxKeysToolStripMenuItem.Text = "DosBox Keys";
             this.dosBoxKeysToolStripMenuItem.Click += new System.EventHandler(this.HelpHandler);
             // 
+            // snes9xReadmeToolStripMenuItem
+            // 
+            this.snes9xReadmeToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.page_white_text;
+            this.snes9xReadmeToolStripMenuItem.Name = "snes9xReadmeToolStripMenuItem";
+            this.snes9xReadmeToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.snes9xReadmeToolStripMenuItem.Text = "Snes9x Readme";
+            this.snes9xReadmeToolStripMenuItem.Click += new System.EventHandler(this.HelpHandler);
+            // 
+            // scummVmReadmeToolStripMenuItem
+            // 
+            this.scummVmReadmeToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.page_white_text;
+            this.scummVmReadmeToolStripMenuItem.Name = "scummVmReadmeToolStripMenuItem";
+            this.scummVmReadmeToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.scummVmReadmeToolStripMenuItem.Text = "ScummVm Readme";
+            this.scummVmReadmeToolStripMenuItem.Click += new System.EventHandler(this.HelpHandler);
+            // 
             // compatiblitySettingsToolStripMenuItem
             // 
-            this.compatiblitySettingsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("compatiblitySettingsToolStripMenuItem.Image")));
+            this.compatiblitySettingsToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.page_white_text;
             this.compatiblitySettingsToolStripMenuItem.Name = "compatiblitySettingsToolStripMenuItem";
             this.compatiblitySettingsToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.compatiblitySettingsToolStripMenuItem.Text = "Compatiblity Settings";
@@ -892,8 +897,6 @@
         private System.Windows.Forms.ToolStripMenuItem minimizeToTrayToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem closeToTrayToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem importDemoCollectionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem getGamesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem getDosDemosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem getScumVMDemosToolStripMenuItem;
@@ -906,6 +909,8 @@
         private System.Windows.Forms.ToolStripMenuItem installReinstallSnes9xToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem uninstallSnes9xToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem getSNESRomsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem snes9xReadmeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem scummVmReadmeToolStripMenuItem;
     }
 }
 
