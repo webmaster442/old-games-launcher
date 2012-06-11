@@ -79,10 +79,21 @@ namespace OldGamesLauncher
             _images.ImageSize = new System.Drawing.Size(32, 32);
             foreach (var e in _games)
             {
-                if (e.GameType == OldGamesLauncher.GameType.DosBox) _images.Images.Add(e.GameName, Properties.Resources.dosicon);
-                else if (e.GameType == OldGamesLauncher.GameType.ScummVm) _images.Images.Add(e.GameName, Properties.Resources.scumicon);
-                else _images.Images.Add(e.GameName, SystemCommands.GetIconOfExe(e.GameExePath));
-                 
+                switch (e.GameType)
+                {
+                    case GameType.Windows:
+                        _images.Images.Add(e.GameName, SystemCommands.GetIconOfExe(e.GameExePath));
+                        break;
+                    case GameType.DosBox:
+                        _images.Images.Add(e.GameName, Properties.Resources.dosicon);
+                        break;
+                    case GameType.ScummVm:
+                        _images.Images.Add(e.GameName, Properties.Resources.scumicon);
+                        break;
+                    case GameType.Snes:
+                        _images.Images.Add(e.GameName, Properties.Resources.snesicon);
+                        break;
+                }
             }
         }
 

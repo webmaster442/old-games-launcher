@@ -84,6 +84,7 @@
             this.getDosDemosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.getScumVMDemosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visitGOGcomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.getSNESRomsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GamesList = new System.Windows.Forms.ListView();
             this.ListContext = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.startGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -107,7 +108,6 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.Tray = new System.Windows.Forms.NotifyIcon(this.components);
-            this.getSNESRomsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenuStrip.SuspendLayout();
             this.ListContext.SuspendLayout();
             this.FilterSelector.SuspendLayout();
@@ -319,6 +319,7 @@
             // 
             // startSnes9xToolStripMenuItem
             // 
+            this.startSnes9xToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.snes;
             this.startSnes9xToolStripMenuItem.Name = "startSnes9xToolStripMenuItem";
             this.startSnes9xToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.startSnes9xToolStripMenuItem.Text = "Start Snes9x";
@@ -580,6 +581,14 @@
             this.visitGOGcomToolStripMenuItem.Text = "Visit GOG.com...";
             this.visitGOGcomToolStripMenuItem.Click += new System.EventHandler(this.GetGamesMenu);
             // 
+            // getSNESRomsToolStripMenuItem
+            // 
+            this.getSNESRomsToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.link_go;
+            this.getSNESRomsToolStripMenuItem.Name = "getSNESRomsToolStripMenuItem";
+            this.getSNESRomsToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.getSNESRomsToolStripMenuItem.Text = "Get SNES Roms";
+            this.getSNESRomsToolStripMenuItem.Click += new System.EventHandler(this.GetGamesMenu);
+            // 
             // GamesList
             // 
             this.GamesList.BackColor = System.Drawing.SystemColors.Control;
@@ -791,14 +800,6 @@
             this.Tray.Text = "Old Games Starter";
             this.Tray.Visible = true;
             this.Tray.DoubleClick += new System.EventHandler(this.Tray_DoubleClick);
-            // 
-            // getSNESRomsToolStripMenuItem
-            // 
-            this.getSNESRomsToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.link_go;
-            this.getSNESRomsToolStripMenuItem.Name = "getSNESRomsToolStripMenuItem";
-            this.getSNESRomsToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.getSNESRomsToolStripMenuItem.Text = "Get SNES Roms";
-            this.getSNESRomsToolStripMenuItem.Click += new System.EventHandler(this.GetGamesMenu);
             // 
             // MainFrm
             // 
