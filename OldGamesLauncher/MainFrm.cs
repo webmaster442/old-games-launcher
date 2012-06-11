@@ -119,8 +119,6 @@ namespace OldGamesLauncher
                 return;
             }
             DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxExe, "\"" + filename + "\"", true);
-            //DoInstall(WaitForInstall.Install.Dosbox, true, "\"" + filename + "\"");
-            //SystemCommands.RunCommand(Program._fileman.DosBoxExe, "\"" + filename + "\"");
         }
 
         private void MainFrm_Load(object sender, EventArgs e)
@@ -515,11 +513,17 @@ namespace OldGamesLauncher
                 case "dosBoxReadmeToolStripMenuItem":
                     _hb.DocIndex = 2;
                     break;
-                case "compatiblitySettingsToolStripMenuItem":
+                case "dosBoxKeysToolStripMenuItem":
                     _hb.DocIndex = 3;
                     break;
-                case "dosBoxKeysToolStripMenuItem":
+                case "scummVmReadmeToolStripMenuItem":
                     _hb.DocIndex = 4;
+                    break;
+                case "snes9xReadmeToolStripMenuItem":
+                    _hb.DocIndex = 5;
+                    break;
+                case "compatiblitySettingsToolStripMenuItem":
+                    _hb.DocIndex = 6;
                     break;
             }
             _hb.Show();

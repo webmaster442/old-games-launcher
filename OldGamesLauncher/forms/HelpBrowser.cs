@@ -32,10 +32,16 @@ namespace OldGamesLauncher
                     RtbHelp.LoadFile(Program._fileman.GetDocumentContent("DOSBoxManual.txt"), RichTextBoxStreamType.PlainText);
                     break;
                 case 3:
-                    RtbHelp.LoadFile(Program._fileman.GetDocumentContent("compatibilitysettings.rtf"), RichTextBoxStreamType.RichText);
+                    RtbHelp.LoadFile(Program._fileman.GetDocumentContent("dosboxkeys.txt"), RichTextBoxStreamType.PlainText);
                     break;
                 case 4:
-                    RtbHelp.LoadFile(Program._fileman.GetDocumentContent("dosboxkeys.txt"), RichTextBoxStreamType.PlainText);
+                    RtbHelp.LoadFile(Program._fileman.GetDocumentContent("ScummReadme.txt"), RichTextBoxStreamType.PlainText);
+                    break;
+                case 5:
+                    RtbHelp.LoadFile(Program._fileman.GetDocumentContent("sneseadme.txt"), RichTextBoxStreamType.PlainText);
+                    break;
+                case 6:
+                    RtbHelp.LoadFile(Program._fileman.GetDocumentContent("compatibilitysettings.rtf"), RichTextBoxStreamType.RichText);
                     break;
             }
         }
