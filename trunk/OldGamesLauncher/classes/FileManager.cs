@@ -178,6 +178,10 @@ namespace OldGamesLauncher
             }
         }
 
+        /// <summary>
+        /// Installs an emulator
+        /// </summary>
+        /// <param name="type">Emulato type to install</param>
         public void InstallEmulator(GameType type)
         {
             FileStream ms = null;
@@ -307,7 +311,7 @@ namespace OldGamesLauncher
         }
 
         /// <summary>
-        /// Registers a Scum
+        /// Registers a Scum game
         /// </summary>
         /// <param name="GameId">Scumm Game ID</param>
         /// <param name="description">Game Name (description)</param>
