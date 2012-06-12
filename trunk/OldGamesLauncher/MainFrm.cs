@@ -299,15 +299,15 @@ namespace OldGamesLauncher
             else
             {
                 var selected = GamesList.SelectedItems[0].Text;
-                bool scummgame = _manager[selected].GameType == GameType.ScummVm;
-                bool dosexe = _manager[selected].GameType == GameType.DosBox;
                 internetToolStripMenuItem.Enabled = true;
                 deleteGameToolStripMenuItem.Enabled = true;
                 EditToolStripMenuItem.Enabled = true;
                 openFolderToolStripMenuItem.Enabled = true;
                 startGameToolStripMenuItem.Enabled = true;
+                directDrawHackToolStripMenuItem.Enabled = false;
+                gameExePropertiesToolStripMenuItem.Enabled = false;
                 gameSettingsToolStripMenuItem.Enabled = SystemCommands.SetupExists(_manager.GetPathByName(selected));
-                if (!dosexe & !scummgame)
+                if (_manager[selected].GameType == GameType.Windows)
                 {
                     gameExePropertiesToolStripMenuItem.Enabled = true;
                     directDrawHackToolStripMenuItem.Enabled = true;
