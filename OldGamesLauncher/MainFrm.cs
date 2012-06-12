@@ -85,16 +85,17 @@ namespace OldGamesLauncher
             var selected = GamesList.SelectedItems[0].Text;
             GamesData d = _manager[selected];
             bool test = SystemCommands.IsDosExe(d.GameExePath);
+            string args = string.IsNullOrEmpty(d.CommandLinePars) ? null : d.CommandLinePars + " ";
             switch (d.GameType)
             {
                 case GameType.DosBox:
-                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxExe, "\"" + d.GameExePath + "\"", true);
+                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxExe, args+"\"" + d.GameExePath + "\"", true);
                     break;
                 case GameType.ScummVm:
-                    DoInstallAndRun(GameType.ScummVm, Program._fileman.ScummVmExe, d.ScumGameId, true);
+                    DoInstallAndRun(GameType.ScummVm, Program._fileman.ScummVmExe, args+d.ScumGameId, true);
                     break;
                 case GameType.Snes:
-                    DoInstallAndRun(GameType.Snes, Program._fileman.SnesExe, "\"" + d.GameExePath + "\"", false);
+                    DoInstallAndRun(GameType.Snes, Program._fileman.SnesExe, args+"\"" + d.GameExePath + "\"", false);
                     break;
                 case GameType.Windows:
                     if (test)
@@ -102,7 +103,7 @@ namespace OldGamesLauncher
                         MessageBox.Show("You are trying to run a DOS program as a Windows program.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    _idtowatch = SystemCommands.RunCommand(d.GameExePath);
+                    _idtowatch = SystemCommands.RunCommand(d.GameExePath, d.CommandLinePars);
                     Thread.Sleep(1000);
                     ProcessWatchTimer.Enabled = true;
                     SystemCommands.KillExplorer();
@@ -142,6 +143,7 @@ namespace OldGamesLauncher
             _manager.LoadDataFile(Program._fileman.ConfigLocation);
             BuildList();
             if (Settings.Default.DropVisible) _dosdop.Show();
+            steamToolStripMenuItem.Enabled = Steam.IsSteamInstalled();
         }
 
         private void MainFrm_FormClosing(object sender, FormClosingEventArgs e)
@@ -223,7 +225,7 @@ namespace OldGamesLauncher
             AddGameForm agf = new AddGameForm();
             if (agf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                _manager.AddGame(agf.GameName, agf.GamePath, agf.SelectedGameType);
+                _manager.AddGame(agf.GameName, agf.GamePath, agf.SelectedGameType, null, agf.Arguments);
                 BuildList();
             }
         }
@@ -362,11 +364,13 @@ namespace OldGamesLauncher
                     AddGameForm ed = new AddGameForm();
                     ed.GameName = dat.GameName;
                     ed.GamePath = dat.GameExePath;
+                    ed.Arguments = dat.CommandLinePars;
                     ed.SelectedGameType = dat.GameType;
                     if (ed.ShowDialog() == DialogResult.OK)
                     {
                         dat.GameName = ed.GameName;
                         dat.GameExePath = ed.GamePath;
+                        dat.CommandLinePars = ed.Arguments;
                         dat.GameType = ed.SelectedGameType;
                         _manager[index] = dat;
                     }
@@ -662,6 +666,32 @@ namespace OldGamesLauncher
                     break;
             }
 
+        }
+
+        private void SteamMenu(object sender, EventArgs e)
+        {
+            ToolStripMenuItem s = (ToolStripMenuItem)sender;
+            switch (s.Name)
+            {
+                case "storeToolStripMenuItem":
+                    Steam.DoSteamAction(Steam.SteamAction.OpenStore);
+                    break;
+                case "gamesToolStripMenuItem1":
+                    Steam.DoSteamAction(Steam.SteamAction.OpenGames);
+                    break;
+                case "downloadsToolStripMenuItem":
+                    Steam.DoSteamAction(Steam.SteamAction.OpenDownloads);
+                    break;
+                case "friendsToolStripMenuItem":
+                    Steam.DoSteamAction(Steam.SteamAction.OpenFriendsList);
+                    break;
+                case "newsToolStripMenuItem":
+                    Steam.DoSteamAction(Steam.SteamAction.OpenNews);
+                    break;
+                case "settingsToolStripMenuItem":
+                    Steam.DoSteamAction(Steam.SteamAction.OpenSettings);
+                    break;
+            }
         }
     }
 }

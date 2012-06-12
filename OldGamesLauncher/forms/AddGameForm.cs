@@ -74,6 +74,12 @@ namespace OldGamesLauncher
             set { TbGamePath.Text = value; }
         }
 
+        public string Arguments
+        {
+            get { return TbArgs.Text; }
+            set { TbArgs.Text = value; }
+        }
+
         public GameType SelectedGameType
         {
             get

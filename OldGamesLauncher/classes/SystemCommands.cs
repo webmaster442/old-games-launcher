@@ -135,6 +135,8 @@ namespace OldGamesLauncher
         public static bool IsDosExe(string filename)
         {
             if (filename.EndsWith(".com")) return true;
+            else if (filename.EndsWith(".cmd")) return false;
+            else if (filename.EndsWith(".bat")) return true;
             try
             {
                 _3DViewerControls.Data.PeHeaderReader pe = new _3DViewerControls.Data.PeHeaderReader(filename);

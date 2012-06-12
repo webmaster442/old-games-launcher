@@ -24,6 +24,7 @@ namespace OldGamesLauncher
         public string GameExePath { get; set; }
         public GameType GameType { get; set; }
         public string ScumGameId { get; set; }
+        public string CommandLinePars { get; set; }
 
         public GamesData() { ScumGameId = ""; }
 
@@ -32,6 +33,7 @@ namespace OldGamesLauncher
             GameName = Name;
             GameExePath = Exepath;
             ScumGameId = "";
+            CommandLinePars = "";
         }
 
         public override int GetHashCode()
@@ -200,13 +202,14 @@ namespace OldGamesLauncher
         /// </summary>
         /// <param name="Name">Game name</param>
         /// <param name="ExePath">Game exe path</param>
-        public void AddGame(string Name, string ExePath, GameType type, string scumid = null)
+        public void AddGame(string Name, string ExePath, GameType type, string Gameid = null, string Cmdline = null)
         {
             GamesData d = new GamesData();
             d.GameName = Name;
             d.GameExePath = ExePath;
             d.GameType = type;
-            d.ScumGameId = scumid;
+            d.CommandLinePars = Cmdline;
+            d.ScumGameId = Gameid;
             _games.Add(d);
             RebuildIconIndex();
         }

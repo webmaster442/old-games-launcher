@@ -99,6 +99,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="classes\Steam.cs" />
     <Compile Include="forms\AddScumGameForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -234,6 +235,7 @@
     <None Include="icons\back5.png" />
     <None Include="icons\snesicon.ico" />
     <None Include="icons\snes.png" />
+    <None Include="icons\steam.png" />
     <Content Include="Zips\dosbox.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
