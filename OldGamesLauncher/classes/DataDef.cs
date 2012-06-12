@@ -38,7 +38,7 @@ namespace OldGamesLauncher
 
         public override int GetHashCode()
         {
-            return GameName.GetHashCode() ^ GameExePath.GetHashCode() ^ GameType.GetHashCode() ^ ScumGameId.GetHashCode();
+            return GameName.GetHashCode() ^ GameExePath.GetHashCode() ^ GameType.GetHashCode();
         }
 
         public override string ToString()

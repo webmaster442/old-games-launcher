@@ -36,6 +36,7 @@ namespace OldGamesLauncher
 
             if (OpenExeDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                Warn = false;
                 this.TbGamePath.Text = OpenExeDialog.FileName;
                 if (OpenExeDialog.FilterIndex == 0)
                 {
