@@ -38,6 +38,8 @@
             this.OpenExeDialog = new System.Windows.Forms.OpenFileDialog();
             this.label3 = new System.Windows.Forms.Label();
             this.CbGameType = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.TbArgs = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -85,7 +87,7 @@
             // BtnCancel
             // 
             this.BtnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.BtnCancel.Location = new System.Drawing.Point(327, 112);
+            this.BtnCancel.Location = new System.Drawing.Point(327, 140);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(75, 23);
             this.BtnCancel.TabIndex = 5;
@@ -94,7 +96,7 @@
             // 
             // BtnAdd
             // 
-            this.BtnAdd.Location = new System.Drawing.Point(246, 112);
+            this.BtnAdd.Location = new System.Drawing.Point(246, 140);
             this.BtnAdd.Name = "BtnAdd";
             this.BtnAdd.Size = new System.Drawing.Size(75, 23);
             this.BtnAdd.TabIndex = 6;
@@ -102,10 +104,13 @@
             this.BtnAdd.UseVisualStyleBackColor = true;
             this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
+            // OpenExeDialog
+            // 
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 90);
+            this.label3.Location = new System.Drawing.Point(12, 126);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(62, 13);
             this.label3.TabIndex = 7;
@@ -119,18 +124,36 @@
             "Windows",
             "Dos",
             "SNES"});
-            this.CbGameType.Location = new System.Drawing.Point(80, 87);
+            this.CbGameType.Location = new System.Drawing.Point(71, 140);
             this.CbGameType.Name = "CbGameType";
             this.CbGameType.Size = new System.Drawing.Size(121, 21);
             this.CbGameType.TabIndex = 8;
             this.CbGameType.SelectedIndexChanged += new System.EventHandler(this.CbGameType_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 87);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(241, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Additional arguments to pass to game or emulator:";
+            // 
+            // TbArgs
+            // 
+            this.TbArgs.Location = new System.Drawing.Point(15, 103);
+            this.TbArgs.Name = "TbArgs";
+            this.TbArgs.Size = new System.Drawing.Size(387, 20);
+            this.TbArgs.TabIndex = 10;
             // 
             // AddGameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.BtnCancel;
-            this.ClientSize = new System.Drawing.Size(414, 145);
+            this.ClientSize = new System.Drawing.Size(414, 175);
+            this.Controls.Add(this.TbArgs);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.CbGameType);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.BtnAdd);
@@ -162,5 +185,7 @@
         private System.Windows.Forms.OpenFileDialog OpenExeDialog;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox CbGameType;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox TbArgs;
     }
 }

@@ -1,2 +1,2 @@
-﻿Windows & Dos Exe|*.exe;*.com;*.bat
+﻿Windows & Dos Exe|*.exe;*.com;*.bat;*.cmd
 SNES Rom|*.N;*.smcN;*.zipY;*.zip;*.gzY;*.swcN;*.figN;*.058N;*.078N;*.japN;*.usaN;*.048N;*.eurN;*.sfcN;*.1N;*.mgdN;*.ufoN;*.binN;*.gd3N;*.mghN;*.gd7N;*.ausN;*.dx2N;*.aN;*.jmaY;
