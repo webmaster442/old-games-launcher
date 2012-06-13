@@ -509,25 +509,25 @@ namespace OldGamesLauncher
             switch (s.Name)
             {
                 case "releaseNotesToolStripMenuItem":
-                    _hb.DocIndex = 0;
+                    _hb.LoadDocument("Old games launcher/Release notes.rtf");
                     break;
                 case "licenseToolStripMenuItem":
-                    _hb.DocIndex = 1;
+                    _hb.LoadDocument("Old games launcher/License.rtf");
                     break;
                 case "dosBoxReadmeToolStripMenuItem":
-                    _hb.DocIndex = 2;
+                    _hb.LoadDocument("Emulator related/DOSBox Manual.txt");
                     break;
                 case "dosBoxKeysToolStripMenuItem":
-                    _hb.DocIndex = 3;
+                    _hb.LoadDocument("Emulator related/Dosbox keys.txt");                    
                     break;
                 case "scummVmReadmeToolStripMenuItem":
-                    _hb.DocIndex = 4;
+                    _hb.LoadDocument("Emulator related/ScummVm Readme.txt");   
                     break;
                 case "snes9xReadmeToolStripMenuItem":
-                    _hb.DocIndex = 5;
+                    _hb.LoadDocument("Emulator related/SNES9x Readme.txt");   
                     break;
                 case "compatiblitySettingsToolStripMenuItem":
-                    _hb.DocIndex = 6;
+                    _hb.LoadDocument("Old games launcher/Changelog.rtf");
                     break;
             }
             _hb.Show();
