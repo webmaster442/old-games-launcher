@@ -12,6 +12,7 @@ namespace OldGamesLauncher
         /// </summary>
         /// 
         public static FileManager _fileman;
+        public static GamesManager _manager;
 
         [STAThread]
         static void Main()

@@ -100,6 +100,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="classes\Steam.cs" />
+    <Compile Include="classes\SystemCommands.cs" />
+    <Compile Include="forms\FirstLaunch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\FirstLaunch.Designer.cs">
+      <DependentUpon>FirstLaunch.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\AddScumGameForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -184,13 +191,15 @@
     <Compile Include="sharpzip\Zip\ZipInputStream.cs" />
     <Compile Include="sharpzip\Zip\ZipNameTransform.cs" />
     <Compile Include="sharpzip\Zip\ZipOutputStream.cs" />
-    <Compile Include="classes\SystemCommands.cs" />
     <Compile Include="forms\WaitForInstall.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\WaitForInstall.Designer.cs">
       <DependentUpon>WaitForInstall.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="forms\FirstLaunch.resx">
+      <DependentUpon>FirstLaunch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\AddScumGameForm.resx">
       <DependentUpon>AddScumGameForm.cs</DependentUpon>
     </EmbeddedResource>

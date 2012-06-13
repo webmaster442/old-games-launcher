@@ -175,5 +175,22 @@ namespace OldGamesLauncher
             }
             return null;
         }
+
+        public static bool DirectDrawTest(string exepath)
+        {
+            Process p = new Process();
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.FileName = "cmd.exe";
+            p.StartInfo.Arguments = "/c findstr -i .dll \"" + exepath + "\" | more | findstr -i .dll | more";
+            p.Start();
+            string[] output = p.StandardOutput.ReadToEnd().ToLower().Split('\n');
+            p.WaitForExit();
+            foreach (var dll in output)
+            {
+                if (dll.StartsWith("ddraw.dll")) return true;
+            }
+            return false;
+        }
     }
 }

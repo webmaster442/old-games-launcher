@@ -72,6 +72,13 @@
             this.smallIconsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.steamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.storeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gamesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.downloadsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.friendsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.releaseNotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.licenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,7 +92,6 @@
             this.getScumVMDemosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visitGOGcomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.getSNESRomsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.steamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GamesList = new System.Windows.Forms.ListView();
             this.ListContext = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.startGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -109,12 +115,6 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.Tray = new System.Windows.Forms.NotifyIcon(this.components);
-            this.downloadsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.friendsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gamesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.newsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.storeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenuStrip.SuspendLayout();
             this.ListContext.SuspendLayout();
             this.FilterSelector.SuspendLayout();
@@ -145,14 +145,14 @@
             this.minimizeToTrayToolStripMenuItem,
             this.toolStripMenuItem3,
             this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("fileToolStripMenuItem.Image")));
+            this.fileToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.folder;
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // restartAsAdministratorToolStripMenuItem
             // 
-            this.restartAsAdministratorToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("restartAsAdministratorToolStripMenuItem.Image")));
+            this.restartAsAdministratorToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.application_error;
             this.restartAsAdministratorToolStripMenuItem.Name = "restartAsAdministratorToolStripMenuItem";
             this.restartAsAdministratorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
             this.restartAsAdministratorToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
@@ -161,7 +161,7 @@
             // 
             // restartExplorerexeToolStripMenuItem
             // 
-            this.restartExplorerexeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("restartExplorerexeToolStripMenuItem.Image")));
+            this.restartExplorerexeToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.arrow_refresh;
             this.restartExplorerexeToolStripMenuItem.Name = "restartExplorerexeToolStripMenuItem";
             this.restartExplorerexeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.R)));
@@ -188,7 +188,7 @@
             // 
             // exitToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exitToolStripMenuItem.Image")));
+            this.exitToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.door_out;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
@@ -202,14 +202,14 @@
             this.addScumVmGameToolStripMenuItem,
             this.toolStripMenuItem4,
             this.removeAllToolStripMenuItem});
-            this.gamesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("gamesToolStripMenuItem.Image")));
+            this.gamesToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.folder;
             this.gamesToolStripMenuItem.Name = "gamesToolStripMenuItem";
             this.gamesToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.gamesToolStripMenuItem.Text = "Games";
             // 
             // addGameToolStripMenuItem
             // 
-            this.addGameToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addGameToolStripMenuItem.Image")));
+            this.addGameToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.application_add;
             this.addGameToolStripMenuItem.Name = "addGameToolStripMenuItem";
             this.addGameToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
             this.addGameToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
@@ -218,7 +218,7 @@
             // 
             // addScumVmGameToolStripMenuItem
             // 
-            this.addScumVmGameToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addScumVmGameToolStripMenuItem.Image")));
+            this.addScumVmGameToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.application_add;
             this.addScumVmGameToolStripMenuItem.Name = "addScumVmGameToolStripMenuItem";
             this.addScumVmGameToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.addScumVmGameToolStripMenuItem.Text = "Add ScumVm Game...";
@@ -245,7 +245,7 @@
             this.startSnes9xToolStripMenuItem,
             this.toolStripMenuItem1,
             this.installUninstallToolStripMenuItem});
-            this.emulatorsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("emulatorsToolStripMenuItem.Image")));
+            this.emulatorsToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.folder;
             this.emulatorsToolStripMenuItem.Name = "emulatorsToolStripMenuItem";
             this.emulatorsToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
             this.emulatorsToolStripMenuItem.Text = "Emulators";
@@ -257,14 +257,14 @@
             this.openScreenshotsRecordingsToolStripMenuItem,
             this.resetConfigurationToolStripMenuItem,
             this.resetKeyMappingsToolStripMenuItem});
-            this.dosBoxToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("dosBoxToolStripMenuItem.Image")));
+            this.dosBoxToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources._0000___DOSBOX_ICO_0004;
             this.dosBoxToolStripMenuItem.Name = "dosBoxToolStripMenuItem";
             this.dosBoxToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.dosBoxToolStripMenuItem.Text = "DosBox";
             // 
             // editConfigurationToolStripMenuItem
             // 
-            this.editConfigurationToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editConfigurationToolStripMenuItem.Image")));
+            this.editConfigurationToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.bullet_wrench;
             this.editConfigurationToolStripMenuItem.Name = "editConfigurationToolStripMenuItem";
             this.editConfigurationToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.editConfigurationToolStripMenuItem.Text = "Edit Configuration";
@@ -280,7 +280,7 @@
             // 
             // resetConfigurationToolStripMenuItem
             // 
-            this.resetConfigurationToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetConfigurationToolStripMenuItem.Image")));
+            this.resetConfigurationToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.bullet_wrench;
             this.resetConfigurationToolStripMenuItem.Name = "resetConfigurationToolStripMenuItem";
             this.resetConfigurationToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.resetConfigurationToolStripMenuItem.Text = "Reset Configuration";
@@ -288,7 +288,7 @@
             // 
             // resetKeyMappingsToolStripMenuItem
             // 
-            this.resetKeyMappingsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resetKeyMappingsToolStripMenuItem.Image")));
+            this.resetKeyMappingsToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.bullet_wrench;
             this.resetKeyMappingsToolStripMenuItem.Name = "resetKeyMappingsToolStripMenuItem";
             this.resetKeyMappingsToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.resetKeyMappingsToolStripMenuItem.Text = "Reset Key Mappings";
@@ -296,7 +296,7 @@
             // 
             // startDosBoxToolSatripMenuItem
             // 
-            this.startDosBoxToolSatripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("startDosBoxToolSatripMenuItem.Image")));
+            this.startDosBoxToolSatripMenuItem.Image = global::OldGamesLauncher.Properties.Resources._0000___DOSBOX_ICO_0004;
             this.startDosBoxToolSatripMenuItem.Name = "startDosBoxToolSatripMenuItem";
             this.startDosBoxToolSatripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
             this.startDosBoxToolSatripMenuItem.Size = new System.Drawing.Size(200, 22);
@@ -305,7 +305,7 @@
             // 
             // startScummVMToolStripMenuItem
             // 
-            this.startScummVMToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("startScummVMToolStripMenuItem.Image")));
+            this.startScummVMToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.scum;
             this.startScummVMToolStripMenuItem.Name = "startScummVMToolStripMenuItem";
             this.startScummVMToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.startScummVMToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
@@ -336,14 +336,14 @@
             this.toolStripMenuItem6,
             this.installReinstallSnes9xToolStripMenuItem,
             this.uninstallSnes9xToolStripMenuItem});
-            this.installUninstallToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("installUninstallToolStripMenuItem.Image")));
+            this.installUninstallToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.folder;
             this.installUninstallToolStripMenuItem.Name = "installUninstallToolStripMenuItem";
             this.installUninstallToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.installUninstallToolStripMenuItem.Text = "Install/Uninstall";
             // 
             // installReinstallDosBoxToolStripMenuItem
             // 
-            this.installReinstallDosBoxToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("installReinstallDosBoxToolStripMenuItem.Image")));
+            this.installReinstallDosBoxToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.drive_disk;
             this.installReinstallDosBoxToolStripMenuItem.Name = "installReinstallDosBoxToolStripMenuItem";
             this.installReinstallDosBoxToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.installReinstallDosBoxToolStripMenuItem.Text = "Install/Reinstall DosBox";
@@ -351,7 +351,7 @@
             // 
             // uninstallDosBoxToolStripMenuItem
             // 
-            this.uninstallDosBoxToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("uninstallDosBoxToolStripMenuItem.Image")));
+            this.uninstallDosBoxToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.drive_delete;
             this.uninstallDosBoxToolStripMenuItem.Name = "uninstallDosBoxToolStripMenuItem";
             this.uninstallDosBoxToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.uninstallDosBoxToolStripMenuItem.Text = "Uninstall DosBox";
@@ -364,7 +364,7 @@
             // 
             // installReinstallScummVmToolStripMenuItem
             // 
-            this.installReinstallScummVmToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("installReinstallScummVmToolStripMenuItem.Image")));
+            this.installReinstallScummVmToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.drive_disk;
             this.installReinstallScummVmToolStripMenuItem.Name = "installReinstallScummVmToolStripMenuItem";
             this.installReinstallScummVmToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.installReinstallScummVmToolStripMenuItem.Text = "Install/Reinstall ScummVm";
@@ -372,7 +372,7 @@
             // 
             // uninstallScummVmToolStripMenuItem
             // 
-            this.uninstallScummVmToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("uninstallScummVmToolStripMenuItem.Image")));
+            this.uninstallScummVmToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.drive_delete;
             this.uninstallScummVmToolStripMenuItem.Name = "uninstallScummVmToolStripMenuItem";
             this.uninstallScummVmToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.uninstallScummVmToolStripMenuItem.Text = "Uninstall ScummVm";
@@ -411,7 +411,7 @@
             this.smallIconsToolStripMenuItem,
             this.listToolStripMenuItem,
             this.tileToolStripMenuItem});
-            this.viewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("viewToolStripMenuItem.Image")));
+            this.viewToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.folder;
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.viewToolStripMenuItem.Text = "View";
@@ -487,6 +487,68 @@
             this.tileToolStripMenuItem.Text = "Tile";
             this.tileToolStripMenuItem.Click += new System.EventHandler(this.SetViewType);
             // 
+            // steamToolStripMenuItem
+            // 
+            this.steamToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.storeToolStripMenuItem,
+            this.gamesToolStripMenuItem1,
+            this.downloadsToolStripMenuItem,
+            this.friendsToolStripMenuItem,
+            this.newsToolStripMenuItem,
+            this.settingsToolStripMenuItem});
+            this.steamToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.steam;
+            this.steamToolStripMenuItem.Name = "steamToolStripMenuItem";
+            this.steamToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.steamToolStripMenuItem.Text = "Steam";
+            // 
+            // storeToolStripMenuItem
+            // 
+            this.storeToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.steam;
+            this.storeToolStripMenuItem.Name = "storeToolStripMenuItem";
+            this.storeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.storeToolStripMenuItem.Text = "Store...";
+            this.storeToolStripMenuItem.Click += new System.EventHandler(this.SteamMenu);
+            // 
+            // gamesToolStripMenuItem1
+            // 
+            this.gamesToolStripMenuItem1.Image = global::OldGamesLauncher.Properties.Resources.steam;
+            this.gamesToolStripMenuItem1.Name = "gamesToolStripMenuItem1";
+            this.gamesToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.gamesToolStripMenuItem1.Text = "Games...";
+            this.gamesToolStripMenuItem1.Click += new System.EventHandler(this.SteamMenu);
+            // 
+            // downloadsToolStripMenuItem
+            // 
+            this.downloadsToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.steam;
+            this.downloadsToolStripMenuItem.Name = "downloadsToolStripMenuItem";
+            this.downloadsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.downloadsToolStripMenuItem.Text = "Downloads...";
+            this.downloadsToolStripMenuItem.Click += new System.EventHandler(this.SteamMenu);
+            // 
+            // friendsToolStripMenuItem
+            // 
+            this.friendsToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.steam;
+            this.friendsToolStripMenuItem.Name = "friendsToolStripMenuItem";
+            this.friendsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.friendsToolStripMenuItem.Text = "Friends...";
+            this.friendsToolStripMenuItem.Click += new System.EventHandler(this.SteamMenu);
+            // 
+            // newsToolStripMenuItem
+            // 
+            this.newsToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.steam;
+            this.newsToolStripMenuItem.Name = "newsToolStripMenuItem";
+            this.newsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newsToolStripMenuItem.Text = "News...";
+            this.newsToolStripMenuItem.Click += new System.EventHandler(this.SteamMenu);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.steam;
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settingsToolStripMenuItem.Text = "Settings...";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SteamMenu);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -497,7 +559,7 @@
             this.snes9xReadmeToolStripMenuItem,
             this.scummVmReadmeToolStripMenuItem,
             this.compatiblitySettingsToolStripMenuItem});
-            this.helpToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("helpToolStripMenuItem.Image")));
+            this.helpToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.folder;
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.helpToolStripMenuItem.Text = "Help";
@@ -602,20 +664,6 @@
             this.getSNESRomsToolStripMenuItem.Text = "Get SNES Roms";
             this.getSNESRomsToolStripMenuItem.Click += new System.EventHandler(this.GetGamesMenu);
             // 
-            // steamToolStripMenuItem
-            // 
-            this.steamToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.storeToolStripMenuItem,
-            this.gamesToolStripMenuItem1,
-            this.downloadsToolStripMenuItem,
-            this.friendsToolStripMenuItem,
-            this.newsToolStripMenuItem,
-            this.settingsToolStripMenuItem});
-            this.steamToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.steam;
-            this.steamToolStripMenuItem.Name = "steamToolStripMenuItem";
-            this.steamToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
-            this.steamToolStripMenuItem.Text = "Steam";
-            // 
             // GamesList
             // 
             this.GamesList.BackColor = System.Drawing.SystemColors.Control;
@@ -671,14 +719,14 @@
             this.searchCheatsToolStripMenuItem,
             this.wikipediaLookupToolStripMenuItem,
             this.googleToolStripMenuItem});
-            this.internetToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("internetToolStripMenuItem.Image")));
+            this.internetToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.link;
             this.internetToolStripMenuItem.Name = "internetToolStripMenuItem";
             this.internetToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.internetToolStripMenuItem.Text = "Internet";
             // 
             // searchCheatsToolStripMenuItem
             // 
-            this.searchCheatsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("searchCheatsToolStripMenuItem.Image")));
+            this.searchCheatsToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.link_go;
             this.searchCheatsToolStripMenuItem.Name = "searchCheatsToolStripMenuItem";
             this.searchCheatsToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.searchCheatsToolStripMenuItem.Text = "Search Cheats";
@@ -686,7 +734,7 @@
             // 
             // wikipediaLookupToolStripMenuItem
             // 
-            this.wikipediaLookupToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("wikipediaLookupToolStripMenuItem.Image")));
+            this.wikipediaLookupToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.link_go;
             this.wikipediaLookupToolStripMenuItem.Name = "wikipediaLookupToolStripMenuItem";
             this.wikipediaLookupToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.wikipediaLookupToolStripMenuItem.Text = "Wikipedia lookup";
@@ -694,7 +742,7 @@
             // 
             // googleToolStripMenuItem
             // 
-            this.googleToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("googleToolStripMenuItem.Image")));
+            this.googleToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.link_go;
             this.googleToolStripMenuItem.Name = "googleToolStripMenuItem";
             this.googleToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.googleToolStripMenuItem.Text = "Google seach";
@@ -702,7 +750,7 @@
             // 
             // deleteGameToolStripMenuItem
             // 
-            this.deleteGameToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteGameToolStripMenuItem.Image")));
+            this.deleteGameToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.application_delete;
             this.deleteGameToolStripMenuItem.Name = "deleteGameToolStripMenuItem";
             this.deleteGameToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.deleteGameToolStripMenuItem.Text = "Delete Game";
@@ -710,7 +758,7 @@
             // 
             // EditToolStripMenuItem
             // 
-            this.EditToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("EditToolStripMenuItem.Image")));
+            this.EditToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.application_edit;
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
             this.EditToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.EditToolStripMenuItem.Text = "Edit Game Inormation...";
@@ -827,54 +875,6 @@
             this.Tray.Text = "Old Games Starter";
             this.Tray.Visible = true;
             this.Tray.DoubleClick += new System.EventHandler(this.Tray_DoubleClick);
-            // 
-            // downloadsToolStripMenuItem
-            // 
-            this.downloadsToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.steam;
-            this.downloadsToolStripMenuItem.Name = "downloadsToolStripMenuItem";
-            this.downloadsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.downloadsToolStripMenuItem.Text = "Downloads...";
-            this.downloadsToolStripMenuItem.Click += new System.EventHandler(this.SteamMenu);
-            // 
-            // friendsToolStripMenuItem
-            // 
-            this.friendsToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.steam;
-            this.friendsToolStripMenuItem.Name = "friendsToolStripMenuItem";
-            this.friendsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.friendsToolStripMenuItem.Text = "Friends...";
-            this.friendsToolStripMenuItem.Click += new System.EventHandler(this.SteamMenu);
-            // 
-            // gamesToolStripMenuItem1
-            // 
-            this.gamesToolStripMenuItem1.Image = global::OldGamesLauncher.Properties.Resources.steam;
-            this.gamesToolStripMenuItem1.Name = "gamesToolStripMenuItem1";
-            this.gamesToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.gamesToolStripMenuItem1.Text = "Games...";
-            this.gamesToolStripMenuItem1.Click += new System.EventHandler(this.SteamMenu);
-            // 
-            // newsToolStripMenuItem
-            // 
-            this.newsToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.steam;
-            this.newsToolStripMenuItem.Name = "newsToolStripMenuItem";
-            this.newsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.newsToolStripMenuItem.Text = "News...";
-            this.newsToolStripMenuItem.Click += new System.EventHandler(this.SteamMenu);
-            // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.steam;
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.settingsToolStripMenuItem.Text = "Settings...";
-            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SteamMenu);
-            // 
-            // storeToolStripMenuItem
-            // 
-            this.storeToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.steam;
-            this.storeToolStripMenuItem.Name = "storeToolStripMenuItem";
-            this.storeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.storeToolStripMenuItem.Text = "Store...";
-            this.storeToolStripMenuItem.Click += new System.EventHandler(this.SteamMenu);
             // 
             // MainFrm
             // 
