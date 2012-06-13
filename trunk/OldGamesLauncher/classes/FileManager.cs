@@ -87,6 +87,11 @@ namespace OldGamesLauncher
             get { return _storageroot + "snes9x"; }
         }
 
+        public string DocsPath
+        {
+            get { return _appdir + "\\Zips\\docs.zip"; }
+        }
+
         public bool IsEmulatorInstalled(GameType type)
         {
             switch (type)
@@ -283,15 +288,14 @@ namespace OldGamesLauncher
         {
             try
             {
-                string docs = _appdir + "\\Zips\\docs.zip";
                 MemoryStream outp = new MemoryStream();
-                FileStream fs = File.OpenRead(docs);
+                FileStream fs = File.OpenRead(DocsPath);
                 using (ZipInputStream zi = new ZipInputStream(fs))
                 {
                     ZipEntry file;
                     while ((file = zi.GetNextEntry()) != null)
                     {
-                        if (file.Name == fname)
+                        if (string.Compare(file.Name, fname, true) == 0)
                         {
                             int size;
                             byte[] data = new byte[2048];

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using OldGamesLauncher.Properties;
+using System.IO;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace OldGamesLauncher
 {
@@ -15,45 +17,71 @@ namespace OldGamesLauncher
         public HelpBrowser()
         {
             InitializeComponent();
+            ListItems();
         }
 
-        private void TabSelector_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListItems()
         {
-            RtbHelp.Clear();
-            switch (TabSelector.SelectedIndex)
+            TreeNode lastNode = null;
+            string subPathAgg;
+            string pathext;
+            TvDocs.PathSeparator = "/";
+            try
             {
-                case 0:
-                    RtbHelp.LoadFile(Program._fileman.GetDocumentContent("Notes.rtf"), RichTextBoxStreamType.RichText);
-                    break;
-                case 1:
-                    RtbHelp.LoadFile(Program._fileman.GetDocumentContent("license.rtf"), RichTextBoxStreamType.RichText);
-                    break;
-                case 2:
-                    RtbHelp.LoadFile(Program._fileman.GetDocumentContent("DOSBoxManual.txt"), RichTextBoxStreamType.PlainText);
-                    break;
-                case 3:
-                    RtbHelp.LoadFile(Program._fileman.GetDocumentContent("dosboxkeys.txt"), RichTextBoxStreamType.PlainText);
-                    break;
-                case 4:
-                    RtbHelp.LoadFile(Program._fileman.GetDocumentContent("ScummReadme.txt"), RichTextBoxStreamType.PlainText);
-                    break;
-                case 5:
-                    RtbHelp.LoadFile(Program._fileman.GetDocumentContent("sneseadme.txt"), RichTextBoxStreamType.PlainText);
-                    break;
-                case 6:
-                    RtbHelp.LoadFile(Program._fileman.GetDocumentContent("compatibilitysettings.rtf"), RichTextBoxStreamType.RichText);
-                    break;
+                FileStream fs = File.OpenRead(Program._fileman.DocsPath);
+                using (ZipInputStream zi = new ZipInputStream(fs))
+                {
+                    ZipEntry file;
+                    while ((file = zi.GetNextEntry()) != null)
+                    {
+                        pathext = "Documents/" + file.Name;
+                        subPathAgg = string.Empty;
+                        foreach (string subPath in pathext.Split('/'))
+                        {
+                            if (string.IsNullOrEmpty(subPath)) continue;
+                            subPathAgg += subPath + '/';
+                            TreeNode[] nodes = TvDocs.Nodes.Find(subPathAgg, true);
+                            if (nodes.Length == 0)
+                            {
+                                if (lastNode == null) lastNode = TvDocs.Nodes.Add(subPathAgg, subPath);
+                                else lastNode = lastNode.Nodes.Add(subPathAgg, subPath);
+                            }
+                            else lastNode = nodes[0];
+                        }
+                    }
+                }
+            }
+            catch (IOException)
+            {
+                MessageBox.Show("Can't Get documentation", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        public int DocIndex
+        private void HelpBrowser_Load(object sender, EventArgs e)
         {
-            get { return TabSelector.SelectedIndex; }
-            set 
+            TvDocs.ExpandAll();
+        }
+
+        private void TvDocs_DoubleClick(object sender, EventArgs e)
+        {
+            if (TvDocs.SelectedNode == null) return;
+            string path = TvDocs.SelectedNode.FullPath.Replace("Documents/", "");
+            LoadDocument(path);
+        }
+
+        public void LoadDocument(string path)
+        {
+            if (string.IsNullOrEmpty(path)) return;
+            MemoryStream data = Program._fileman.GetDocumentContent(path);
+            if (data == null)
             {
-                TabSelector.SelectedIndex = value;
-                TabSelector_SelectedIndexChanged(null, null);
+                MessageBox.Show("Document not found: " + path, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+            if (path.EndsWith(".txt")) RtbHelp.LoadFile(data, RichTextBoxStreamType.PlainText);
+            else if (path.EndsWith(".rtf")) RtbHelp.LoadFile(data, RichTextBoxStreamType.RichText);
         }
     }
+
 }
+

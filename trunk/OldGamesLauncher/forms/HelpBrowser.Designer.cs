@@ -28,139 +28,75 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TabSelector = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.RtbHelp = new System.Windows.Forms.RichTextBox();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.TabSelector.SuspendLayout();
+            this.TvDocs = new System.Windows.Forms.TreeView();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // TabSelector
-            // 
-            this.TabSelector.Controls.Add(this.tabPage1);
-            this.TabSelector.Controls.Add(this.tabPage2);
-            this.TabSelector.Controls.Add(this.tabPage3);
-            this.TabSelector.Controls.Add(this.tabPage5);
-            this.TabSelector.Controls.Add(this.tabPage6);
-            this.TabSelector.Controls.Add(this.tabPage7);
-            this.TabSelector.Controls.Add(this.tabPage4);
-            this.TabSelector.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TabSelector.Location = new System.Drawing.Point(0, 0);
-            this.TabSelector.Multiline = true;
-            this.TabSelector.Name = "TabSelector";
-            this.TabSelector.SelectedIndex = 0;
-            this.TabSelector.Size = new System.Drawing.Size(632, 24);
-            this.TabSelector.TabIndex = 0;
-            this.TabSelector.SelectedIndexChanged += new System.EventHandler(this.TabSelector_SelectedIndexChanged);
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(624, 0);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Release Notes";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(624, 0);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Licence";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(624, 0);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "DosBox Manual";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // tabPage5
-            // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(624, 0);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "DosBox keys";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(624, 0);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Compatiblility Options";
-            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // RtbHelp
             // 
             this.RtbHelp.BackColor = System.Drawing.SystemColors.Control;
             this.RtbHelp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RtbHelp.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.RtbHelp.Location = new System.Drawing.Point(0, 24);
+            this.RtbHelp.Location = new System.Drawing.Point(0, 0);
             this.RtbHelp.Name = "RtbHelp";
             this.RtbHelp.ReadOnly = true;
-            this.RtbHelp.Size = new System.Drawing.Size(632, 404);
+            this.RtbHelp.Size = new System.Drawing.Size(428, 428);
             this.RtbHelp.TabIndex = 1;
             this.RtbHelp.Text = "";
             // 
-            // tabPage6
+            // TvDocs
             // 
-            this.tabPage6.Location = new System.Drawing.Point(4, 22);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(624, 0);
-            this.tabPage6.TabIndex = 5;
-            this.tabPage6.Text = "ScumVM Readme";
-            this.tabPage6.UseVisualStyleBackColor = true;
+            this.TvDocs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TvDocs.Location = new System.Drawing.Point(0, 0);
+            this.TvDocs.Name = "TvDocs";
+            this.TvDocs.Size = new System.Drawing.Size(200, 428);
+            this.TvDocs.TabIndex = 2;
+            this.TvDocs.DoubleClick += new System.EventHandler(this.TvDocs_DoubleClick);
             // 
-            // tabPage7
+            // splitContainer1
             // 
-            this.tabPage7.Location = new System.Drawing.Point(4, 22);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(624, 0);
-            this.tabPage7.TabIndex = 6;
-            this.tabPage7.Text = "Snes9x readme";
-            this.tabPage7.UseVisualStyleBackColor = true;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.TvDocs);
+            this.splitContainer1.Panel1MinSize = 200;
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.RtbHelp);
+            this.splitContainer1.Size = new System.Drawing.Size(632, 428);
+            this.splitContainer1.SplitterDistance = 200;
+            this.splitContainer1.TabIndex = 3;
             // 
             // HelpBrowser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(632, 428);
-            this.Controls.Add(this.RtbHelp);
-            this.Controls.Add(this.TabSelector);
+            this.Controls.Add(this.splitContainer1);
             this.Name = "HelpBrowser";
             this.Text = "HelpBrowser";
-            this.TabSelector.ResumeLayout(false);
+            this.Load += new System.EventHandler(this.HelpBrowser_Load);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl TabSelector;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.RichTextBox RtbHelp;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.TabPage tabPage6;
-        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.TreeView TvDocs;
+        private System.Windows.Forms.SplitContainer splitContainer1;
     }
 }
