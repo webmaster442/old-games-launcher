@@ -15,7 +15,6 @@ namespace OldGamesLauncher
 {
     public partial class MainFrm : Form
     {
-        private GamesManager _manager;
         private int _idtowatch;
         private string _windir;
         private DropForm _dosdop;
@@ -38,11 +37,11 @@ namespace OldGamesLauncher
         {
             GamesList.Items.Clear();
             GamesList.Groups.Clear();
-            GamesList.LargeImageList = _manager.Icons;
-            GamesList.SmallImageList = _manager.Icons;
-            GamesList.StateImageList = _manager.Icons;
-            var games = _manager.Filter(_filter);
-            foreach (var c in _manager.GetGameNameGroups())
+            GamesList.LargeImageList = Program._manager.Icons;
+            GamesList.SmallImageList = Program._manager.Icons;
+            GamesList.StateImageList = Program._manager.Icons;
+            var games = Program._manager.Filter(_filter);
+            foreach (var c in Program._manager.GetGameNameGroups())
             {
                 GamesList.Groups.Add(string.Format("{0}", c), string.Format("{0}", c));
             }
@@ -83,7 +82,7 @@ namespace OldGamesLauncher
         {
             if (GamesList.SelectedItems.Count < 1) return;
             var selected = GamesList.SelectedItems[0].Text;
-            GamesData d = _manager[selected];
+            GamesData d = Program._manager[selected];
             bool test = SystemCommands.IsDosExe(d.GameExePath);
             string args = string.IsNullOrEmpty(d.CommandLinePars) ? null : d.CommandLinePars + " ";
             switch (d.GameType)
@@ -103,12 +102,27 @@ namespace OldGamesLauncher
                         MessageBox.Show("You are trying to run a DOS program as a Windows program.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    _idtowatch = SystemCommands.RunCommand(d.GameExePath, d.CommandLinePars);
-                    Thread.Sleep(1000);
-                    ProcessWatchTimer.Enabled = true;
-                    SystemCommands.KillExplorer();
+                    if (d.DirectDraw == UsesDDraw.Unknown)
+                    {
+                        FirstLaunch fl = new FirstLaunch();
+                        fl.Data = d;
+                        fl.Show();
+                    }
+                    else LaunchdDraw(d);
                     break;
             }
+        }
+
+        //-------------------------------------------------------------------------------------------------------------------------------------
+        // Ide kell kitalálni majd azt, hogy hogy a picsába legyen async az indítás, mert jelenleg kurvára nem az!
+        //-------------------------------------------------------------------------------------------------------------------------------------
+
+        private void LaunchdDraw(GamesData d)
+        {
+            _idtowatch = SystemCommands.RunCommand(d.GameExePath, d.CommandLinePars);
+            Thread.Sleep(1000);
+            ProcessWatchTimer.Enabled = true;
+            SystemCommands.KillExplorer();
         }
 
         public void RunDosExe(string filename)
@@ -138,9 +152,9 @@ namespace OldGamesLauncher
             showEmulatorsConsoleToolStripMenuItem.Checked = Settings.Default.EmuConsoleVisible;
             closeToTrayToolStripMenuItem.Checked = Settings.Default.CloseToTray;
 
-            _manager = new GamesManager();
+            Program._manager = new GamesManager();
             Program._fileman = new FileManager();
-            _manager.LoadDataFile(Program._fileman.ConfigLocation);
+            Program._manager.LoadDataFile(Program._fileman.ConfigLocation);
             BuildList();
             if (Settings.Default.DropVisible) _dosdop.Show();
             steamToolStripMenuItem.Enabled = Steam.IsSteamInstalled();
@@ -156,7 +170,7 @@ namespace OldGamesLauncher
             }
             Size s = new System.Drawing.Size(this.Width, this.Height);
             Settings.Default.WindowSize = s;
-            _manager.SaveDataFile(Program._fileman.ConfigLocation);
+            Program._manager.SaveDataFile(Program._fileman.ConfigLocation);
             Settings.Default.DropVisible = dosExeDropformToolStripMenuItem.Checked;
             Settings.Default.GroupsVisible = groupsVisibleToolStripMenuItem.Checked;
             Settings.Default.EmuConsoleVisible = showEmulatorsConsoleToolStripMenuItem.Checked;
@@ -225,7 +239,7 @@ namespace OldGamesLauncher
             AddGameForm agf = new AddGameForm();
             if (agf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                _manager.AddGame(agf.GameName, agf.GamePath, agf.SelectedGameType, null, agf.Arguments);
+                Program._manager.AddGame(agf.GameName, agf.GamePath, agf.SelectedGameType, null, agf.Arguments);
                 BuildList();
             }
         }
@@ -235,7 +249,7 @@ namespace OldGamesLauncher
             AddScumGameForm asgf = new AddScumGameForm();
             if (asgf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                _manager.AddGame(asgf.GameName, asgf.GamePath, GameType.ScummVm, asgf.GameId);
+                Program._manager.AddGame(asgf.GameName, asgf.GamePath, GameType.ScummVm, asgf.GameId);
                 Program._fileman.AddScummGame(asgf.GameId, asgf.GameName, asgf.GamePath);
                 BuildList();
             }
@@ -306,8 +320,8 @@ namespace OldGamesLauncher
                 startGameToolStripMenuItem.Enabled = true;
                 directDrawHackToolStripMenuItem.Enabled = false;
                 gameExePropertiesToolStripMenuItem.Enabled = false;
-                gameSettingsToolStripMenuItem.Enabled = SystemCommands.SetupExists(_manager.GetPathByName(selected));
-                if (_manager[selected].GameType == GameType.Windows)
+                gameSettingsToolStripMenuItem.Enabled = SystemCommands.SetupExists(Program._manager.GetPathByName(selected));
+                if (Program._manager[selected].GameType == GameType.Windows)
                 {
                     gameExePropertiesToolStripMenuItem.Enabled = true;
                     directDrawHackToolStripMenuItem.Enabled = true;
@@ -325,7 +339,7 @@ namespace OldGamesLauncher
         {
             if (GamesList.SelectedItems.Count < 1) return;
             var selected = GamesList.SelectedItems[0].Text;
-            string path = Path.GetDirectoryName(_manager.GetPathByName(selected));
+            string path = Path.GetDirectoryName(Program._manager.GetPathByName(selected));
             SystemCommands.RunCommand("explorer.exe", path);
         }
 
@@ -353,8 +367,8 @@ namespace OldGamesLauncher
             if (GamesList.SelectedItems.Count < 1) return;
             var selected = GamesList.SelectedItems[0].Text;
 
-            var dat = _manager[selected];
-            int index = _manager.IndexOf(dat);
+            var dat = Program._manager[selected];
+            int index = Program._manager.IndexOf(dat);
 
             switch (dat.GameType)
             {
@@ -372,7 +386,7 @@ namespace OldGamesLauncher
                         dat.GameExePath = ed.GamePath;
                         dat.CommandLinePars = ed.Arguments;
                         dat.GameType = ed.SelectedGameType;
-                        _manager[index] = dat;
+                        Program._manager[index] = dat;
                     }
                     break;
                 case GameType.ScummVm:
@@ -385,11 +399,11 @@ namespace OldGamesLauncher
                         dat.GameName = esg.GameName;
                         dat.GameExePath = esg.GamePath;
                         dat.ScumGameId = esg.GameId;
-                        _manager[index] = dat;
+                        Program._manager[index] = dat;
                     }
                     break;
             }
-            _manager.RebuildIconIndex();
+            Program._manager.RebuildIconIndex();
             BuildList();
         }
 
@@ -400,8 +414,8 @@ namespace OldGamesLauncher
             var confirm = MessageBox.Show("Delete " + selected + "?", "Confirm action", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
             if (confirm == System.Windows.Forms.DialogResult.Yes)
             {
-                if (_manager[selected].GameType == GameType.ScummVm) Program._fileman.RemoveScummGame(_manager[selected].ScumGameId);
-                _manager.RemoveByName(selected);
+                if (Program._manager[selected].GameType == GameType.ScummVm) Program._fileman.RemoveScummGame(Program._manager[selected].ScumGameId);
+                Program._manager.RemoveByName(selected);
                 BuildList();
             }
         }
@@ -537,7 +551,7 @@ namespace OldGamesLauncher
         {
             if (GamesList.SelectedItems.Count < 1) return;
             var selected = GamesList.SelectedItems[0].Text;
-            SystemCommands.ShowFileProperties(_manager.GetPathByName(selected));
+            SystemCommands.ShowFileProperties(Program._manager.GetPathByName(selected));
         }
 
         private void installToolStripMenuItem_Click(object sender, EventArgs e)
@@ -547,7 +561,7 @@ namespace OldGamesLauncher
             var res = MessageBox.Show("Install Direct Draw hack to " + selected + "?", "DirectDraw Hack Installer", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (res == System.Windows.Forms.DialogResult.Yes)
             {
-                string directory = Path.GetDirectoryName(_manager.GetPathByName(selected));
+                string directory = Path.GetDirectoryName(Program._manager.GetPathByName(selected));
                 Program._fileman.InstallDirectDrawHack(directory);
             }
         }
@@ -559,7 +573,7 @@ namespace OldGamesLauncher
             var res = MessageBox.Show("Uninstall Direct Draw hack from " + selected + "?", "DirectDraw Hack Installer", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (res == System.Windows.Forms.DialogResult.Yes)
             {
-                string directory = Path.GetDirectoryName(_manager.GetPathByName(selected));
+                string directory = Path.GetDirectoryName(Program._manager.GetPathByName(selected));
                 if (Program._fileman.DeleteDirectDrawHack(directory))
                 {
                     MessageBox.Show("Direct Draw hack uninstalled", "DirectDraw Hack Installer", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -577,7 +591,7 @@ namespace OldGamesLauncher
         {
             if (GamesList.SelectedItems.Count < 1) return;
             var selected = GamesList.SelectedItems[0].Text;
-            string setup = SystemCommands.GetSetup(_manager.GetPathByName(selected));
+            string setup = SystemCommands.GetSetup(Program._manager.GetPathByName(selected));
             if (string.IsNullOrEmpty(setup)) return;
             RunDosExe(setup);
         }
@@ -645,7 +659,7 @@ namespace OldGamesLauncher
                                           "Are you sure you want to do this?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (confirm == System.Windows.Forms.DialogResult.Yes)
             {
-                _manager.Clear();
+                Program._manager.Clear();
                 BuildList();
             }
         }

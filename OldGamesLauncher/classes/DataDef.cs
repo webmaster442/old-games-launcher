@@ -18,6 +18,12 @@ namespace OldGamesLauncher
     }
 
     [Serializable]
+    public enum UsesDDraw
+    {
+        True, False, Unknown
+    }
+
+    [Serializable]
     public class GamesData
     {
         public string GameName { get; set; }
@@ -25,6 +31,7 @@ namespace OldGamesLauncher
         public GameType GameType { get; set; }
         public string ScumGameId { get; set; }
         public string CommandLinePars { get; set; }
+        public UsesDDraw DirectDraw { get; set; }
 
         public GamesData() { ScumGameId = ""; }
 
@@ -34,11 +41,12 @@ namespace OldGamesLauncher
             GameExePath = Exepath;
             ScumGameId = "";
             CommandLinePars = "";
+            DirectDraw = UsesDDraw.Unknown;
         }
 
         public override int GetHashCode()
         {
-            return GameName.GetHashCode() ^ GameExePath.GetHashCode() ^ GameType.GetHashCode();
+            return GameName.GetHashCode() ^ GameExePath.GetHashCode() ^ GameType.GetHashCode() ^ DirectDraw.GetHashCode();
         }
 
         public override string ToString()
