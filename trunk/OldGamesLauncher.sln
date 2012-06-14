@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OldGamesLauncher", "OldGamesLauncher\OldGamesLauncher.csproj", "{CD530533-6BC7-4F31-83E8-03E60939D411}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamesFolderReader", "GamesFolderReader\GamesFolderReader.csproj", "{24A80199-3B16-4842-82C7-63E3118071D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -13,6 +15,10 @@ Global
 		{CD530533-6BC7-4F31-83E8-03E60939D411}.Debug|x86.Build.0 = Debug|x86
 		{CD530533-6BC7-4F31-83E8-03E60939D411}.Release|x86.ActiveCfg = Release|x86
 		{CD530533-6BC7-4F31-83E8-03E60939D411}.Release|x86.Build.0 = Release|x86
+		{24A80199-3B16-4842-82C7-63E3118071D5}.Debug|x86.ActiveCfg = Debug|x86
+		{24A80199-3B16-4842-82C7-63E3118071D5}.Debug|x86.Build.0 = Debug|x86
+		{24A80199-3B16-4842-82C7-63E3118071D5}.Release|x86.ActiveCfg = Release|x86
+		{24A80199-3B16-4842-82C7-63E3118071D5}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
