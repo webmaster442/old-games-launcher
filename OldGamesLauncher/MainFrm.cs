@@ -113,16 +113,17 @@ namespace OldGamesLauncher
             }
         }
 
-        //-------------------------------------------------------------------------------------------------------------------------------------
-        // Ide kell kitalálni majd azt, hogy hogy a picsába legyen async az indítás, mert jelenleg kurvára nem az!
-        //-------------------------------------------------------------------------------------------------------------------------------------
-
-        private void LaunchdDraw(GamesData d)
+        public void LaunchdDraw(GamesData d)
         {
-            _idtowatch = SystemCommands.RunCommand(d.GameExePath, d.CommandLinePars);
-            Thread.Sleep(1000);
-            ProcessWatchTimer.Enabled = true;
-            SystemCommands.KillExplorer();
+            string gamedir = Path.GetDirectoryName(d.GameExePath);
+            if (!File.Exists(gamedir + "\\ddhack.cfg"))
+            {
+                _idtowatch = SystemCommands.RunCommand(d.GameExePath, d.CommandLinePars);
+                Thread.Sleep(1000);
+                ProcessWatchTimer.Enabled = true;
+                SystemCommands.KillExplorer();
+            }
+            else SystemCommands.RunCommand(d.GameExePath, d.CommandLinePars);
         }
 
         public void RunDosExe(string filename)

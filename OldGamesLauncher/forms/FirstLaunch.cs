@@ -19,6 +19,7 @@ namespace OldGamesLauncher
             InitializeComponent();
         }
 
+        public MainFrm CallerForm { get; set; }
         public GamesData Data { get; set; }
 
         private void FirstLaunch_Load(object sender, EventArgs e)
@@ -30,7 +31,11 @@ namespace OldGamesLauncher
                 if (check) Data.DirectDraw = UsesDDraw.True;
                 else Data.DirectDraw = UsesDDraw.False;
                 Program._manager[index] = Data;
-                if (this.InvokeRequired) this.Invoke((Action)delegate { this.Close(); });
+                if (this.InvokeRequired) this.Invoke((Action)delegate 
+                {
+                    CallerForm.LaunchdDraw(Data);
+                    this.Close();
+                });
             });
             _t.Start();
         }
