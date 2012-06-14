@@ -115,6 +115,7 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.Tray = new System.Windows.Forms.NotifyIcon(this.components);
+            this.showGamesFolderContentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenuStrip.SuspendLayout();
             this.ListContext.SuspendLayout();
             this.FilterSelector.SuspendLayout();
@@ -406,6 +407,7 @@
             this.dosExeDropformToolStripMenuItem,
             this.showEmulatorsConsoleToolStripMenuItem,
             this.closeToTrayToolStripMenuItem,
+            this.showGamesFolderContentsToolStripMenuItem,
             this.toolStripSeparator2,
             this.largeIconsToolStripMenuItem,
             this.smallIconsToolStripMenuItem,
@@ -422,7 +424,7 @@
             this.groupsVisibleToolStripMenuItem.CheckOnClick = true;
             this.groupsVisibleToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.groupsVisibleToolStripMenuItem.Name = "groupsVisibleToolStripMenuItem";
-            this.groupsVisibleToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.groupsVisibleToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.groupsVisibleToolStripMenuItem.Text = "Groups visible";
             this.groupsVisibleToolStripMenuItem.Click += new System.EventHandler(this.groupsVisibleToolStripMenuItem_Click);
             // 
@@ -430,7 +432,7 @@
             // 
             this.dosExeDropformToolStripMenuItem.CheckOnClick = true;
             this.dosExeDropformToolStripMenuItem.Name = "dosExeDropformToolStripMenuItem";
-            this.dosExeDropformToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.dosExeDropformToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.dosExeDropformToolStripMenuItem.Text = "Show Dos Dropform";
             this.dosExeDropformToolStripMenuItem.Click += new System.EventHandler(this.dosExeDropformToolStripMenuItem_Click);
             // 
@@ -438,7 +440,7 @@
             // 
             this.showEmulatorsConsoleToolStripMenuItem.CheckOnClick = true;
             this.showEmulatorsConsoleToolStripMenuItem.Name = "showEmulatorsConsoleToolStripMenuItem";
-            this.showEmulatorsConsoleToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.showEmulatorsConsoleToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.showEmulatorsConsoleToolStripMenuItem.Text = "Show Emulator\'s Console";
             this.showEmulatorsConsoleToolStripMenuItem.Click += new System.EventHandler(this.showEmulatorsConsoleToolStripMenuItem_Click);
             // 
@@ -446,20 +448,20 @@
             // 
             this.closeToTrayToolStripMenuItem.CheckOnClick = true;
             this.closeToTrayToolStripMenuItem.Name = "closeToTrayToolStripMenuItem";
-            this.closeToTrayToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.closeToTrayToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.closeToTrayToolStripMenuItem.Text = "Close to Tray";
             this.closeToTrayToolStripMenuItem.Click += new System.EventHandler(this.closeToTrayToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(205, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(222, 6);
             // 
             // largeIconsToolStripMenuItem
             // 
             this.largeIconsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("largeIconsToolStripMenuItem.Image")));
             this.largeIconsToolStripMenuItem.Name = "largeIconsToolStripMenuItem";
-            this.largeIconsToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.largeIconsToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.largeIconsToolStripMenuItem.Text = "Large Icons";
             this.largeIconsToolStripMenuItem.Click += new System.EventHandler(this.SetViewType);
             // 
@@ -467,7 +469,7 @@
             // 
             this.smallIconsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("smallIconsToolStripMenuItem.Image")));
             this.smallIconsToolStripMenuItem.Name = "smallIconsToolStripMenuItem";
-            this.smallIconsToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.smallIconsToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.smallIconsToolStripMenuItem.Text = "Small Icons";
             this.smallIconsToolStripMenuItem.Click += new System.EventHandler(this.SetViewType);
             // 
@@ -475,7 +477,7 @@
             // 
             this.listToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("listToolStripMenuItem.Image")));
             this.listToolStripMenuItem.Name = "listToolStripMenuItem";
-            this.listToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.listToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.listToolStripMenuItem.Text = "List";
             this.listToolStripMenuItem.Click += new System.EventHandler(this.SetViewType);
             // 
@@ -483,7 +485,7 @@
             // 
             this.tileToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("tileToolStripMenuItem.Image")));
             this.tileToolStripMenuItem.Name = "tileToolStripMenuItem";
-            this.tileToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.tileToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.tileToolStripMenuItem.Text = "Tile";
             this.tileToolStripMenuItem.Click += new System.EventHandler(this.SetViewType);
             // 
@@ -505,7 +507,7 @@
             // 
             this.storeToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.steam;
             this.storeToolStripMenuItem.Name = "storeToolStripMenuItem";
-            this.storeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.storeToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.storeToolStripMenuItem.Text = "Store...";
             this.storeToolStripMenuItem.Click += new System.EventHandler(this.SteamMenu);
             // 
@@ -513,7 +515,7 @@
             // 
             this.gamesToolStripMenuItem1.Image = global::OldGamesLauncher.Properties.Resources.steam;
             this.gamesToolStripMenuItem1.Name = "gamesToolStripMenuItem1";
-            this.gamesToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.gamesToolStripMenuItem1.Size = new System.Drawing.Size(142, 22);
             this.gamesToolStripMenuItem1.Text = "Games...";
             this.gamesToolStripMenuItem1.Click += new System.EventHandler(this.SteamMenu);
             // 
@@ -521,7 +523,7 @@
             // 
             this.downloadsToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.steam;
             this.downloadsToolStripMenuItem.Name = "downloadsToolStripMenuItem";
-            this.downloadsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.downloadsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.downloadsToolStripMenuItem.Text = "Downloads...";
             this.downloadsToolStripMenuItem.Click += new System.EventHandler(this.SteamMenu);
             // 
@@ -529,7 +531,7 @@
             // 
             this.friendsToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.steam;
             this.friendsToolStripMenuItem.Name = "friendsToolStripMenuItem";
-            this.friendsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.friendsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.friendsToolStripMenuItem.Text = "Friends...";
             this.friendsToolStripMenuItem.Click += new System.EventHandler(this.SteamMenu);
             // 
@@ -537,7 +539,7 @@
             // 
             this.newsToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.steam;
             this.newsToolStripMenuItem.Name = "newsToolStripMenuItem";
-            this.newsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.newsToolStripMenuItem.Text = "News...";
             this.newsToolStripMenuItem.Click += new System.EventHandler(this.SteamMenu);
             // 
@@ -545,7 +547,7 @@
             // 
             this.settingsToolStripMenuItem.Image = global::OldGamesLauncher.Properties.Resources.steam;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.settingsToolStripMenuItem.Text = "Settings...";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SteamMenu);
             // 
@@ -676,7 +678,7 @@
             this.GamesList.Location = new System.Drawing.Point(0, 24);
             this.GamesList.Name = "GamesList";
             this.GamesList.ShowGroups = global::OldGamesLauncher.Properties.Settings.Default.GroupsVisible;
-            this.GamesList.Size = new System.Drawing.Size(618, 401);
+            this.GamesList.Size = new System.Drawing.Size(618, 380);
             this.GamesList.TabIndex = 1;
             this.GamesList.UseCompatibleStateImageBehavior = false;
             this.GamesList.View = global::OldGamesLauncher.Properties.Settings.Default.ViewType;
@@ -876,13 +878,21 @@
             this.Tray.Visible = true;
             this.Tray.DoubleClick += new System.EventHandler(this.Tray_DoubleClick);
             // 
+            // showGamesFolderContentsToolStripMenuItem
+            // 
+            this.showGamesFolderContentsToolStripMenuItem.CheckOnClick = true;
+            this.showGamesFolderContentsToolStripMenuItem.Name = "showGamesFolderContentsToolStripMenuItem";
+            this.showGamesFolderContentsToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.showGamesFolderContentsToolStripMenuItem.Text = "Show Games folder contents";
+            this.showGamesFolderContentsToolStripMenuItem.Click += new System.EventHandler(this.showGamesFolderContentsToolStripMenuItem_Click);
+            // 
             // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(618, 425);
-            this.Controls.Add(this.FilterSelector);
             this.Controls.Add(this.GamesList);
+            this.Controls.Add(this.FilterSelector);
             this.Controls.Add(this.MainMenuStrip);
             this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::OldGamesLauncher.Properties.Settings.Default, "Location", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -988,6 +998,7 @@
         private System.Windows.Forms.ToolStripMenuItem friendsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showGamesFolderContentsToolStripMenuItem;
     }
 }
 
