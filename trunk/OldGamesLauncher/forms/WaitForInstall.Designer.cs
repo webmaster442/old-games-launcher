@@ -48,9 +48,10 @@
             this.ClientSize = new System.Drawing.Size(404, 69);
             this.ControlBox = false;
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "WaitForInstall";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Installig DosBox...";
+            this.Text = "Installig Emulator...";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WaitForInstall_FormClosing);
             this.Load += new System.EventHandler(this.WaitForDosBoxInstall_Load);
