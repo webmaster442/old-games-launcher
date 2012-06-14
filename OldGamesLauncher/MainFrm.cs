@@ -37,6 +37,7 @@ namespace OldGamesLauncher
         {
             GamesList.Items.Clear();
             GamesList.Groups.Clear();
+            GamesList.ShowGroups = Settings.Default.GroupsVisible;
             GamesList.LargeImageList = Program._manager.Icons;
             GamesList.SmallImageList = Program._manager.Icons;
             GamesList.StateImageList = Program._manager.Icons;
@@ -53,6 +54,17 @@ namespace OldGamesLauncher
                 itm.Group = GamesList.Groups[game.GameName[0].ToString()];
                 GamesList.Items.Add(itm);
 
+            }
+            if ((_filter == GameType.All || _filter == GameType.Windows) && Settings.Default.GamesfolderVisible)
+            {
+                foreach (var wgame in Program._manager.WindowsGames)
+                {
+                    ListViewItem itm = new ListViewItem();
+                    itm.Text = wgame.Key;
+                    itm.Group = GamesList.Groups[wgame.Key[0].ToString()];
+                    itm.ImageKey = wgame.Key;
+                    GamesList.Items.Add(itm);
+                }
             }
 
         }
@@ -152,13 +164,14 @@ namespace OldGamesLauncher
             groupsVisibleToolStripMenuItem.Checked = Settings.Default.GroupsVisible;
             showEmulatorsConsoleToolStripMenuItem.Checked = Settings.Default.EmuConsoleVisible;
             closeToTrayToolStripMenuItem.Checked = Settings.Default.CloseToTray;
+            showGamesFolderContentsToolStripMenuItem.Checked = Settings.Default.GamesfolderVisible;
 
             Program._manager = new GamesManager();
             Program._fileman = new FileManager();
             Program._manager.LoadDataFile(Program._fileman.ConfigLocation);
             BuildList();
             if (Settings.Default.DropVisible) _dosdop.Show();
-            steamToolStripMenuItem.Enabled = Steam.IsSteamInstalled();
+            steamToolStripMenuItem.Visible = Steam.IsSteamInstalled();
         }
 
         private void MainFrm_FormClosing(object sender, FormClosingEventArgs e)
@@ -212,23 +225,18 @@ namespace OldGamesLauncher
             {
                 case 0:
                     _filter = GameType.All;
-                    GamesList.BackgroundImage = Properties.Resources.back;
                     break;
                 case 1:
                     _filter = GameType.Windows;
-                    GamesList.BackgroundImage = Properties.Resources.back1;
                     break;
                 case 2:
                     _filter = GameType.DosBox;
-                    GamesList.BackgroundImage = Properties.Resources.back2;
                     break;
                 case 3:
                     _filter = GameType.ScummVm;
-                    GamesList.BackgroundImage = Properties.Resources.back3;
                     break;
                 case 4:
                     _filter = GameType.Snes;
-                    GamesList.BackgroundImage = Properties.Resources.back4;
                     break;
             }
             BuildList();
@@ -599,6 +607,7 @@ namespace OldGamesLauncher
 
         private void groupsVisibleToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Settings.Default.GroupsVisible = groupsVisibleToolStripMenuItem.Checked;
             GamesList.ShowGroups = groupsVisibleToolStripMenuItem.Checked;
         }
         #endregion
@@ -707,6 +716,12 @@ namespace OldGamesLauncher
                     Steam.DoSteamAction(Steam.SteamAction.OpenSettings);
                     break;
             }
+        }
+
+        private void showGamesFolderContentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings.Default.GamesfolderVisible = showGamesFolderContentsToolStripMenuItem.Checked;
+            BuildList();
         }
     }
 }

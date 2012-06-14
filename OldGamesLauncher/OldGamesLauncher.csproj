@@ -237,11 +237,6 @@
     <None Include="icons\scumicon.ico" />
     <None Include="icons\back.png" />
     <None Include="FileTypes.txt" />
-    <None Include="icons\back1.png" />
-    <None Include="icons\back2.png" />
-    <None Include="icons\back3.png" />
-    <None Include="icons\back4.png" />
-    <None Include="icons\back5.png" />
     <None Include="icons\snesicon.ico" />
     <None Include="icons\snes.png" />
     <None Include="icons\steam.png" />

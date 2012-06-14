@@ -4,6 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using System.Runtime.InteropServices;
+using Microsoft.Win32;
+using System.Text;
 
 namespace OldGamesLauncher
 {
@@ -61,6 +64,7 @@ namespace OldGamesLauncher
     internal class GamesManager : IEnumerable<GamesData>, ICollection<GamesData>
     {
         private List<GamesData> _games;
+        private Dictionary<string, string> _gamesfolder;
         private List<string> _gamestartletters;
         private ImageList _images;
 
@@ -69,7 +73,29 @@ namespace OldGamesLauncher
             _games = new List<GamesData>();
             _gamestartletters = new List<string>();
             _images = new ImageList();
+            _gamesfolder = new Dictionary<string, string>();
             _images.ImageSize = new System.Drawing.Size(32, 32);
+            GetWindowsGames();
+        }
+
+        private void GetWindowsGames()
+        {
+            try
+            {
+                _gamesfolder.Clear();
+                RegistryKey games = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\GameUX\Games", false);
+                RegistryKey subk = null;
+                string gamename, gamepath;
+                foreach (var subkey in games.GetSubKeyNames())
+                {
+                    subk = games.OpenSubKey(subkey);
+                    gamepath = subk.GetValue("ConfigGDFBinaryPath").ToString();
+                    gamename = subk.GetValue("Title").ToString();
+                    if (_gamesfolder.ContainsKey(gamename)) _gamesfolder[gamename] = gamepath;
+                    _gamesfolder.Add(gamename, gamepath);
+                }
+            }
+            catch (Exception) { }
         }
 
         /// <summary>
@@ -104,6 +130,10 @@ namespace OldGamesLauncher
                         _images.Images.Add(e.GameName, Properties.Resources.snesicon);
                         break;
                 }
+            }
+            foreach (var game in _gamesfolder)
+            {
+                _images.Images.Add(game.Key, SystemCommands.GetIconOfExe(game.Value));
             }
         }
 
@@ -201,8 +231,7 @@ namespace OldGamesLauncher
         /// <returns></returns>
         public char[] GetGameNameGroups()
         {
-            var query = from g in _games group g by g.GameName[0] into List select List.Key;
-            return query.ToArray();
+            return "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToArray();
         }
 
         /// <summary>
@@ -350,6 +379,11 @@ namespace OldGamesLauncher
         public bool Remove(GamesData item)
         {
             return _games.Remove(item);
+        }
+
+        public Dictionary<string, string> WindowsGames
+        {
+            get { return _gamesfolder; }
         }
     }
 }
