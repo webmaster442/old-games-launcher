@@ -33,11 +33,11 @@ namespace OldGamesLauncher
         private void WaitForDosBoxInstall_Load(object sender, EventArgs e)
         {
             label1.Text = string.Format("Installing {0}, Please Wait...", EmulatorToInstall);
-            if (!Program._fileman.IsEmulatorInstalled(EmulatorToInstall))
+            if (!Program.FileMan.IsEmulatorInstalled(EmulatorToInstall))
             {
                 _t = new Thread(delegate()
                 {
-                    Program._fileman.InstallEmulator(EmulatorToInstall);
+                    Program.FileMan.InstallEmulator(EmulatorToInstall);
                     if (this.InvokeRequired) this.Invoke((Action)delegate { this.Close(); });
                 });
                 _t.Start();

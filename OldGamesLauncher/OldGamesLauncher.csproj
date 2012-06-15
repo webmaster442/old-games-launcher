@@ -197,6 +197,7 @@
     <Compile Include="forms\WaitForInstall.Designer.cs">
       <DependentUpon>WaitForInstall.cs</DependentUpon>
     </Compile>
+    <Compile Include="classes\WindowsCode.cs" />
     <EmbeddedResource Include="forms\FirstLaunch.resx">
       <DependentUpon>FirstLaunch.cs</DependentUpon>
     </EmbeddedResource>
@@ -338,6 +339,12 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IconLib\IconLib.csproj">
+      <Project>{CE53747F-D2E6-4E1E-9EF4-A0AE02671B1D}</Project>
+      <Name>IconLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

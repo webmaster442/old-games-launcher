@@ -26,11 +26,11 @@ namespace OldGamesLauncher
         {
             _t = new Thread(delegate()
             {
-                int index = Program._manager.IndexOf(Data);
+                int index = Program.GameMan.IndexOf(Data);
                 bool check = SystemCommands.DirectDrawTest(Data.GameExePath);
                 if (check) Data.DirectDraw = UsesDDraw.True;
                 else Data.DirectDraw = UsesDDraw.False;
-                Program._manager[index] = Data;
+                Program.GameMan[index] = Data;
                 if (this.InvokeRequired) this.Invoke((Action)delegate 
                 {
                     CallerForm.LaunchdDraw(Data);
