@@ -38,11 +38,11 @@ namespace OldGamesLauncher
             GamesList.Items.Clear();
             GamesList.Groups.Clear();
             GamesList.ShowGroups = Settings.Default.GroupsVisible;
-            GamesList.LargeImageList = Program._manager.Icons;
-            GamesList.SmallImageList = Program._manager.Icons;
-            GamesList.StateImageList = Program._manager.Icons;
-            var games = Program._manager.Filter(_filter);
-            foreach (var c in Program._manager.GetGameNameGroups())
+            GamesList.LargeImageList = Program.GameMan.Icons;
+            GamesList.SmallImageList = Program.GameMan.Icons;
+            GamesList.StateImageList = Program.GameMan.Icons;
+            var games = Program.GameMan.Filter(_filter);
+            foreach (var c in Program.GameMan.GetGameNameGroups())
             {
                 GamesList.Groups.Add(string.Format("{0}", c), string.Format("{0}", c));
             }
@@ -57,7 +57,7 @@ namespace OldGamesLauncher
             }
             if ((_filter == GameType.All || _filter == GameType.Windows) && Settings.Default.GamesfolderVisible)
             {
-                foreach (var wgame in Program._manager.WindowsGames)
+                foreach (var wgame in Program.GameMan.WindowsGames)
                 {
                     ListViewItem itm = new ListViewItem();
                     itm.Text = wgame.Key;
@@ -94,19 +94,19 @@ namespace OldGamesLauncher
         {
             if (GamesList.SelectedItems.Count < 1) return;
             var selected = GamesList.SelectedItems[0].Text;
-            GamesData d = Program._manager[selected];
+            GamesData d = Program.GameMan[selected];
             bool test = SystemCommands.IsDosExe(d.GameExePath);
             string args = string.IsNullOrEmpty(d.CommandLinePars) ? null : d.CommandLinePars + " ";
             switch (d.GameType)
             {
                 case GameType.DosBox:
-                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxExe, args+"\"" + d.GameExePath + "\"", true);
+                    DoInstallAndRun(GameType.DosBox, Program.FileMan.DosBoxExe, args+"\"" + d.GameExePath + "\"", true);
                     break;
                 case GameType.ScummVm:
-                    DoInstallAndRun(GameType.ScummVm, Program._fileman.ScummVmExe, args+d.ScumGameId, true);
+                    DoInstallAndRun(GameType.ScummVm, Program.FileMan.ScummVmExe, args+d.ScumGameId, true);
                     break;
                 case GameType.Snes:
-                    DoInstallAndRun(GameType.Snes, Program._fileman.SnesExe, args+"\"" + d.GameExePath + "\"", false);
+                    DoInstallAndRun(GameType.Snes, Program.FileMan.SnesExe, args+"\"" + d.GameExePath + "\"", false);
                     break;
                 case GameType.Windows:
                     if (test)
@@ -146,7 +146,7 @@ namespace OldGamesLauncher
                 MessageBox.Show("The file you droped is not a Dos executable", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxExe, "\"" + filename + "\"", true);
+            DoInstallAndRun(GameType.DosBox, Program.FileMan.DosBoxExe, "\"" + filename + "\"", true);
         }
 
         private void MainFrm_Load(object sender, EventArgs e)
@@ -166,9 +166,10 @@ namespace OldGamesLauncher
             closeToTrayToolStripMenuItem.Checked = Settings.Default.CloseToTray;
             showGamesFolderContentsToolStripMenuItem.Checked = Settings.Default.GamesfolderVisible;
 
-            Program._manager = new GamesManager();
-            Program._fileman = new FileManager();
-            Program._manager.LoadDataFile(Program._fileman.ConfigLocation);
+            Program.GameMan = new GamesManager();
+            Program.FileMan = new FileManager();
+            Program.WinInterop = new WindowsCode();
+            Program.GameMan.LoadDataFile(Program.FileMan.ConfigLocation);
             BuildList();
             if (Settings.Default.DropVisible) _dosdop.Show();
             steamToolStripMenuItem.Visible = Steam.IsSteamInstalled();
@@ -184,7 +185,7 @@ namespace OldGamesLauncher
             }
             Size s = new System.Drawing.Size(this.Width, this.Height);
             Settings.Default.WindowSize = s;
-            Program._manager.SaveDataFile(Program._fileman.ConfigLocation);
+            Program.GameMan.SaveDataFile(Program.FileMan.ConfigLocation);
             Settings.Default.DropVisible = dosExeDropformToolStripMenuItem.Checked;
             Settings.Default.GroupsVisible = groupsVisibleToolStripMenuItem.Checked;
             Settings.Default.EmuConsoleVisible = showEmulatorsConsoleToolStripMenuItem.Checked;
@@ -248,7 +249,7 @@ namespace OldGamesLauncher
             AddGameForm agf = new AddGameForm();
             if (agf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                Program._manager.AddGame(agf.GameName, agf.GamePath, agf.SelectedGameType, null, agf.Arguments);
+                Program.GameMan.AddGame(agf.GameName, agf.GamePath, agf.SelectedGameType, null, agf.Arguments);
                 BuildList();
             }
         }
@@ -258,8 +259,8 @@ namespace OldGamesLauncher
             AddScumGameForm asgf = new AddScumGameForm();
             if (asgf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                Program._manager.AddGame(asgf.GameName, asgf.GamePath, GameType.ScummVm, asgf.GameId);
-                Program._fileman.AddScummGame(asgf.GameId, asgf.GameName, asgf.GamePath);
+                Program.GameMan.AddGame(asgf.GameName, asgf.GamePath, GameType.ScummVm, asgf.GameId);
+                Program.FileMan.AddScummGame(asgf.GameId, asgf.GameName, asgf.GamePath);
                 BuildList();
             }
         }
@@ -329,8 +330,8 @@ namespace OldGamesLauncher
                 startGameToolStripMenuItem.Enabled = true;
                 directDrawHackToolStripMenuItem.Enabled = false;
                 gameExePropertiesToolStripMenuItem.Enabled = false;
-                gameSettingsToolStripMenuItem.Enabled = SystemCommands.SetupExists(Program._manager.GetPathByName(selected));
-                if (Program._manager[selected].GameType == GameType.Windows)
+                gameSettingsToolStripMenuItem.Enabled = SystemCommands.SetupExists(Program.GameMan.GetPathByName(selected));
+                if (Program.GameMan[selected].GameType == GameType.Windows)
                 {
                     gameExePropertiesToolStripMenuItem.Enabled = true;
                     directDrawHackToolStripMenuItem.Enabled = true;
@@ -348,7 +349,7 @@ namespace OldGamesLauncher
         {
             if (GamesList.SelectedItems.Count < 1) return;
             var selected = GamesList.SelectedItems[0].Text;
-            string path = Path.GetDirectoryName(Program._manager.GetPathByName(selected));
+            string path = Path.GetDirectoryName(Program.GameMan.GetPathByName(selected));
             SystemCommands.RunCommand("explorer.exe", path);
         }
 
@@ -376,8 +377,8 @@ namespace OldGamesLauncher
             if (GamesList.SelectedItems.Count < 1) return;
             var selected = GamesList.SelectedItems[0].Text;
 
-            var dat = Program._manager[selected];
-            int index = Program._manager.IndexOf(dat);
+            var dat = Program.GameMan[selected];
+            int index = Program.GameMan.IndexOf(dat);
 
             switch (dat.GameType)
             {
@@ -395,7 +396,7 @@ namespace OldGamesLauncher
                         dat.GameExePath = ed.GamePath;
                         dat.CommandLinePars = ed.Arguments;
                         dat.GameType = ed.SelectedGameType;
-                        Program._manager[index] = dat;
+                        Program.GameMan[index] = dat;
                     }
                     break;
                 case GameType.ScummVm:
@@ -408,11 +409,11 @@ namespace OldGamesLauncher
                         dat.GameName = esg.GameName;
                         dat.GameExePath = esg.GamePath;
                         dat.ScumGameId = esg.GameId;
-                        Program._manager[index] = dat;
+                        Program.GameMan[index] = dat;
                     }
                     break;
             }
-            Program._manager.RebuildIconIndex();
+            Program.GameMan.RebuildIconIndex();
             BuildList();
         }
 
@@ -423,8 +424,8 @@ namespace OldGamesLauncher
             var confirm = MessageBox.Show("Delete " + selected + "?", "Confirm action", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
             if (confirm == System.Windows.Forms.DialogResult.Yes)
             {
-                if (Program._manager[selected].GameType == GameType.ScummVm) Program._fileman.RemoveScummGame(Program._manager[selected].ScumGameId);
-                Program._manager.RemoveByName(selected);
+                if (Program.GameMan[selected].GameType == GameType.ScummVm) Program.FileMan.RemoveScummGame(Program.GameMan[selected].ScumGameId);
+                Program.GameMan.RemoveByName(selected);
                 BuildList();
             }
         }
@@ -436,19 +437,19 @@ namespace OldGamesLauncher
             switch (s.Name)
             {
                 case "editConfigurationToolStripMenuItem":
-                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxPath + "\\DOSBox 0.74 Options.bat", null, false);
+                    DoInstallAndRun(GameType.DosBox, Program.FileMan.DosBoxPath + "\\DOSBox 0.74 Options.bat", null, false);
                     //SystemCommands.RunCommand(Program._fileman.DosBoxPath + "\\DOSBox 0.74 Options.bat");
                     break;
                 case "openScreenshotsRecordingsToolStripMenuItem":
-                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxPath + "\\Screenshots & Recordings.bat", null, false);
+                    DoInstallAndRun(GameType.DosBox, Program.FileMan.DosBoxPath + "\\Screenshots & Recordings.bat", null, false);
                     //SystemCommands.RunCommand(Program._fileman.DosBoxPath + "\\Screenshots & Recordings.bat");
                     break;
                 case "resetConfigurationToolStripMenuItem":
-                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxPath + "\\Reset Options.bat", null, false);
+                    DoInstallAndRun(GameType.DosBox, Program.FileMan.DosBoxPath + "\\Reset Options.bat", null, false);
                     //SystemCommands.RunCommand(Program._fileman.DosBoxPath + "\\Reset Options.bat");
                     break;
                 case "resetKeyMappingsToolStripMenuItem":
-                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxPath + "\\Reset KeyMapper.bat", null, false);
+                    DoInstallAndRun(GameType.DosBox, Program.FileMan.DosBoxPath + "\\Reset KeyMapper.bat", null, false);
                     //SystemCommands.RunCommand(Program._fileman.DosBoxPath + "\\Reset KeyMapper.bat");
                     break;
             }
@@ -476,15 +477,15 @@ namespace OldGamesLauncher
                 switch (s.Name)
                 {
                     case "installReinstallDosBoxToolStripMenuItem":
-                        if (Program._fileman.IsEmulatorInstalled(GameType.DosBox)) Program._fileman.DeleteEmulator(GameType.DosBox);
+                        if (Program.FileMan.IsEmulatorInstalled(GameType.DosBox)) Program.FileMan.DeleteEmulator(GameType.DosBox);
                         DoInstall(GameType.DosBox);
                         break;
                     case "installReinstallScummVmToolStripMenuItem":
-                        if (Program._fileman.IsEmulatorInstalled(GameType.ScummVm)) Program._fileman.DeleteEmulator(GameType.ScummVm);
+                        if (Program.FileMan.IsEmulatorInstalled(GameType.ScummVm)) Program.FileMan.DeleteEmulator(GameType.ScummVm);
                         DoInstall(GameType.ScummVm);
                         break;
                     case "installReinstallSnes9xToolStripMenuItem":
-                        if (Program._fileman.IsEmulatorInstalled(GameType.Snes)) Program._fileman.DeleteEmulator(GameType.Snes);
+                        if (Program.FileMan.IsEmulatorInstalled(GameType.Snes)) Program.FileMan.DeleteEmulator(GameType.Snes);
                         DoInstall(GameType.Snes);
                         break;
                 }
@@ -513,13 +514,13 @@ namespace OldGamesLauncher
                 switch (s.Name)
                 {
                     case "uninstallDosBoxToolStripMenuItem":
-                        if (Program._fileman.DeleteEmulator(GameType.DosBox)) MessageBox.Show("DosBox Uninstalled", "DosBox Installer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (Program.FileMan.DeleteEmulator(GameType.DosBox)) MessageBox.Show("DosBox Uninstalled", "DosBox Installer", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     case "uninstallScummVmToolStripMenuItem":
-                        if (Program._fileman.DeleteEmulator(GameType.ScummVm)) MessageBox.Show("ScummVM Uninstalled", "ScummVM Installer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (Program.FileMan.DeleteEmulator(GameType.ScummVm)) MessageBox.Show("ScummVM Uninstalled", "ScummVM Installer", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     case "uninstallSnes9xToolStripMenuItem":
-                        if (Program._fileman.DeleteEmulator(GameType.Snes)) MessageBox.Show("Snes9x Uninstalled", "ScummVM Installer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (Program.FileMan.DeleteEmulator(GameType.Snes)) MessageBox.Show("Snes9x Uninstalled", "ScummVM Installer", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                 }
             }
@@ -560,7 +561,7 @@ namespace OldGamesLauncher
         {
             if (GamesList.SelectedItems.Count < 1) return;
             var selected = GamesList.SelectedItems[0].Text;
-            SystemCommands.ShowFileProperties(Program._manager.GetPathByName(selected));
+            SystemCommands.ShowFileProperties(Program.GameMan.GetPathByName(selected));
         }
 
         private void installToolStripMenuItem_Click(object sender, EventArgs e)
@@ -570,8 +571,8 @@ namespace OldGamesLauncher
             var res = MessageBox.Show("Install Direct Draw hack to " + selected + "?", "DirectDraw Hack Installer", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (res == System.Windows.Forms.DialogResult.Yes)
             {
-                string directory = Path.GetDirectoryName(Program._manager.GetPathByName(selected));
-                Program._fileman.InstallDirectDrawHack(directory);
+                string directory = Path.GetDirectoryName(Program.GameMan.GetPathByName(selected));
+                Program.FileMan.InstallDirectDrawHack(directory);
             }
         }
 
@@ -582,8 +583,8 @@ namespace OldGamesLauncher
             var res = MessageBox.Show("Uninstall Direct Draw hack from " + selected + "?", "DirectDraw Hack Installer", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (res == System.Windows.Forms.DialogResult.Yes)
             {
-                string directory = Path.GetDirectoryName(Program._manager.GetPathByName(selected));
-                if (Program._fileman.DeleteDirectDrawHack(directory))
+                string directory = Path.GetDirectoryName(Program.GameMan.GetPathByName(selected));
+                if (Program.FileMan.DeleteDirectDrawHack(directory))
                 {
                     MessageBox.Show("Direct Draw hack uninstalled", "DirectDraw Hack Installer", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -600,7 +601,7 @@ namespace OldGamesLauncher
         {
             if (GamesList.SelectedItems.Count < 1) return;
             var selected = GamesList.SelectedItems[0].Text;
-            string setup = SystemCommands.GetSetup(Program._manager.GetPathByName(selected));
+            string setup = SystemCommands.GetSetup(Program.GameMan.GetPathByName(selected));
             if (string.IsNullOrEmpty(setup)) return;
             RunDosExe(setup);
         }
@@ -669,7 +670,7 @@ namespace OldGamesLauncher
                                           "Are you sure you want to do this?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (confirm == System.Windows.Forms.DialogResult.Yes)
             {
-                Program._manager.Clear();
+                Program.GameMan.Clear();
                 BuildList();
             }
         }
@@ -680,13 +681,13 @@ namespace OldGamesLauncher
             switch (s.Name)
             {
                 case "startDosBoxToolSatripMenuItem":
-                    DoInstallAndRun(GameType.DosBox, Program._fileman.DosBoxExe, null, true);
+                    DoInstallAndRun(GameType.DosBox, Program.FileMan.DosBoxExe, null, true);
                     break;
                 case "startScummVMToolStripMenuItem":
-                    DoInstallAndRun(GameType.ScummVm, Program._fileman.ScummVmExe, null, true);
+                    DoInstallAndRun(GameType.ScummVm, Program.FileMan.ScummVmExe, null, true);
                     break;
                 case "startSnes9xToolStripMenuItem":
-                    DoInstallAndRun(GameType.Snes, Program._fileman.SnesExe, null, false);
+                    DoInstallAndRun(GameType.Snes, Program.FileMan.SnesExe, null, false);
                     break;
             }
 

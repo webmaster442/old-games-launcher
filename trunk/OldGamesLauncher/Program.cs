@@ -11,8 +11,9 @@ namespace OldGamesLauncher
         /// The main entry point for the application.
         /// </summary>
         /// 
-        public static FileManager _fileman;
-        public static GamesManager _manager;
+        public static FileManager FileMan;
+        public static GamesManager GameMan;
+        public static WindowsCode WinInterop;
 
         [STAThread]
         static void Main()

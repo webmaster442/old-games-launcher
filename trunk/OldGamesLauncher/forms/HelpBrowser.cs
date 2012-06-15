@@ -28,7 +28,7 @@ namespace OldGamesLauncher
             TvDocs.PathSeparator = "/";
             try
             {
-                FileStream fs = File.OpenRead(Program._fileman.DocsPath);
+                FileStream fs = File.OpenRead(Program.FileMan.DocsPath);
                 using (ZipInputStream zi = new ZipInputStream(fs))
                 {
                     ZipEntry file;
@@ -72,7 +72,7 @@ namespace OldGamesLauncher
         public void LoadDocument(string path)
         {
             if (string.IsNullOrEmpty(path)) return;
-            MemoryStream data = Program._fileman.GetDocumentContent(path);
+            MemoryStream data = Program.FileMan.GetDocumentContent(path);
             if (data == null)
             {
                 MessageBox.Show("Document not found: " + path, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

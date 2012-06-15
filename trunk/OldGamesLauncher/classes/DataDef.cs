@@ -112,13 +112,13 @@ namespace OldGamesLauncher
                 GC.Collect();
             }
             _images = new ImageList();
-            _images.ImageSize = new System.Drawing.Size(32, 32);
+            _images.ImageSize = new System.Drawing.Size(48, 48);
             foreach (var e in _games)
             {
                 switch (e.GameType)
                 {
                     case GameType.Windows:
-                        _images.Images.Add(e.GameName, SystemCommands.GetIconOfExe(e.GameExePath));
+                        _images.Images.Add(e.GameName, Program.WinInterop.GetThumbnail(e.GameExePath));
                         break;
                     case GameType.DosBox:
                         _images.Images.Add(e.GameName, Properties.Resources.dosicon);
@@ -133,7 +133,7 @@ namespace OldGamesLauncher
             }
             foreach (var game in _gamesfolder)
             {
-                _images.Images.Add(game.Key, SystemCommands.GetIconOfExe(game.Value));
+                _images.Images.Add(game.Key, Program.WinInterop.GetThumbnail(game.Value));
             }
         }
 
@@ -329,7 +329,7 @@ namespace OldGamesLauncher
             var scumgames = Filter(GameType.ScummVm);
             foreach (var game in scumgames)
             {
-                Program._fileman.RemoveScummGame(game.ScumGameId);
+                Program.FileMan.RemoveScummGame(game.ScumGameId);
             }
             _games.Clear();
             RebuildIconIndex();
