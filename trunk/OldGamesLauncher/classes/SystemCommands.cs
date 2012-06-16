@@ -6,6 +6,8 @@ using System.IO;
 using System.Security.Principal;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Drawing.IconLib;
+using System.Linq;
 
 namespace OldGamesLauncher
 {
@@ -87,9 +89,16 @@ namespace OldGamesLauncher
             catch (Win32Exception) { return false; }
         }
 
-        public static Icon GetIconOfExe(string Path)
+        public static Icon GetThumbnail(string filepath)
         {
-            return Icon.ExtractAssociatedIcon(Path);
+            MultiIcon mi = new MultiIcon();
+            mi.Load(filepath);
+            SingleIcon icon = mi[0];
+            var query = from i in icon where i.Image.Width == 48 && i.Image.Height == 48 orderby i.PixelFormat descending select i.Icon;
+            Icon ret = query.FirstOrDefault();
+            if (ret == null)
+                ret = (from i in icon where i.Image.Width == 32 && i.Image.Height == 32 orderby i.PixelFormat descending select i.Icon).FirstOrDefault();
+            return ret;
         }
 
         public static bool IsAdministrator

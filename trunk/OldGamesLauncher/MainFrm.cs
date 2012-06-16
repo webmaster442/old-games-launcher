@@ -95,6 +95,16 @@ namespace OldGamesLauncher
             if (GamesList.SelectedItems.Count < 1) return;
             var selected = GamesList.SelectedItems[0].Text;
             GamesData d = Program.GameMan[selected];
+            if (d == null)
+            {
+                var exepath = (from g in Program.GameMan.WindowsGames where g.Key == selected select g.Value).FirstOrDefault();
+                if (exepath != null)
+                {
+                    MessageBox.Show("DirectDraw hacking for windows games folder games is not supported", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    SystemCommands.RunCommand(exepath);
+                }
+                return;
+            }
             bool test = SystemCommands.IsDosExe(d.GameExePath);
             string args = string.IsNullOrEmpty(d.CommandLinePars) ? null : d.CommandLinePars + " ";
             switch (d.GameType)
@@ -168,7 +178,6 @@ namespace OldGamesLauncher
 
             Program.GameMan = new GamesManager();
             Program.FileMan = new FileManager();
-            Program.WinInterop = new WindowsCode();
             Program.GameMan.LoadDataFile(Program.FileMan.ConfigLocation);
             BuildList();
             if (Settings.Default.DropVisible) _dosdop.Show();

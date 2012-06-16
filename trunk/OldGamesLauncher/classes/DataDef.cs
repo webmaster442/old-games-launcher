@@ -90,6 +90,7 @@ namespace OldGamesLauncher
                 {
                     subk = games.OpenSubKey(subkey);
                     gamepath = subk.GetValue("ConfigGDFBinaryPath").ToString();
+                    if (gamepath.EndsWith(".dll")) continue;
                     gamename = subk.GetValue("Title").ToString();
                     if (_gamesfolder.ContainsKey(gamename)) _gamesfolder[gamename] = gamepath;
                     _gamesfolder.Add(gamename, gamepath);
@@ -118,7 +119,7 @@ namespace OldGamesLauncher
                 switch (e.GameType)
                 {
                     case GameType.Windows:
-                        _images.Images.Add(e.GameName, Program.WinInterop.GetThumbnail(e.GameExePath));
+                        _images.Images.Add(e.GameName, SystemCommands.GetThumbnail(e.GameExePath));
                         break;
                     case GameType.DosBox:
                         _images.Images.Add(e.GameName, Properties.Resources.dosicon);
@@ -133,7 +134,7 @@ namespace OldGamesLauncher
             }
             foreach (var game in _gamesfolder)
             {
-                _images.Images.Add(game.Key, Program.WinInterop.GetThumbnail(game.Value));
+                _images.Images.Add(game.Key, SystemCommands.GetThumbnail(game.Value));
             }
         }
 
