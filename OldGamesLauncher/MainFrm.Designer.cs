@@ -67,6 +67,7 @@
             this.dosExeDropformToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showEmulatorsConsoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToTrayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showGamesFolderContentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.largeIconsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.smallIconsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -115,7 +116,8 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.Tray = new System.Windows.Forms.NotifyIcon(this.components);
-            this.showGamesFolderContentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startGameWithDirectDrawHackingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenuStrip.SuspendLayout();
             this.ListContext.SuspendLayout();
             this.FilterSelector.SuspendLayout();
@@ -142,6 +144,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.restartAsAdministratorToolStripMenuItem,
             this.restartExplorerexeToolStripMenuItem,
+            this.optionsToolStripMenuItem,
             this.toolStripSeparator1,
             this.minimizeToTrayToolStripMenuItem,
             this.toolStripMenuItem3,
@@ -452,6 +455,14 @@
             this.closeToTrayToolStripMenuItem.Text = "Close to Tray";
             this.closeToTrayToolStripMenuItem.Click += new System.EventHandler(this.closeToTrayToolStripMenuItem_Click);
             // 
+            // showGamesFolderContentsToolStripMenuItem
+            // 
+            this.showGamesFolderContentsToolStripMenuItem.CheckOnClick = true;
+            this.showGamesFolderContentsToolStripMenuItem.Name = "showGamesFolderContentsToolStripMenuItem";
+            this.showGamesFolderContentsToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.showGamesFolderContentsToolStripMenuItem.Text = "Show Games folder contents";
+            this.showGamesFolderContentsToolStripMenuItem.Click += new System.EventHandler(this.showGamesFolderContentsToolStripMenuItem_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -688,6 +699,7 @@
             // 
             this.ListContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.startGameToolStripMenuItem,
+            this.startGameWithDirectDrawHackingToolStripMenuItem,
             this.openFolderToolStripMenuItem,
             this.internetToolStripMenuItem,
             this.deleteGameToolStripMenuItem,
@@ -696,7 +708,7 @@
             this.gameSettingsToolStripMenuItem,
             this.gameExePropertiesToolStripMenuItem});
             this.ListContext.Name = "ListContext";
-            this.ListContext.Size = new System.Drawing.Size(200, 180);
+            this.ListContext.Size = new System.Drawing.Size(200, 224);
             this.ListContext.Opening += new System.ComponentModel.CancelEventHandler(this.ListContext_Opening);
             // 
             // startGameToolStripMenuItem
@@ -878,13 +890,19 @@
             this.Tray.Visible = true;
             this.Tray.DoubleClick += new System.EventHandler(this.Tray_DoubleClick);
             // 
-            // showGamesFolderContentsToolStripMenuItem
+            // optionsToolStripMenuItem
             // 
-            this.showGamesFolderContentsToolStripMenuItem.CheckOnClick = true;
-            this.showGamesFolderContentsToolStripMenuItem.Name = "showGamesFolderContentsToolStripMenuItem";
-            this.showGamesFolderContentsToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-            this.showGamesFolderContentsToolStripMenuItem.Text = "Show Games folder contents";
-            this.showGamesFolderContentsToolStripMenuItem.Click += new System.EventHandler(this.showGamesFolderContentsToolStripMenuItem_Click);
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.optionsToolStripMenuItem.Text = "Options...";
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
+            // 
+            // startGameWithDirectDrawHackingToolStripMenuItem
+            // 
+            this.startGameWithDirectDrawHackingToolStripMenuItem.Name = "startGameWithDirectDrawHackingToolStripMenuItem";
+            this.startGameWithDirectDrawHackingToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.startGameWithDirectDrawHackingToolStripMenuItem.Text = "Start with hack...";
+            this.startGameWithDirectDrawHackingToolStripMenuItem.Click += new System.EventHandler(this.startGameWithDirectDrawHackingToolStripMenuItem_Click);
             // 
             // MainFrm
             // 
@@ -999,6 +1017,8 @@
         private System.Windows.Forms.ToolStripMenuItem newsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showGamesFolderContentsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem startGameWithDirectDrawHackingToolStripMenuItem;
     }
 }
 

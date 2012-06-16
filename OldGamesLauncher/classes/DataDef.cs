@@ -78,6 +78,12 @@ namespace OldGamesLauncher
             GetWindowsGames();
         }
 
+        public bool IsWinFolderGame(string name)
+        {
+            var q = (from element in _gamesfolder where element.Key == name select element.Key).Count();
+            return q > 0;
+        }
+
         private void GetWindowsGames()
         {
             try
