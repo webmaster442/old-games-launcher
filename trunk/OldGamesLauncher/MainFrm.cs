@@ -90,7 +90,7 @@ namespace OldGamesLauncher
             catch (ObjectDisposedException) { }
         }
 
-        private void StartGame()
+        private void StartGame(bool force = false)
         {
             if (GamesList.SelectedItems.Count < 1) return;
             var selected = GamesList.SelectedItems[0].Text;
@@ -100,7 +100,7 @@ namespace OldGamesLauncher
                 var exepath = (from g in Program.GameMan.WindowsGames where g.Key == selected select g.Value).FirstOrDefault();
                 if (exepath != null)
                 {
-                    MessageBox.Show("DirectDraw hacking for windows games folder games is not supported", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (!Settings.Default.DontwarnDirectDraw) MessageBox.Show("DirectDraw hacking for windows games folder games is not supported", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     SystemCommands.RunCommand(exepath);
                 }
                 return;
@@ -110,13 +110,13 @@ namespace OldGamesLauncher
             switch (d.GameType)
             {
                 case GameType.DosBox:
-                    DoInstallAndRun(GameType.DosBox, Program.FileMan.DosBoxExe, args+"\"" + d.GameExePath + "\"", true);
+                    DoInstallAndRun(GameType.DosBox, Program.FileMan.DosBoxExe, args + "\"" + d.GameExePath + "\"", true);
                     break;
                 case GameType.ScummVm:
-                    DoInstallAndRun(GameType.ScummVm, Program.FileMan.ScummVmExe, args+d.ScumGameId, true);
+                    DoInstallAndRun(GameType.ScummVm, Program.FileMan.ScummVmExe, args + d.ScumGameId, true);
                     break;
                 case GameType.Snes:
-                    DoInstallAndRun(GameType.Snes, Program.FileMan.SnesExe, args+"\"" + d.GameExePath + "\"", false);
+                    DoInstallAndRun(GameType.Snes, Program.FileMan.SnesExe, args + "\"" + d.GameExePath + "\"", false);
                     break;
                 case GameType.Windows:
                     if (test)
@@ -124,21 +124,22 @@ namespace OldGamesLauncher
                         MessageBox.Show("You are trying to run a DOS program as a Windows program.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    if (d.DirectDraw == UsesDDraw.Unknown)
+                    if (d.DirectDraw == UsesDDraw.Unknown && !force)
                     {
                         FirstLaunch fl = new FirstLaunch();
                         fl.Data = d;
+                        fl.CallerForm = this;
                         fl.Show();
                     }
-                    else LaunchdDraw(d);
+                    else LaunchdDraw(d, force);
                     break;
             }
         }
 
-        public void LaunchdDraw(GamesData d)
+        public void LaunchdDraw(GamesData d, bool force = false)
         {
             string gamedir = Path.GetDirectoryName(d.GameExePath);
-            if (!File.Exists(gamedir + "\\ddhack.cfg"))
+            if ((!File.Exists(gamedir + "\\ddhack.cfg") && d.DirectDraw == UsesDDraw.True) || Settings.Default.ForceDirectDraw || force)
             {
                 _idtowatch = SystemCommands.RunCommand(d.GameExePath, d.CommandLinePars);
                 Thread.Sleep(1000);
@@ -328,25 +329,35 @@ namespace OldGamesLauncher
                 gameExePropertiesToolStripMenuItem.Enabled = false;
                 directDrawHackToolStripMenuItem.Enabled = false;
                 gameSettingsToolStripMenuItem.Enabled = false;
+                startGameWithDirectDrawHackingToolStripMenuItem.Enabled = false;
             }
             else
             {
                 var selected = GamesList.SelectedItems[0].Text;
                 internetToolStripMenuItem.Enabled = true;
-                deleteGameToolStripMenuItem.Enabled = true;
-                EditToolStripMenuItem.Enabled = true;
                 openFolderToolStripMenuItem.Enabled = true;
                 startGameToolStripMenuItem.Enabled = true;
                 directDrawHackToolStripMenuItem.Enabled = false;
+                EditToolStripMenuItem.Enabled = false;
+                deleteGameToolStripMenuItem.Enabled = false;
                 gameExePropertiesToolStripMenuItem.Enabled = false;
+                startGameWithDirectDrawHackingToolStripMenuItem.Enabled = false;
                 gameSettingsToolStripMenuItem.Enabled = SystemCommands.SetupExists(Program.GameMan.GetPathByName(selected));
-                if (Program.GameMan[selected].GameType == GameType.Windows)
+                gameExePropertiesToolStripMenuItem.Enabled = IsWinGame(selected);
+                if (Program.GameMan[selected] != null)
                 {
-                    gameExePropertiesToolStripMenuItem.Enabled = true;
-                    directDrawHackToolStripMenuItem.Enabled = true;
-                    gameSettingsToolStripMenuItem.Enabled = false;
+                    directDrawHackToolStripMenuItem.Enabled = IsWinGame(selected);
+                    deleteGameToolStripMenuItem.Enabled = IsWinGame(selected);
+                    EditToolStripMenuItem.Enabled = IsWinGame(selected);
+                    startGameWithDirectDrawHackingToolStripMenuItem.Enabled = !Settings.Default.ForceDirectDraw && IsWinGame(selected);
                 }
             }
+        }
+
+        bool IsWinGame(string selected)
+        {
+            if (Program.GameMan[selected] == null) return true;
+            return Program.GameMan[selected].GameType == GameType.Windows;
         }
 
         private void startGameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -359,6 +370,7 @@ namespace OldGamesLauncher
             if (GamesList.SelectedItems.Count < 1) return;
             var selected = GamesList.SelectedItems[0].Text;
             string path = Path.GetDirectoryName(Program.GameMan.GetPathByName(selected));
+            if (string.IsNullOrEmpty(path)) path = Path.GetDirectoryName(Program.GameMan.WindowsGames[selected]);
             SystemCommands.RunCommand("explorer.exe", path);
         }
 
@@ -551,13 +563,13 @@ namespace OldGamesLauncher
                     _hb.LoadDocument("Emulator related/DOSBox Manual.txt");
                     break;
                 case "dosBoxKeysToolStripMenuItem":
-                    _hb.LoadDocument("Emulator related/Dosbox keys.txt");                    
+                    _hb.LoadDocument("Emulator related/Dosbox keys.txt");
                     break;
                 case "scummVmReadmeToolStripMenuItem":
-                    _hb.LoadDocument("Emulator related/ScummVm Readme.txt");   
+                    _hb.LoadDocument("Emulator related/ScummVm Readme.txt");
                     break;
                 case "snes9xReadmeToolStripMenuItem":
-                    _hb.LoadDocument("Emulator related/SNES9x Readme.txt");   
+                    _hb.LoadDocument("Emulator related/SNES9x Readme.txt");
                     break;
                 case "compatiblitySettingsToolStripMenuItem":
                     _hb.LoadDocument("Old games launcher/Changelog.rtf");
@@ -570,7 +582,9 @@ namespace OldGamesLauncher
         {
             if (GamesList.SelectedItems.Count < 1) return;
             var selected = GamesList.SelectedItems[0].Text;
-            SystemCommands.ShowFileProperties(Program.GameMan.GetPathByName(selected));
+            string path = Program.GameMan.GetPathByName(selected);
+            if (string.IsNullOrEmpty(path)) path = Program.GameMan.WindowsGames[selected];
+            SystemCommands.ShowFileProperties(path);
         }
 
         private void installToolStripMenuItem_Click(object sender, EventArgs e)
@@ -732,6 +746,23 @@ namespace OldGamesLauncher
         {
             Settings.Default.GamesfolderVisible = showGamesFolderContentsToolStripMenuItem.Checked;
             BuildList();
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OptionsForm ofm = new OptionsForm();
+            if (ofm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                closeToTrayToolStripMenuItem.Checked = Settings.Default.CloseToTray;
+                showEmulatorsConsoleToolStripMenuItem.Checked = Settings.Default.EmuConsoleVisible;
+                showGamesFolderContentsToolStripMenuItem.Checked = Settings.Default.GamesfolderVisible;
+                BuildList();
+            }
+        }
+
+        private void startGameWithDirectDrawHackingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StartGame(true);
         }
     }
 }
