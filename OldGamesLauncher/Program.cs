@@ -13,7 +13,6 @@ namespace OldGamesLauncher
         /// 
         public static FileManager FileMan;
         public static GamesManager GameMan;
-        public static WindowsCode WinInterop;
 
         [STAThread]
         static void Main()

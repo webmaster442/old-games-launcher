@@ -197,7 +197,6 @@
     <Compile Include="forms\WaitForInstall.Designer.cs">
       <DependentUpon>WaitForInstall.cs</DependentUpon>
     </Compile>
-    <Compile Include="classes\WindowsCode.cs" />
     <EmbeddedResource Include="forms\FirstLaunch.resx">
       <DependentUpon>FirstLaunch.cs</DependentUpon>
     </EmbeddedResource>
