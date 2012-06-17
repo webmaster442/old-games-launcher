@@ -764,5 +764,30 @@ namespace OldGamesLauncher
         {
             StartGame(true);
         }
+
+        private void GamesList_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+            else e.Effect = DragDropEffects.None;
+        }
+
+        private void GamesList_DragDrop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                Array a = (Array)e.Data.GetData(DataFormats.FileDrop);
+                if (a == null) return;
+                foreach (string file in a)
+                {
+                    AddGameForm agf = new AddGameForm();
+                    agf.GamePath = file;
+                    if (agf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                            Program.GameMan.AddGame(agf.GameName, agf.GamePath, agf.SelectedGameType, null, agf.Arguments);
+                }
+                this.Activate();
+                BuildList();
+            }
+            catch (Exception) { }
+        }
     }
 }

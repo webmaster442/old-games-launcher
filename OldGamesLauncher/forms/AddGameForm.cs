@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
 
 namespace OldGamesLauncher
 {
@@ -37,8 +38,8 @@ namespace OldGamesLauncher
             if (OpenExeDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 Warn = false;
-                this.TbGamePath.Text = OpenExeDialog.FileName;
-                if (OpenExeDialog.FilterIndex == 0)
+                GamePath = OpenExeDialog.FileName;
+                if (OpenExeDialog.FilterIndex == 1)
                 {
                     if (SystemCommands.IsDosExe(OpenExeDialog.FileName)) CbGameType.SelectedIndex = 1;
                     else CbGameType.SelectedIndex = 0;
@@ -72,7 +73,23 @@ namespace OldGamesLauncher
         public string GamePath
         {
             get { return TbGamePath.Text; }
-            set { TbGamePath.Text = value; }
+            set
+            {
+                NameGuess(value);
+                TbGamePath.Text = value;
+            }
+        }
+
+        private void NameGuess(string input)
+        {
+            string gamenametoset = null;
+            if (string.IsNullOrEmpty(input) || !string.IsNullOrEmpty(GameName)) return;
+            if (input.EndsWith(".exe"))
+            {
+                if (!SystemCommands.IsDosExe(input)) gamenametoset = FileVersionInfo.GetVersionInfo(input).ProductName;
+            }
+            if (gamenametoset == null) gamenametoset = Path.GetFileNameWithoutExtension(input);
+            GameName = gamenametoset;
         }
 
         public string Arguments
@@ -117,7 +134,7 @@ namespace OldGamesLauncher
         private void CbGameType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!Warn)
-            { 
+            {
                 Warn = true;
                 return;
             }
