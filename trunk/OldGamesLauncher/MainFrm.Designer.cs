@@ -34,6 +34,7 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restartAsAdministratorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restartExplorerexeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.minimizeToTrayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
@@ -96,6 +97,7 @@
             this.GamesList = new System.Windows.Forms.ListView();
             this.ListContext = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.startGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startGameWithDirectDrawHackingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.internetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchCheatsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -116,8 +118,6 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.Tray = new System.Windows.Forms.NotifyIcon(this.components);
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.startGameWithDirectDrawHackingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenuStrip.SuspendLayout();
             this.ListContext.SuspendLayout();
             this.FilterSelector.SuspendLayout();
@@ -172,6 +172,13 @@
             this.restartExplorerexeToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
             this.restartExplorerexeToolStripMenuItem.Text = "Restart Explorer.exe";
             this.restartExplorerexeToolStripMenuItem.Click += new System.EventHandler(this.restartExplorerexeToolStripMenuItem_Click);
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.optionsToolStripMenuItem.Text = "Options...";
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -679,6 +686,7 @@
             // 
             // GamesList
             // 
+            this.GamesList.AllowDrop = true;
             this.GamesList.BackColor = System.Drawing.SystemColors.Control;
             this.GamesList.BackgroundImage = global::OldGamesLauncher.Properties.Resources.back;
             this.GamesList.BackgroundImageTiled = true;
@@ -693,6 +701,8 @@
             this.GamesList.TabIndex = 1;
             this.GamesList.UseCompatibleStateImageBehavior = false;
             this.GamesList.View = global::OldGamesLauncher.Properties.Settings.Default.ViewType;
+            this.GamesList.DragDrop += new System.Windows.Forms.DragEventHandler(this.GamesList_DragDrop);
+            this.GamesList.DragEnter += new System.Windows.Forms.DragEventHandler(this.GamesList_DragEnter);
             this.GamesList.DoubleClick += new System.EventHandler(this.GamesList_DoubleClick);
             // 
             // ListContext
@@ -718,6 +728,13 @@
             this.startGameToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.startGameToolStripMenuItem.Text = "Start Game";
             this.startGameToolStripMenuItem.Click += new System.EventHandler(this.startGameToolStripMenuItem_Click);
+            // 
+            // startGameWithDirectDrawHackingToolStripMenuItem
+            // 
+            this.startGameWithDirectDrawHackingToolStripMenuItem.Name = "startGameWithDirectDrawHackingToolStripMenuItem";
+            this.startGameWithDirectDrawHackingToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.startGameWithDirectDrawHackingToolStripMenuItem.Text = "Start with hack...";
+            this.startGameWithDirectDrawHackingToolStripMenuItem.Click += new System.EventHandler(this.startGameWithDirectDrawHackingToolStripMenuItem_Click);
             // 
             // openFolderToolStripMenuItem
             // 
@@ -890,22 +907,9 @@
             this.Tray.Visible = true;
             this.Tray.DoubleClick += new System.EventHandler(this.Tray_DoubleClick);
             // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
-            this.optionsToolStripMenuItem.Text = "Options...";
-            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
-            // 
-            // startGameWithDirectDrawHackingToolStripMenuItem
-            // 
-            this.startGameWithDirectDrawHackingToolStripMenuItem.Name = "startGameWithDirectDrawHackingToolStripMenuItem";
-            this.startGameWithDirectDrawHackingToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-            this.startGameWithDirectDrawHackingToolStripMenuItem.Text = "Start with hack...";
-            this.startGameWithDirectDrawHackingToolStripMenuItem.Click += new System.EventHandler(this.startGameWithDirectDrawHackingToolStripMenuItem_Click);
-            // 
             // MainFrm
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(618, 425);
@@ -920,6 +924,8 @@
             this.Text = "Old Games Starter";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainFrm_FormClosing);
             this.Load += new System.EventHandler(this.MainFrm_Load);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.GamesList_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.GamesList_DragEnter);
             this.MainMenuStrip.ResumeLayout(false);
             this.MainMenuStrip.PerformLayout();
             this.ListContext.ResumeLayout(false);

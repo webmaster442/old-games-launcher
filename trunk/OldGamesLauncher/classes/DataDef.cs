@@ -36,7 +36,12 @@ namespace OldGamesLauncher
         public string CommandLinePars { get; set; }
         public UsesDDraw DirectDraw { get; set; }
 
-        public GamesData() { ScumGameId = ""; }
+        public GamesData() 
+        { 
+            ScumGameId = "";
+            CommandLinePars = "";
+            DirectDraw = UsesDDraw.Unknown;
+        }
 
         public GamesData(string Name, string Exepath)
         {
