@@ -47,18 +47,26 @@ namespace OldGamesLauncher
 
         public static int RunCommand(string cmd, string args = "", bool cmdemu = false)
         {
-            Process Command = new Process();
-            Command.StartInfo.UseShellExecute = true;
-            Command.StartInfo.FileName = cmd;
+            try
+            {
+                Process Command = new Process();
+                Command.StartInfo.UseShellExecute = true;
+                Command.StartInfo.FileName = cmd;
 
-            string dir = Path.GetDirectoryName(cmd);
-            if (dir.Length < 1) dir = Path.GetDirectoryName(Application.ExecutablePath);
+                string dir = Path.GetDirectoryName(cmd);
+                if (dir.Length < 1) dir = Path.GetDirectoryName(Application.ExecutablePath);
 
-            Command.StartInfo.WorkingDirectory = dir;
-            if (!Properties.Settings.Default.EmuConsoleVisible && cmdemu) Command.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            Command.StartInfo.Arguments = args;
-            Command.Start();
-            return Command.Id;
+                Command.StartInfo.WorkingDirectory = dir;
+                if (!Properties.Settings.Default.EmuConsoleVisible && cmdemu) Command.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                Command.StartInfo.Arguments = args;
+                Command.Start();
+                return Command.Id;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return -1;
+            }
         }
 
         public static bool ExplorerIsRunning()
@@ -89,16 +97,25 @@ namespace OldGamesLauncher
             catch (Win32Exception) { return false; }
         }
 
-        public static Icon GetThumbnail(string filepath)
+        public static Bitmap GetThumbnail(string filepath)
         {
             MultiIcon mi = new MultiIcon();
             mi.Load(filepath);
             SingleIcon icon = mi[0];
             var query = from i in icon where i.Image.Width == 48 && i.Image.Height == 48 orderby i.PixelFormat descending select i.Icon;
-            Icon ret = query.FirstOrDefault();
-            if (ret == null)
-                ret = (from i in icon where i.Image.Width == 32 && i.Image.Height == 32 orderby i.PixelFormat descending select i.Icon).FirstOrDefault();
-            return ret;
+            Icon tmp = query.FirstOrDefault();
+            if (tmp == null)
+                tmp = (from i in icon where i.Image.Width == 32 && i.Image.Height == 32 orderby i.PixelFormat descending select i.Icon).FirstOrDefault();
+            if (tmp.Width == 32 && tmp.Height == 32)
+            {
+                Bitmap bmp = new Bitmap(48, 48);
+                Graphics g = Graphics.FromImage(bmp);
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                g.DrawIcon(tmp, new Rectangle(0, 0, 48, 48));
+                return bmp;
+            }
+            return tmp.ToBitmap();
         }
 
         public static bool IsAdministrator
