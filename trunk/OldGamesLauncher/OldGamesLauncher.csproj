@@ -50,7 +50,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -353,6 +353,13 @@
       <Project>{CE53747F-D2E6-4E1E-9EF4-A0AE02671B1D}</Project>
       <Name>IconLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VersionHandling\VersionHandling.csproj">
+      <Project>{511DE089-ACC8-4EBA-A0A5-C1BEE9F0E0A4}</Project>
+      <Name>VersionHandling</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
